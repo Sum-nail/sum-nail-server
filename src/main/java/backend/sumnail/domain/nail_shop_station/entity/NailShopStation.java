@@ -4,6 +4,7 @@ import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.station.entity.Station;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,17 @@ public class NailShopStation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="nail_shop_id")
     private NailShop nailShop;
+
+    @Builder
+    public NailShopStation(Station station,NailShop nailShop){
+        this.station=station;
+        this.nailShop=nailShop;
+    }
+
+    public NailShopStation createNailShopStation(Station station, NailShop nailShop){
+        return NailShopStation.builder()
+                .station(station)
+                .nailShop(nailShop)
+                .build();
+    }
 }
