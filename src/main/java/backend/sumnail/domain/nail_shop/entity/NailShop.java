@@ -1,4 +1,4 @@
-package backend.sumnail.domain.nailshop.entity;
+package backend.sumnail.domain.nail_shop.entity;
 
 import backend.sumnail.global.util.StringListConverter;
 import jakarta.persistence.*;
@@ -13,13 +13,13 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Nailshop {
+public class NailShop {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="nailshop_id")
+    @Column(name="nail_shop_id")
     private Long id;
 
-    @Column(name = "nailshop_name")
+    @Column(name = "nail_shop_name")
     private String name;
 
     private String location;

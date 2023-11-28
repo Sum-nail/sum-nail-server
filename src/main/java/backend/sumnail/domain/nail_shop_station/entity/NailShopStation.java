@@ -1,6 +1,6 @@
-package backend.sumnail.domain.nailshop_station.entity;
+package backend.sumnail.domain.nail_shop_station.entity;
 
-import backend.sumnail.domain.nailshop.entity.Nailshop;
+import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.station.entity.Station;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class NailshopStation {
+public class NailShopStation {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "nailshop_station_id")
+    @Column(name = "nail_shop_station_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -20,6 +20,6 @@ public class NailshopStation {
     private Station station;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="nailshop_id")
-    private Nailshop nailshop;
+    @JoinColumn(name="nail_shop_id")
+    private NailShop nailShop;
 }
