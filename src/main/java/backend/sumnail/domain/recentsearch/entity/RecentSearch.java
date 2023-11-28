@@ -14,10 +14,12 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class RecentSearch {
 
     @Id
