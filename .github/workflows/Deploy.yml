@@ -47,7 +47,7 @@ jobs:
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t sumnail .
-          docker tag sumnail sumanil/sumnail:${GITHUB_SHA::7}
+          docker tag sumnail sumnail/sumnail:${GITHUB_SHA::7}
           docker push sumnail/sumnail:${GITHUB_SHA::7}
 
       # Deploy (docker_compose 사용)
