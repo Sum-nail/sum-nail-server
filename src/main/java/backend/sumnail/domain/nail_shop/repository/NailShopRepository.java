@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface NailShopRepository{
     List<NailShop> findAll();
 
-    List<NailShop> findAllByStationsContainingAndHashtagsContaining(Station station, Hashtag hashtag);
+    List<NailShop> findNailShopsByHashtagAndStation(String stationName, String hashtagName);
 }

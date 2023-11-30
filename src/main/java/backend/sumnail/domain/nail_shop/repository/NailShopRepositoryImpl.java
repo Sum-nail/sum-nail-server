@@ -17,7 +17,7 @@ public class NailShopRepositoryImpl implements NailShopRepository{
     }
 
     @Override
-    public List<NailShop> findAllByStationsContainingAndHashtagsContaining(Station station, Hashtag hashtag){
-        return nailShopJpaRepository.findAllByStationsContainingAndHashtagsContaining(station,hashtag);
+    public List<NailShop> findNailShopsByHashtagAndStation(String stationName, String hashtagName){
+        return nailShopJpaRepository.findNailShopsByHashtagAndStation(stationName,hashtagName);
     }
 }
