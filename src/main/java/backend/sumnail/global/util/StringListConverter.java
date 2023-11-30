@@ -3,6 +3,7 @@ package backend.sumnail.global.util;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class StringListConverter implements AttributeConverter<List<String>, Str
 
     @Override
     public List<String> convertToEntityAttribute(String string) {
+
+        if(string==null){
+            return new ArrayList<>();
+        }
         return Arrays.asList(string.split(SPLIT_CHAR));
     }
 }
