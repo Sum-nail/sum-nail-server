@@ -1,6 +1,7 @@
 package backend.sumnail.domain.nail_shop.entity;
 
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
+import backend.sumnail.domain.nail_shop_station.entity.NailShopStation;
 import backend.sumnail.global.util.StringListConverter;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -50,6 +51,9 @@ public class NailShop {
 
     @OneToMany(mappedBy = "nailShop")
     private List<NailShopHashtag> hashtags;
+
+    @OneToMany(mappedBy = "nailShop")
+    private List<NailShopStation> stations;
 
     @Convert(converter = StringListConverter.class)
     private List<String> detailImages;
