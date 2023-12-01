@@ -2,8 +2,10 @@ package backend.sumnail.domain.user.service;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
+import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindSavedDto;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
+import backend.sumnail.domain.nail_shop.service.NailShopService;
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
@@ -25,10 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserService {
     private final UserRepository userRepository;
+
     private final UserNailShopService userNailShopService;
-    private final NailShopRepository nailShopRepository;
-    private final NailShopHashtagRepository nailShopHashtagRepository;
-    private final HashtagRepository hashtagRepository;
+    private final NailShopService nailShopService;
     private final RecentSearchService recentSearchService;
 
     @Transactional(readOnly = true)
@@ -40,30 +41,25 @@ public class UserService {
     @Transactional(readOnly = true)
     public List<UserFindNailShopResponse> findAllNailShopsUser(final long userId) {
         List<UserNailShop> userNailShops = userNailShopService.findByUserId(userId);
-        List<UserFindNailShopResponse> responses = userNailShops.stream()
+
+        return userNailShops.stream()
                 .map(userNailShop -> {
-                    NailShop nailShop = nailShopRepository.getById(userNailShop.getId());
-                    List<Hashtag> hashtags = nailShopHashtagRepository.getByNailShopId(nailShop.getId()).stream()
-                            .map(nailShopHashtag -> hashtagRepository.getById(nailShopHashtag.getHashtag().getId()))
-                            .toList();
-                    return UserFindNailShopResponse.of(nailShop, hashtags);
+                    NailShopFindSavedDto savedNailShop = nailShopService.findSavedNailShop(userNailShop);
+                    return UserFindNailShopResponse.from(savedNailShop);
                 })
                 .toList();
-
-        return responses;
     }
 
     public void saveNailShopUser(long userId, long nailShopId) {
         User user = userRepository.getById(userId);
-        NailShop nailShop = nailShopRepository.getById(nailShopId);
-
+        NailShop nailShop = nailShopService.getById(nailShopId);
         userNailShopService.save(user, nailShop);
     }
 
 
     public void deleteNailShopUser(long userId, long nailShopId) {
         User user = userRepository.getById(userId);
-        NailShop nailShop = nailShopRepository.getById(nailShopId);
+        NailShop nailShop = nailShopService.getById(nailShopId);
         userNailShopService.delete(user, nailShop);
     }
 
