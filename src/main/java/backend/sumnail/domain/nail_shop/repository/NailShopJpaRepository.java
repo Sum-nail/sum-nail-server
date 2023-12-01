@@ -21,4 +21,6 @@ public interface NailShopJpaRepository extends JpaRepository<NailShop,Long> {
              String stationName,
              String hashtagName
     );
+
+    Optional<NailShop> findById(Long id);
 }
