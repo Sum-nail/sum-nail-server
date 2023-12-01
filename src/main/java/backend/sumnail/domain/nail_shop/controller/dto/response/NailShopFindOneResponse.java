@@ -17,8 +17,8 @@ public class NailShopFindOneResponse {
     private Long employeeNum;
     private Long minimumPrice;
     private Long maximumPrice;
-    private Float mapLat;
-    private Float mapLng;
+    private Double mapLat;
+    private Double mapLng;
     private String streetAddress;
     private String naverMapLink;
     private String reservationLink;
