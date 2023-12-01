@@ -13,7 +13,7 @@ import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStation
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user.repository.UserRepository;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
-import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
+import backend.sumnail.domain.user_nail_shop.service.UserNailShopService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserService {
     private final UserRepository userRepository;
-    private final UserNailShopRepository userNailShopRepository;
+    private final UserNailShopService userNailShopService;
     private final NailShopRepository nailShopRepository;
     private final NailShopHashtagRepository nailShopHashtagRepository;
     private final HashtagRepository hashtagRepository;
@@ -38,7 +38,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<UserFindNailShopResponse> findAllNailShopsUser(final long userId) {
-        List<UserNailShop> userNailShops = userNailShopRepository.findByUserId(userId);
+        List<UserNailShop> userNailShops = userNailShopService.findByUserId(userId);
         List<UserFindNailShopResponse> responses = userNailShops.stream()
                 .map(userNailShop -> {
                     NailShop nailShop = nailShopRepository.getById(userNailShop.getId());
@@ -56,22 +56,17 @@ public class UserService {
         User user = userRepository.getById(userId);
         NailShop nailShop = nailShopRepository.getById(nailShopId);
 
-        checkNotSavedNailShop(user, nailShop);
-
-        UserNailShop userNailShop = UserNailShop.createUserNailShop(user, nailShop);
-        userNailShopRepository.save(userNailShop);
+        userNailShopService.save(user, nailShop);
     }
 
 
     public void deleteNailShopUser(long userId, long nailShopId) {
         User user = userRepository.getById(userId);
         NailShop nailShop = nailShopRepository.getById(nailShopId);
-
-        checkSavedNailShop(user, nailShop);
-
-        userNailShopRepository.deleteByUserAndNailShop(user, nailShop);
+        userNailShopService.delete(user, nailShop);
     }
 
+    @Transactional(readOnly = true)
     public UserFindSearchStationsResponse findSearchStationsUser(long userId) {
         List<RecentSearch> recentSearches = recentSearchRepository.findByUserId(userId);
         return UserFindSearchStationsResponse.from(recentSearches);
@@ -81,14 +76,5 @@ public class UserService {
         recentSearchRepository.deleteByUserId(userId);
     }
 
-    private void checkNotSavedNailShop(User user, NailShop nailShop) {
-        userNailShopRepository.findByUserAndNailShop(user, nailShop)
-                .ifPresent((userNailShop) -> new RuntimeException("이미 저장한 네일샵입니다"));
-    }
-
-    private void checkSavedNailShop(User user, NailShop nailShop) {
-        userNailShopRepository.findByUserAndNailShop(user, nailShop)
-                .orElseThrow(() -> new RuntimeException("저장하지 않은 네일샵입니다."));
-    }
 
 }
