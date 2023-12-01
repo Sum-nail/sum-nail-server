@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class UserNailShopService {
-    UserNailShopRepository userNailShopRepository;
+    private final UserNailShopRepository userNailShopRepository;
 
     public void delete(User user, NailShop nailShop) {
         throwIfNailShopNotSaved(user, nailShop);
@@ -32,7 +32,9 @@ public class UserNailShopService {
 
     private void throwIfNailShopAlreadySaved(User user, NailShop nailShop) {
         userNailShopRepository.findByUserAndNailShop(user, nailShop)
-                .ifPresent((userNailShop) -> new RuntimeException("이미 저장한 네일샵입니다"));
+                .ifPresent((userNailShop) -> {
+                    throw new RuntimeException("이미 저장한 네일샵입니다");
+                });
     }
 
     private void throwIfNailShopNotSaved(User user, NailShop nailShop) {
