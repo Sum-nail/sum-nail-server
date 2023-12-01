@@ -14,7 +14,7 @@ public class UserFindNailShopResponse {
     private final String nailShopName;
     private final String location;
     private final String titleImage;
-    private final List<String> hashTags;
+    private final List<String> hashtags;
 
     public static UserFindNailShopResponse from(NailShopFindSavedDto nailShopFindSavedDto) {
         NailShop nailShop = nailShopFindSavedDto.getNailShop();
@@ -28,7 +28,7 @@ public class UserFindNailShopResponse {
                 .nailShopName(nailShop.getName())
                 .location(nailShop.getLocation())
                 .titleImage(nailShop.getTitleImage())
-                .hashTags(hashTagNames)
+                .hashtags(hashTagNames)
                 .build();
 
     }
