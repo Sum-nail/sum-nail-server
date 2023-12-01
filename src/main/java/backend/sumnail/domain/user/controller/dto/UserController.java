@@ -37,7 +37,7 @@ public class UserController {
 
     @PostMapping("nail-shops/{nailShopId}")
     public ResponseEntity<Void> saveNailShopUser(@PathVariable("nailShopId") long nailShopId) {
-        userService.saveNailShopUser((long) 1, nailShopId);
+        userService.saveNailShopUser(1, nailShopId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

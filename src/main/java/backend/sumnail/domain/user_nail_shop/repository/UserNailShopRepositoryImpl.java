@@ -4,6 +4,7 @@ import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -25,5 +26,10 @@ public class UserNailShopRepositoryImpl implements UserNailShopRepository {
     @Override
     public void deleteByUserAndNailShop(User user, NailShop nailShop) {
         userNailShopJpaRepository.deleteByUserAndNailShop(user, nailShop);
+    }
+
+    @Override
+    public Optional<UserNailShop> findByUserAndNailShop(User user, NailShop nailShop) {
+        return userNailShopJpaRepository.findByUserAndNailShop(user, nailShop);
     }
 }

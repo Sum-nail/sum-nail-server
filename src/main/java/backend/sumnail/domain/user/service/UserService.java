@@ -55,13 +55,20 @@ public class UserService {
     public void saveNailShopUser(long userId, long nailShopId) {
         User user = userRepository.getById(userId);
         NailShop nailShop = nailShopRepository.getById(nailShopId);
+
+        checkNotSavedNailShop(user, nailShop);
+
         UserNailShop userNailShop = UserNailShop.createUserNailShop(user, nailShop);
         userNailShopRepository.save(userNailShop);
     }
 
+
     public void deleteNailShopUser(long userId, long nailShopId) {
         User user = userRepository.getById(userId);
         NailShop nailShop = nailShopRepository.getById(nailShopId);
+
+        checkSavedNailShop(user, nailShop);
+
         userNailShopRepository.deleteByUserAndNailShop(user, nailShop);
     }
 
@@ -73,4 +80,15 @@ public class UserService {
     public void deleteSearchStationsUser(long userId) {
         recentSearchRepository.deleteByUserId(userId);
     }
+
+    private void checkNotSavedNailShop(User user, NailShop nailShop) {
+        userNailShopRepository.findByUserAndNailShop(user, nailShop)
+                .ifPresent((userNailShop) -> new RuntimeException("이미 저장한 네일샵입니다"));
+    }
+
+    private void checkSavedNailShop(User user, NailShop nailShop) {
+        userNailShopRepository.findByUserAndNailShop(user, nailShop)
+                .orElseThrow(() -> new RuntimeException("저장하지 않은 네일샵입니다."));
+    }
+
 }
