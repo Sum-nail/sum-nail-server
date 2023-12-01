@@ -2,6 +2,7 @@ package backend.sumnail.domain.nail_shop.service;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
+import backend.sumnail.domain.hashtag.service.HashtagService;
 import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindSavedDto;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
@@ -19,11 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class NailShopService {
     private final NailShopRepository nailShopRepository;
 
-    private final NailShopHashtagService nailShopHashtagService;
+    private final HashtagService hashtagService;
 
     public NailShopFindSavedDto findSavedNailShop(UserNailShop userNailShop){
         NailShop nailShop = nailShopRepository.getById(userNailShop.getNailShop().getId());
-        List<Hashtag> hashtags = nailShopHashtagService.findHashtags(nailShop);
+        List<Hashtag> hashtags = hashtagService.findHashtags(nailShop);
         return NailShopFindSavedDto.of(nailShop,hashtags);
     }
 
