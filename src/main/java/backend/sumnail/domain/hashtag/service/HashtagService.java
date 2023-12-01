@@ -23,7 +23,11 @@ public class HashtagService {
                 .stream()
                 .map(nailShopHashtag -> hashtagRepository.getById(nailShopHashtag.getHashtag().getId()))
                 .toList();
-        
+
+        if(hashtags.size() > Hashtag.MAX_HASHTAG_COUNT){
+            throw new RuntimeException("해시태그의 최대개수는 3개입니다.");
+        }
+
         return hashtags;
     }
 }
