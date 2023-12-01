@@ -33,12 +33,14 @@ public class UserNailShopService {
     private void throwIfNailShopAlreadySaved(User user, NailShop nailShop) {
         userNailShopRepository.findByUserAndNailShop(user, nailShop)
                 .ifPresent((userNailShop) -> {
+                    // TODO 커스텀 에러 만든 후 수정
                     throw new RuntimeException("이미 저장한 네일샵입니다");
                 });
     }
 
     private void throwIfNailShopNotSaved(User user, NailShop nailShop) {
         userNailShopRepository.findByUserAndNailShop(user, nailShop)
+                // TODO 커스텀 에러 만든 후 수정
                 .orElseThrow(() -> new RuntimeException("저장하지 않은 네일샵입니다."));
     }
 

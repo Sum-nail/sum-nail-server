@@ -24,6 +24,7 @@ public class HashtagService {
                 .toList();
 
         if (hashtags.size() > Hashtag.MAX_HASHTAG_COUNT) {
+            // TODO 커스텀 에러 만든 후 수정
             throw new RuntimeException("해시태그의 최대개수는 3개입니다.");
         }
 
