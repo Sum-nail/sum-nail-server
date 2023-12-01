@@ -7,6 +7,7 @@ import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
+import backend.sumnail.domain.recentsearch.service.RecentSearchService;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
@@ -28,7 +29,7 @@ public class UserService {
     private final NailShopRepository nailShopRepository;
     private final NailShopHashtagRepository nailShopHashtagRepository;
     private final HashtagRepository hashtagRepository;
-    private final RecentSearchRepository recentSearchRepository;
+    private final RecentSearchService recentSearchService;
 
     @Transactional(readOnly = true)
     public UserFindResponse findUser(final long userId) {
@@ -68,12 +69,12 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserFindSearchStationsResponse findSearchStationsUser(long userId) {
-        List<RecentSearch> recentSearches = recentSearchRepository.findByUserId(userId);
+        List<RecentSearch> recentSearches = recentSearchService.findByUserId(userId);
         return UserFindSearchStationsResponse.from(recentSearches);
     }
 
     public void deleteSearchStationsUser(long userId) {
-        recentSearchRepository.deleteByUserId(userId);
+        recentSearchService.deleteAll(userId);
     }
 
 
