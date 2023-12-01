@@ -22,7 +22,7 @@ public class NailShopService {
     private final NailShopHashtagService nailShopHashtagService;
 
     public NailShopFindSavedDto findSavedNailShop(UserNailShop userNailShop){
-        NailShop nailShop = nailShopRepository.getById(userNailShop.getId());
+        NailShop nailShop = nailShopRepository.getById(userNailShop.getNailShop().getId());
         List<Hashtag> hashtags = nailShopHashtagService.findHashtags(nailShop);
         return NailShopFindSavedDto.of(nailShop,hashtags);
     }
