@@ -5,8 +5,11 @@ import backend.sumnail.domain.hashtag.repository.HashtagRepository;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
+import backend.sumnail.domain.recentsearch.entity.RecentSearch;
+import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
+import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user.repository.UserRepository;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
@@ -25,6 +28,7 @@ public class UserService {
     private final NailShopRepository nailShopRepository;
     private final NailShopHashtagRepository nailShopHashtagRepository;
     private final HashtagRepository hashtagRepository;
+    private final RecentSearchRepository recentSearchRepository;
 
     @Transactional(readOnly = true)
     public UserFindResponse findUser(final long userId) {
@@ -59,5 +63,14 @@ public class UserService {
         User user = userRepository.getById(userId);
         NailShop nailShop = nailShopRepository.getById(nailShopId);
         userNailShopRepository.deleteByUserAndNailShop(user, nailShop);
+    }
+
+    public UserFindSearchStationsResponse findSearchStationsUser(long userId) {
+        List<RecentSearch> recentSearches = recentSearchRepository.findByUserId(userId);
+        return UserFindSearchStationsResponse.from(recentSearches);
+    }
+
+    public void deleteSearchStationsUser(long userId) {
+        recentSearchRepository.deleteByUserId(userId);
     }
 }

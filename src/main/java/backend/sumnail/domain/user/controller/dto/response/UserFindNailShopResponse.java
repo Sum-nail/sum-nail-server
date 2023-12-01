@@ -15,7 +15,7 @@ public class UserFindNailShopResponse {
     private final String titleImage;
     private final List<String> hashTags;
 
-    public static UserFindNailShopResponse of(NailShop nailShop, List<Hashtag> hashtags){
+    public static UserFindNailShopResponse of(NailShop nailShop, List<Hashtag> hashtags) {
         List<String> hashTagNames = hashtags.stream().map(Hashtag::getHashtagName).toList();
         return UserFindNailShopResponse.builder()
                 .nailShopId(nailShop.getId())

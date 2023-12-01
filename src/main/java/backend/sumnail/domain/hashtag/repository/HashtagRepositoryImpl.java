@@ -12,6 +12,7 @@ public class HashtagRepositoryImpl implements HashtagRepository{
     @Override
     public Hashtag getById(Long id) {
         return hashtagJpaRepository.findById(id)
+                // TODO 커스텀 에러 만든 후 수정
                 .orElseThrow(()->new RuntimeException("존재하지 않는 해시태그 id 입니다."));
     }
 }
