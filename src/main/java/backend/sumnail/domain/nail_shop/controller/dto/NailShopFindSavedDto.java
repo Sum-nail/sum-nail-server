@@ -12,7 +12,7 @@ public class NailShopFindSavedDto {
     private final NailShop nailShop;
     private final List<Hashtag> hashtags;
 
-    public static NailShopFindSavedDto of(NailShop nailShop, List<Hashtag> hashtags){
+    public static NailShopFindSavedDto of(NailShop nailShop, List<Hashtag> hashtags) {
         return NailShopFindSavedDto.builder()
                 .nailShop(nailShop)
                 .hashtags(hashtags)

@@ -13,11 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class RecentSearchService {
     private final RecentSearchRepository recentSearchRepository;
 
-    public void deleteAll(long userId){
+    public void deleteAll(long userId) {
         recentSearchRepository.deleteByUserId(userId);
     }
 
-    public List<RecentSearch> findByUserId(long userId){
+    public List<RecentSearch> findByUserId(long userId) {
         return recentSearchRepository.findByUserId(userId);
     }
 }

@@ -1,14 +1,9 @@
 package backend.sumnail.domain.user.service;
 
-import backend.sumnail.domain.hashtag.entity.Hashtag;
-import backend.sumnail.domain.hashtag.repository.HashtagRepository;
 import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindSavedDto;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
-import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop.service.NailShopService;
-import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
-import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
 import backend.sumnail.domain.recentsearch.service.RecentSearchService;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
