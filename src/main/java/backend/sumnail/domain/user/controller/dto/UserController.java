@@ -1,5 +1,6 @@
 package backend.sumnail.domain.user.controller.dto;
 
+import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
@@ -25,10 +26,15 @@ public class UserController {
 
 
     @GetMapping("profile")
-    public ResponseEntity<UserFindResponse> findUser(){
-        final User user = userService.findUser((long) 1); // TODO 테스트 용 userId
-        UserFindResponse response = UserFindResponse.from(user);
+    public ResponseEntity<UserFindResponse> findUser() {
+        UserFindResponse response = userService.findUser(1); // TODO 테스트 용 userId
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("nail-shops")
+    public ResponseEntity<List<UserFindNailShopResponse>> findAllNailShopsUser() {
+        List<UserFindNailShopResponse> responses = userService.findAllNailShopsUser(1);// TODO 테스트 용 userId
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
 
