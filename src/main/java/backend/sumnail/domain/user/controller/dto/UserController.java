@@ -1,10 +1,8 @@
 package backend.sumnail.domain.user.controller.dto;
 
-import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
-import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user.service.UserService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +37,7 @@ public class UserController {
 
     @PostMapping("nail-shops/{nailShopId}")
     public ResponseEntity<Void> saveNailShopUser(@PathVariable("nailShopId") long nailShopId) {
-        userService.saveNailShopUser((long)1, nailShopId);
+        userService.saveNailShopUser((long) 1, nailShopId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

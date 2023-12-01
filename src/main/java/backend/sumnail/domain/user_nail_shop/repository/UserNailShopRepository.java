@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserNailShopRepository {
     List<UserNailShop> findByUserId(long userId);
+
     void save(UserNailShop userNailShop);
+
     void deleteByUserAndNailShop(User user, NailShop nailShop);
 }

@@ -24,22 +24,22 @@ public class UserNailShop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch =  FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nail_shop_id")
     private NailShop nailShop;
 
 
     @Builder
-    public UserNailShop(User user, NailShop nailShop){
+    public UserNailShop(User user, NailShop nailShop) {
         this.user = user;
         this.nailShop = nailShop;
     }
 
-    public static UserNailShop createUserNailShop(User user, NailShop nailShop){
+    public static UserNailShop createUserNailShop(User user, NailShop nailShop) {
         return UserNailShop.builder()
                 .user(user)
                 .nailShop(nailShop)

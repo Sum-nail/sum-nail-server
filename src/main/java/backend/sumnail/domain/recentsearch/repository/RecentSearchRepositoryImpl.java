@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class RecentSearchRepositoryImpl implements RecentSearchRepository{
+public class RecentSearchRepositoryImpl implements RecentSearchRepository {
     private final RecentSearchJpaRepository recentSearchJpaRepository;
 
     @Override
@@ -16,7 +16,7 @@ public class RecentSearchRepositoryImpl implements RecentSearchRepository{
     }
 
     @Override
-    public List<RecentSearch> findByUserId(long userId){
+    public List<RecentSearch> findByUserId(long userId) {
         return recentSearchJpaRepository.findByUserId(userId);
     }
 }
