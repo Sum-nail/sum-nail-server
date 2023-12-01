@@ -1,5 +1,6 @@
 package backend.sumnail.domain.user_nail_shop.entity;
 
+import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,22 +28,22 @@ public class UserNailShop {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @ManyToOne(fetch =  FetchType.LAZY)
-//    @JoinColumn(name = "nail_shop_id")
-//    private NailShop nailShop;
+    @ManyToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "nail_shop_id")
+    private NailShop nailShop;
 
 
-//    @Builder
-//    public UserNailShop(User user, NailShop nailShop){
-//        this.user = user;
-//        this.nailShop = nailShop;
-//    }
-//
-//    public UserNailShop createUserNailShop(User user, NailShop nailShop){
-//        return UserNailShop.builder()
-//                .user(user)
-//                .nailShop(nailShop)
-//                .build();
-//    }
+    @Builder
+    public UserNailShop(User user, NailShop nailShop){
+        this.user = user;
+        this.nailShop = nailShop;
+    }
+
+    public UserNailShop createUserNailShop(User user, NailShop nailShop){
+        return UserNailShop.builder()
+                .user(user)
+                .nailShop(nailShop)
+                .build();
+    }
 
 }
