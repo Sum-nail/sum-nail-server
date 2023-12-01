@@ -1,5 +1,7 @@
 package backend.sumnail.domain.user_nail_shop.repository;
 
+import backend.sumnail.domain.nail_shop.entity.NailShop;
+import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -12,5 +14,15 @@ public class UserNailShopRepositoryImpl implements UserNailShopRepository{
     @Override
     public List<UserNailShop> findByUserId(long userId) {
         return userNailShopJpaRepository.findByUserId(userId);
+    }
+
+    @Override
+    public void save(UserNailShop userNailShop) {
+        userNailShopJpaRepository.save(userNailShop);
+    }
+
+    @Override
+    public void deleteByUserAndNailShop(User user, NailShop nailShop) {
+        userNailShopJpaRepository.deleteByUserAndNailShop(user, nailShop);
     }
 }

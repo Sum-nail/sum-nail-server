@@ -39,7 +39,7 @@ public class UserNailShop {
         this.nailShop = nailShop;
     }
 
-    public UserNailShop createUserNailShop(User user, NailShop nailShop){
+    public static UserNailShop createUserNailShop(User user, NailShop nailShop){
         return UserNailShop.builder()
                 .user(user)
                 .nailShop(nailShop)

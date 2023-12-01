@@ -47,4 +47,17 @@ public class UserService {
 
         return responses;
     }
+
+    public void saveNailShopUser(long userId, long nailShopId) {
+        User user = userRepository.getById(userId);
+        NailShop nailShop = nailShopRepository.getById(nailShopId);
+        UserNailShop userNailShop = UserNailShop.createUserNailShop(user, nailShop);
+        userNailShopRepository.save(userNailShop);
+    }
+
+    public void deleteNailShopUser(long userId, long nailShopId) {
+        User user = userRepository.getById(userId);
+        NailShop nailShop = nailShopRepository.getById(nailShopId);
+        userNailShopRepository.deleteByUserAndNailShop(user, nailShop);
+    }
 }

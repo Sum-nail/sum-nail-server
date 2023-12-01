@@ -37,6 +37,19 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
+    @PostMapping("nail-shops/{nailShopId}")
+    public ResponseEntity<Void> saveNailShopUser(@PathVariable("nailShopId") long nailShopId){
+        userService.saveNailShopUser(1, nailShopId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("nail-shops/{nailShopId}")
+    public ResponseEntity<Void> deleteNailShopUser(@PathVariable("nailShopId") long nailShopId){
+        userService.deleteNailShopUser(1,nailShopId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+
 
 
 
