@@ -6,6 +6,7 @@ import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindSavedDto;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
+import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class NailShopService {
     private final NailShopRepository nailShopRepository;
-    private final NailShopHashtagRepository nailShopHashtagRepository;
-    private final HashtagRepository hashtagRepository;
+
+    private final NailShopHashtagService nailShopHashtagService;
 
     public NailShopFindSavedDto findSavedNailShop(UserNailShop userNailShop){
         NailShop nailShop = nailShopRepository.getById(userNailShop.getId());
-        List<Hashtag> hashtags = nailShopHashtagRepository.getByNailShopId(nailShop.getId()).stream()
-                .map(nailShopHashtag -> hashtagRepository.getById(nailShopHashtag.getHashtag().getId()))
-                .toList();
+        List<Hashtag> hashtags = nailShopHashtagService.findHashtags(nailShop);
         return NailShopFindSavedDto.of(nailShop,hashtags);
     }
 
