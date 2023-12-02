@@ -4,6 +4,7 @@ import backend.sumnail.domain.hashtag.entity.Hashtag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,4 +17,11 @@ public class HashtagRepositoryImpl implements HashtagRepository{
     public Optional<Hashtag> findByHashtagName(String hashtagName) {
         return hashtagJpaRepository.findByHashtagName(hashtagName);
     }
+
+    @Override
+    public List<Hashtag> findAll() {
+        return hashtagJpaRepository.findAll();
+    }
+
+
 }
