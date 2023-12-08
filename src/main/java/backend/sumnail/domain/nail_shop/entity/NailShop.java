@@ -1,17 +1,14 @@
 package backend.sumnail.domain.nail_shop.entity;
 
+import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
+import backend.sumnail.domain.nail_shop_station.entity.NailShopStation;
 import backend.sumnail.global.util.StringListConverter;
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.awt.Point;
-import java.util.List;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Entity
@@ -19,9 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NailShop {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "nail_shop_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="nail_shop_id")
     private Long id;
 
     @Column(name = "nail_shop_name")
@@ -29,7 +25,14 @@ public class NailShop {
 
     private String location;
 
-    private Point coordinate;
+
+////    @Convert(converter = PointConverter.class)
+//    @Column(columnDefinition = "Geometry")
+//    private Geometry coordinate;
+
+    private Double mapLat;
+
+    private Double mapLng;
 
     private Long employeeNum;
 
@@ -44,14 +47,21 @@ public class NailShop {
     @Column(name = "monthly_nail_instagram_link")
     private String monthlyNailLink;
 
-    @Column(name = "monthly_nail_minimum_price")
+    @Column(name="monthly_nail_minimum_price")
     private Long minimumPrice;
 
-    @Column(name = "monthly_nail_maximum_price")
+    @Column(name="monthly_nail_maximum_price")
     private Long maximumPrice;
 
     private String titleImage;
 
+    @OneToMany(mappedBy = "nailShop")
+    private List<NailShopHashtag> hashtags;
+
+    @OneToMany(mappedBy = "nailShop")
+    private List<NailShopStation> stations;
+
     @Convert(converter = StringListConverter.class)
     private List<String> detailImages;
+
 }

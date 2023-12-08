@@ -1,9 +1,11 @@
 package backend.sumnail.domain.hashtag.service;
 
+import backend.sumnail.domain.hashtag.controller.dto.response.HashtagFindAllResponse;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,23 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class HashtagService {
-    private final HashtagRepository hashtagRepository;
 
+    private final HashtagRepository hashtagRepository;
     private final NailShopHashtagService nailShopHashtagService;
+
+    public HashtagFindAllResponse findAllHashtag(){
+        List<String> list=new ArrayList<>();
+        List<Hashtag> hashtags=hashtagRepository.findAll();
+
+        for (Hashtag hashtag:hashtags
+        ) {
+            list.add(hashtag.getHashtagName());
+        }
+        HashtagFindAllResponse response=HashtagFindAllResponse.builder()
+                .hashtags(list)
+                .build();
+        return response;
+    }
 
     public List<Hashtag> findHashtags(final NailShop nailShop) {
         List<Hashtag> hashtags = nailShopHashtagService.getByNailShopId(nailShop)
@@ -31,4 +47,3 @@ public class HashtagService {
         return hashtags;
     }
 }
-
