@@ -9,9 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +25,7 @@ public class RecentSearch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -36,13 +34,13 @@ public class RecentSearch {
     private LocalDateTime dateTime;
 
     @Builder
-    private RecentSearch(User user, String station, LocalDateTime dateTime){
+    private RecentSearch(User user, String station, LocalDateTime dateTime) {
         this.user = user;
         this.station = station;
         this.dateTime = dateTime;
     }
 
-    public static RecentSearch createRecentSearch(User user, String station, LocalDateTime dateTime){
+    public static RecentSearch createRecentSearch(User user, String station, LocalDateTime dateTime) {
         return RecentSearch.builder()
                 .user(user)
                 .station(station)
