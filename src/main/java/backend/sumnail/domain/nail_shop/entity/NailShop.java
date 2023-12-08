@@ -1,19 +1,13 @@
 package backend.sumnail.domain.nail_shop.entity;
-import org.springframework.data.geo.Point;
-import org.hibernate.annotations.Type;
+
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
 import backend.sumnail.domain.nail_shop_station.entity.NailShopStation;
-import backend.sumnail.global.util.PointConverter;
 import backend.sumnail.global.util.StringListConverter;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-import org.locationtech.jts.geom.Geometry;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.List;
 
 

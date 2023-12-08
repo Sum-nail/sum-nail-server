@@ -2,7 +2,14 @@ package backend.sumnail.domain.nail_shop_hashtag.entity;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NailShopHashtag {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "nail_shop_hashtag_id")
     private Long id;
 
@@ -26,12 +34,12 @@ public class NailShopHashtag {
     private Hashtag hashtag;
 
     @Builder
-    public NailShopHashtag(NailShop nailShop,Hashtag hashtag){
-        this.nailShop=nailShop;
-        this.hashtag=hashtag;
+    public NailShopHashtag(NailShop nailShop, Hashtag hashtag) {
+        this.nailShop = nailShop;
+        this.hashtag = hashtag;
     }
 
-    public NailShopHashtag createNailShopHashtag(NailShop nailShop,Hashtag hashtag){
+    public NailShopHashtag createNailShopHashtag(NailShop nailShop, Hashtag hashtag) {
         return NailShopHashtag.builder()
                 .nailShop(nailShop)
                 .hashtag(hashtag)

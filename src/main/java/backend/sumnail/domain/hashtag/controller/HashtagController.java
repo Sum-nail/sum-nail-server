@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hashtags")
+@RequestMapping("/v1/hashtags")
 @RequiredArgsConstructor
 public class HashtagController {
 

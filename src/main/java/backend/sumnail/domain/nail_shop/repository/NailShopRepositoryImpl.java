@@ -1,8 +1,6 @@
 package backend.sumnail.domain.nail_shop.repository;
 
-import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
-import backend.sumnail.domain.station.entity.Station;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -23,7 +21,14 @@ public class NailShopRepositoryImpl implements NailShopRepository{
     }
 
     @Override
-    public Optional<NailShop> findById(Long id){
+    public Optional<NailShop> findById(Long id) {
         return nailShopJpaRepository.findById(id);
+    }
+
+    @Override
+    public NailShop getById(long nailShopId) {
+        return nailShopJpaRepository.findById(nailShopId)
+                // TODO 커스텀 에러 만든 후 수정
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 네일샵입니다."));
     }
 }
