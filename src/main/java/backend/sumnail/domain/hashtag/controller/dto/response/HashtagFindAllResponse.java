@@ -1,9 +1,8 @@
 package backend.sumnail.domain.hashtag.controller.dto.response;
 
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.util.List;
 
 @Getter
 @Builder
