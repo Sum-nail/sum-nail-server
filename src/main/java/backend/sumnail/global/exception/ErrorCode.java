@@ -25,9 +25,12 @@ public enum ErrorCode {
     UNAUTHORIZED_TOKEN(HttpStatus.UNAUTHORIZED, "인증되지 않은 토큰입니다."),
 
     // NailShop 예외
-    NOT_FOUND_NAIL_SHOP(HttpStatus.NOT_FOUND, "해당 네일샵 찾을 수 없습니다.")
+    NOT_FOUND_NAIL_SHOP(HttpStatus.NOT_FOUND, "해당 네일샵 찾을 수 없습니다."),
 
+    // HashTag 예외
+    NOT_FOUND_HASHTAG(HttpStatus.NOT_FOUND, "해당 해시태그를 찾을 수 없습니다."),
    ;
+
     private final HttpStatus status;
     private final String error;
 }
