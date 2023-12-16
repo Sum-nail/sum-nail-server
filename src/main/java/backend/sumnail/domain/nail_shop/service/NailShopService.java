@@ -75,33 +75,7 @@ public class NailShopService {
     public NailShopFindOneResponse findNailShopById(Long id){
         NailShop nailShop=nailShopRepository.findById(id).get();
 
-//        NailShop nailShop=nailShopRepository.findById(id).orElseThrow(()->new RuntimeException());
-        List<String> hashtags= new ArrayList<>();
-        for (NailShopHashtag nailShopHashtag : nailShop.getHashtags()
-        ) {
-            hashtags.add(nailShopHashtag.getHashtag().getHashtagName());
-        }
-        NailShopFindOneResponse nailShopFindOneResponse=NailShopFindOneResponse.builder()
-                .nailShopId(nailShop.getId())
-                .nailShopName(nailShop.getName())
-                .detailImages(nailShop.getDetailImages())
-                .location(nailShop.getLocation())
-                .hashtags(hashtags)
-                .businessHour(nailShop.getBusinessHour())
-                .employeeNum(nailShop.getEmployeeNum())
-                .minimumPrice(nailShop.getMinimumPrice())
-                .maximumPrice(nailShop.getMaximumPrice())
-//                .mapLng(nailShop.getCoordinate().getX())
-//                .mapLat(nailShop.getCoordinate().getY())
-                .mapLat(nailShop.getMapLat())
-                .mapLng(nailShop.getMapLng())
-                .streetAddress(nailShop.getStreetAddress())
-                .naverMapLink(nailShop.getNaverMapLink())
-                .reservationLink(nailShop.getReservationTable())
-                .monthlyNailLink(nailShop.getMonthlyNailLink())
-                .build();
-
-        return nailShopFindOneResponse;
+        return NailShopFindOneResponse.from(nailShop);
     }
 
     public NailShopFindSavedDto findSavedNailShop(UserNailShop userNailShop) {
