@@ -19,16 +19,11 @@ public class StationService {
     public List<StationFindAllResponse> findStations(String keywords){
         List<Station> stations=stationRepository.findByStationNameContaining(keywords);
 
-        List<StationFindAllResponse> responses=new ArrayList<>();
+        List<StationFindAllResponse> responses=stations
+                .stream()
+                .map(station -> StationFindAllResponse.from(station))
+                .toList();
 
-        for (Station station:stations
-             ) {
-            StationFindAllResponse stationFindAllResponse=StationFindAllResponse.builder()
-                    .stationLine(station.getLine())
-                    .stationName(station.getStationName())
-                    .build();
-            responses.add(stationFindAllResponse);
-        }
         return responses;
     }
 }
