@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/nail-shops")
+@RequestMapping("v1/nail-shops")
 @RequiredArgsConstructor
 public class NailShopController {
     private final NailShopService nailShopService;
@@ -24,13 +24,13 @@ public class NailShopController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/search")
+    @GetMapping("search")
     public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam String hashtags, @RequestParam String station){
         List<NailShopFindAllResponse> response=nailShopService.searchNailShop(station,hashtags);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/{nailShopId}")
+    @GetMapping("{nailShopId}")
     public ResponseEntity<NailShopFindOneResponse> searchShopById(@PathVariable Long nailShopId){
         NailShopFindOneResponse response=nailShopService.findNailShopById(nailShopId);
         return ResponseEntity.status(HttpStatus.OK).body(response);

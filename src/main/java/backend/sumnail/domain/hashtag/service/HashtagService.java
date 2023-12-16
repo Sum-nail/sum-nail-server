@@ -23,8 +23,7 @@ public class HashtagService {
         List<String> list=new ArrayList<>();
         List<Hashtag> hashtags=hashtagRepository.findAll();
 
-        for (Hashtag hashtag:hashtags
-        ) {
+        for (Hashtag hashtag:hashtags) {
             list.add(hashtag.getHashtagName());
         }
         HashtagFindAllResponse response=HashtagFindAllResponse.builder()
