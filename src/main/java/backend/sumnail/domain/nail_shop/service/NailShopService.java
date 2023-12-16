@@ -24,51 +24,23 @@ public class NailShopService {
     private final NailShopRepository nailShopRepository;
     private final HashtagService hashtagService;
     public List<NailShopFindAllResponse> findAllShop() {
-
-        List<NailShopFindAllResponse> response = new ArrayList<>();
         List<NailShop> nailShops = nailShopRepository.findAll();
-
-        for (NailShop nailShop : nailShops
-        ) {
-            List<String> hashtags = new ArrayList<>();
-            for (NailShopHashtag nailShopHashtag : nailShop.getHashtags()
-            ) {
-                hashtags.add(nailShopHashtag.getHashtag().getHashtagName());
-            }
-            NailShopFindAllResponse nailShopFindAllResponse = NailShopFindAllResponse.builder()
-                    .nailShopId(nailShop.getId())
-                    .nailShopName(nailShop.getName())
-                    .location(nailShop.getLocation())
-                    .titleImage(nailShop.getTitleImage())
-                    .hashtags(hashtags)
-                    .build();
-            response.add(nailShopFindAllResponse);
-        }
+        List<NailShopFindAllResponse> response = nailShops
+                .stream()
+                .map(NailShop->NailShopFindAllResponse.from(NailShop))
+                .toList();
         return response;
     }
 
     public List<NailShopFindAllResponse> searchNailShop(String stationName, String hashtagName) {
-        List<NailShopFindAllResponse> response = new ArrayList<>();
         if(stationName.isEmpty()){
             stationName="";
         }
         List<NailShop> nailShops= nailShopRepository.findNailShopsByHashtagAndStation(stationName,hashtagName);
-        for (NailShop nailShop : nailShops
-        ) {
-            List<String> hashtags = new ArrayList<>();
-            for (NailShopHashtag nailShopHashtag : nailShop.getHashtags()
-            ) {
-                hashtags.add(nailShopHashtag.getHashtag().getHashtagName());
-            }
-            NailShopFindAllResponse nailShopFindAllResponse = NailShopFindAllResponse.builder()
-                    .nailShopId(nailShop.getId())
-                    .nailShopName(nailShop.getName())
-                    .location(nailShop.getLocation())
-                    .titleImage(nailShop.getTitleImage())
-                    .hashtags(hashtags)
-                    .build();
-            response.add(nailShopFindAllResponse);
-        }
+        List<NailShopFindAllResponse> response = nailShops
+                .stream()
+                .map(NailShop->NailShopFindAllResponse.from(NailShop))
+                .toList();
         return response;
     }
 
