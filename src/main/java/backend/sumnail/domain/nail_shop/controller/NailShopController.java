@@ -3,6 +3,8 @@ package backend.sumnail.domain.nail_shop.controller;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllResponse;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.service.NailShopService;
+import backend.sumnail.domain.recentsearch.entity.RecentSearch;
+import backend.sumnail.domain.recentsearch.service.RecentSearchService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import java.util.List;
 public class NailShopController {
     private final NailShopService nailShopService;
 
+    private final RecentSearchService recentSearchService;
+
     @GetMapping("")
     public ResponseEntity<List<NailShopFindAllResponse>> getAllShops(){
         List<NailShopFindAllResponse> response=nailShopService.findAllShop();
@@ -27,6 +31,7 @@ public class NailShopController {
     @GetMapping("search")
     public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam String hashtags, @RequestParam String station){
         List<NailShopFindAllResponse> response=nailShopService.searchNailShop(station,hashtags);
+        recentSearchService.addRecentSearch(station,1); //JWT 토큰으로 userId 받아와야함
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
