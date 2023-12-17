@@ -4,6 +4,8 @@ import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
+import backend.sumnail.global.exception.CustomException;
+import backend.sumnail.global.exception.ErrorCode;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,15 +35,13 @@ public class UserNailShopService {
     private void throwIfNailShopAlreadySaved(User user, NailShop nailShop) {
         userNailShopRepository.findByUserAndNailShop(user, nailShop)
                 .ifPresent((userNailShop) -> {
-                    // TODO 커스텀 에러 만든 후 수정
-                    throw new RuntimeException("이미 저장한 네일샵입니다");
+                    throw new CustomException(ErrorCode.ALREADY_SAVED_NAIL_SHOP);
                 });
     }
 
     private void throwIfNailShopNotSaved(User user, NailShop nailShop) {
         userNailShopRepository.findByUserAndNailShop(user, nailShop)
-                // TODO 커스텀 에러 만든 후 수정
-                .orElseThrow(() -> new RuntimeException("저장하지 않은 네일샵입니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_SAVED_NAIL_SHOP));
     }
 
 

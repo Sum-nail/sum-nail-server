@@ -3,12 +3,17 @@ package backend.sumnail.domain.nail_shop.entity;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
 import backend.sumnail.domain.nail_shop_station.entity.NailShopStation;
 import backend.sumnail.global.util.StringListConverter;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 
 @Entity
@@ -16,15 +21,15 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NailShop {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="nail_shop_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "nail_shop_id")
     private Long id;
 
     @Column(name = "nail_shop_name")
     private String name;
 
     private String location;
-
 
 ////    @Convert(converter = PointConverter.class)
 //    @Column(columnDefinition = "Geometry")
@@ -47,10 +52,10 @@ public class NailShop {
     @Column(name = "monthly_nail_instagram_link")
     private String monthlyNailLink;
 
-    @Column(name="monthly_nail_minimum_price")
+    @Column(name = "monthly_nail_minimum_price")
     private Long minimumPrice;
 
-    @Column(name="monthly_nail_maximum_price")
+    @Column(name = "monthly_nail_maximum_price")
     private Long maximumPrice;
 
     private String titleImage;

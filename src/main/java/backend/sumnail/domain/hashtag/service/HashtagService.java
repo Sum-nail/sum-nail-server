@@ -5,6 +5,8 @@ import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
+import backend.sumnail.global.exception.CustomException;
+import backend.sumnail.global.exception.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +21,15 @@ public class HashtagService {
     private final HashtagRepository hashtagRepository;
     private final NailShopHashtagService nailShopHashtagService;
 
-    public HashtagFindAllResponse findAllHashtag(){
-        List<String> list=new ArrayList<>();
-        List<Hashtag> hashtags=hashtagRepository.findAll();
+    public HashtagFindAllResponse findAllHashtag() {
+        List<String> list = new ArrayList<>();
+        List<Hashtag> hashtags = hashtagRepository.findAll();
 
-        for (Hashtag hashtag:hashtags
+        for (Hashtag hashtag : hashtags
         ) {
             list.add(hashtag.getHashtagName());
         }
-        HashtagFindAllResponse response=HashtagFindAllResponse.builder()
+        HashtagFindAllResponse response = HashtagFindAllResponse.builder()
                 .hashtags(list)
                 .build();
         return response;
@@ -40,8 +42,7 @@ public class HashtagService {
                 .toList();
 
         if (hashtags.size() > Hashtag.MAX_HASHTAG_COUNT) {
-            // TODO 커스텀 에러 만든 후 수정
-            throw new RuntimeException("해시태그의 최대개수는 3개입니다.");
+            throw new CustomException(ErrorCode.EXCEEDED_MAX_HASHTAG);
         }
 
         return hashtags;
