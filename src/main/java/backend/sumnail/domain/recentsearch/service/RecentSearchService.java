@@ -29,11 +29,14 @@ public class RecentSearchService {
     }
 
     public void addRecentSearch(String station, long userId) {
-        if(recentSearchRepository.findByStation(station).size()>0){
+        if(station.length()==0){
+            return;
+        }
+        if(!recentSearchRepository.findByStation(station).isEmpty()){
             recentSearchRepository.deleteByStation(station);
         }
         User user=userRepository.getById(userId);
-        RecentSearch recentSearch = RecentSearch.createRecentSearch(user,station,LocalDateTime.now());
+        RecentSearch recentSearch = RecentSearch.createRecentSearch(user,station);
         recentSearchRepository.save(recentSearch);
     }
 }

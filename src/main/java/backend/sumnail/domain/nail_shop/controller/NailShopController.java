@@ -31,7 +31,9 @@ public class NailShopController {
     @GetMapping("search")
     public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam String hashtags, @RequestParam String station){
         List<NailShopFindAllResponse> response=nailShopService.searchNailShop(station,hashtags);
-        recentSearchService.addRecentSearch(station,1); //JWT 토큰으로 userId 받아와야함
+        if(!response.isEmpty()) {
+            recentSearchService.addRecentSearch(station, 1);
+        }//JWT 토큰으로 userId 받아와야함
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

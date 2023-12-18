@@ -21,7 +21,7 @@ public class StationService {
 
         List<StationFindAllResponse> responses=stations
                 .stream()
-                .map(station -> StationFindAllResponse.from(station))
+                .map(StationFindAllResponse::from)
                 .toList();
 
         return responses;

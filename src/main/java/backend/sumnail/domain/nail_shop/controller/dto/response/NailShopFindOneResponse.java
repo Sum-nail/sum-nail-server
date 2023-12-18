@@ -28,11 +28,10 @@ public class NailShopFindOneResponse {
     private String monthlyNailLink;
 
     public static NailShopFindOneResponse from(NailShop nailShop){
-        List<String> hashtags= new ArrayList<>();
-        for (NailShopHashtag nailShopHashtag : nailShop.getHashtags()
-        ) {
-            hashtags.add(nailShopHashtag.getHashtag().getHashtagName());
-        }
+        List<String> hashtags = nailShop.getHashtags()
+                .stream()
+                .map(nailShopHashtag -> nailShopHashtag.getHashtag().getHashtagName())
+                .toList();
         return NailShopFindOneResponse.builder()
                 .nailShopId(nailShop.getId())
                 .nailShopName(nailShop.getName())
