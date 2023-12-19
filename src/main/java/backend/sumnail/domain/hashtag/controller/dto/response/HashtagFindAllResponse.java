@@ -3,7 +3,6 @@ package backend.sumnail.domain.hashtag.controller.dto.response;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import lombok.Builder;
 import lombok.Getter;
-
 import java.util.List;
 
 @Getter

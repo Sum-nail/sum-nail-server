@@ -2,11 +2,7 @@ package backend.sumnail.domain.recentsearch.service;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
-
-import java.time.LocalDateTime;
 import java.util.List;
-
-import backend.sumnail.domain.station.repository.StationRepository;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

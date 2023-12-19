@@ -4,8 +4,6 @@ import backend.sumnail.domain.station.entity.Station;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 @Builder
 public class StationFindAllResponse {

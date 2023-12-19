@@ -3,7 +3,6 @@ package backend.sumnail.domain.nail_shop.controller.dto.response;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import lombok.Builder;
 import lombok.Getter;
-
 import java.util.List;
 
 @Builder
