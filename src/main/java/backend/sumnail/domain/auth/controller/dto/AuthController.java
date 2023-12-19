@@ -28,4 +28,12 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    /**
+     * 토큰 리프레시
+     */
+    @PostMapping("refresh")
+    public ResponseEntity<AuthTokenResponse> refresh(@RequestBody AuthRefreshRequest request) {
+        AuthTokenResponse response = authService.refresh(request.getRefreshToken());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
