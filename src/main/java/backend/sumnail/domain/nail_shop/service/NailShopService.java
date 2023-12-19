@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,7 +44,7 @@ public class NailShopService {
     }
 
     public NailShopFindOneResponse findNailShopById(Long id){
-        NailShop nailShop=nailShopRepository.findById(id).get();
+        NailShop nailShop=nailShopRepository.getById(id);
 
         return NailShopFindOneResponse.from(nailShop);
     }
