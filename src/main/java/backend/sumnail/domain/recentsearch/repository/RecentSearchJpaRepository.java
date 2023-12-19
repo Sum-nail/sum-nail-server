@@ -10,4 +10,10 @@ public interface RecentSearchJpaRepository extends JpaRepository<RecentSearch, L
     void deleteByUserId(long userId);
 
     List<RecentSearch> findByUserId(long userId);
+
+    RecentSearch save(RecentSearch recentSearch);
+
+    void deleteByStation(String station);
+
+    List<RecentSearch> findByStation(String station);
 }

@@ -1,8 +1,10 @@
 package backend.sumnail.domain.nail_shop.controller.dto.response;
 
-import java.util.List;
+import backend.sumnail.domain.nail_shop.entity.NailShop;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -22,4 +24,28 @@ public class NailShopFindOneResponse {
     private String naverMapLink;
     private String reservationLink;
     private String monthlyNailLink;
+
+    public static NailShopFindOneResponse from(NailShop nailShop){
+        List<String> hashtags = nailShop.getHashtags()
+                .stream()
+                .map(nailShopHashtag -> nailShopHashtag.getHashtag().getHashtagName())
+                .toList();
+        return NailShopFindOneResponse.builder()
+                .nailShopId(nailShop.getId())
+                .nailShopName(nailShop.getName())
+                .detailImages(nailShop.getDetailImages())
+                .location(nailShop.getLocation())
+                .hashtags(hashtags)
+                .businessHour(nailShop.getBusinessHour())
+                .employeeNum(nailShop.getEmployeeNum())
+                .minimumPrice(nailShop.getMinimumPrice())
+                .maximumPrice(nailShop.getMaximumPrice())
+                .mapLat(nailShop.getMapLat())
+                .mapLng(nailShop.getMapLng())
+                .streetAddress(nailShop.getStreetAddress())
+                .naverMapLink(nailShop.getNaverMapLink())
+                .reservationLink(nailShop.getReservationTable())
+                .monthlyNailLink(nailShop.getMonthlyNailLink())
+                .build();
+    }
 }

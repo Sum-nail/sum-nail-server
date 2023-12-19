@@ -3,39 +3,41 @@ package backend.sumnail.domain.nail_shop.controller;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllResponse;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.service.NailShopService;
-import java.util.List;
+import backend.sumnail.domain.recentsearch.service.RecentSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/v1/nail-shops")
+@RequestMapping("v1/nail-shops")
 @RequiredArgsConstructor
 public class NailShopController {
     private final NailShopService nailShopService;
 
+    private final RecentSearchService recentSearchService;
+
     @GetMapping("")
-    public ResponseEntity<List<NailShopFindAllResponse>> getAllShops() {
-        List<NailShopFindAllResponse> response = nailShopService.findAllShop();
+    public ResponseEntity<List<NailShopFindAllResponse>> getAllShops(){
+        List<NailShopFindAllResponse> response=nailShopService.findAllShop();
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam String hashtags,
-                                                                     @RequestParam String station) {
-        List<NailShopFindAllResponse> response = nailShopService.searchNailShop(station, hashtags);
+    @GetMapping("search")
+    public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam String hashtags, @RequestParam String station){
+        List<NailShopFindAllResponse> response=nailShopService.searchNailShop(station,hashtags);
+        if(!response.isEmpty()) {
+            recentSearchService.addRecentSearch(station, 1);
+        }//JWT 토큰으로 userId 받아와야함
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/{nailShopId}")
-    public ResponseEntity<NailShopFindOneResponse> searchShopById(@PathVariable Long nailShopId) {
-        NailShopFindOneResponse response = nailShopService.findNailShopById(nailShopId);
+    @GetMapping("{nailShopId}")
+    public ResponseEntity<NailShopFindOneResponse> searchShopById(@PathVariable Long nailShopId){
+        NailShopFindOneResponse response=nailShopService.findNailShopById(nailShopId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

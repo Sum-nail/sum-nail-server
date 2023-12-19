@@ -2,7 +2,13 @@ package backend.sumnail.domain.recentsearch.service;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
+
+import java.time.LocalDateTime;
 import java.util.List;
+
+import backend.sumnail.domain.station.repository.StationRepository;
+import backend.sumnail.domain.user.entity.User;
+import backend.sumnail.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RecentSearchService {
     private final RecentSearchRepository recentSearchRepository;
+    private final UserRepository userRepository;
 
     public void deleteAll(long userId) {
         recentSearchRepository.deleteByUserId(userId);
@@ -19,5 +26,17 @@ public class RecentSearchService {
 
     public List<RecentSearch> findByUserId(long userId) {
         return recentSearchRepository.findByUserId(userId);
+    }
+
+    public void addRecentSearch(String station, long userId) {
+        if(station.length()==0){
+            return;
+        }
+        if(!recentSearchRepository.findByStation(station).isEmpty()){
+            recentSearchRepository.deleteByStation(station);
+        }
+        User user=userRepository.getById(userId);
+        RecentSearch recentSearch = RecentSearch.createRecentSearch(user,station);
+        recentSearchRepository.save(recentSearch);
     }
 }
