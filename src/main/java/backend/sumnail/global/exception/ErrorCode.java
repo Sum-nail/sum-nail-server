@@ -20,7 +20,8 @@ public enum ErrorCode {
     NOT_FOUND_SAVED_NAIL_SHOP(HttpStatus.NOT_FOUND, "저장한 적 없는 네일샵입니다."),
 
 
-    // Token 예외
+    // Auth 예외
+    INVALID_PROVIDER_NAME(HttpStatus.BAD_REQUEST, "유효하지 않은 providerName 입니다."),
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
     TOKEN_INVALID(HttpStatus.UNAUTHORIZED, "토큰이 유효하지 않습니다."),
     UNAUTHORIZED_TOKEN(HttpStatus.UNAUTHORIZED, "인증되지 않은 토큰입니다."),

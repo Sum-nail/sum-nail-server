@@ -32,7 +32,7 @@ public class JwtTokenProvider {
     // accessToken 생성
     public String generateAccessToken(User user) {
 
-        Claims claims = Jwts.claims().setSubject(user.getEmail()); // JWT payload에 저장되는 정보 단위
+        Claims claims = Jwts.claims().setSubject(user.getId().toString()); // JWT payload에 저장되는 정보 단위
         Date issuedAt = new Date();
         Date TokenExpiresIn = new Date(issuedAt.getTime() + JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME);
 
@@ -42,22 +42,31 @@ public class JwtTokenProvider {
     // RefreshToken 생성
     public String generateRefreshToken(User user) {
 
-        Claims claims = Jwts.claims().setSubject(user.getEmail());
+        Claims claims = Jwts.claims().setSubject(user.getId().toString());
         Date issuedAt = new Date();
         Date TokenExpiresIn = new Date(issuedAt.getTime() + JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME);
 
         return buildToken(claims, issuedAt, TokenExpiresIn, refreshSecretKey);
     }
 
-    // accessToken에서 userPk(loginId) 추출
-    public String getUsernameFromAccessToken(String token) {
-
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    // accessToken에서 userPk 추출
+    public Long getUserIdFromAccessToken(String token) {
+        return Long.parseLong(
+                Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject());
     }
 
-    public String getUsernameFromRefreshToken(String token) {
-
-        return Jwts.parser().setSigningKey(refreshSecretKey).parseClaimsJws(token).getBody().getSubject();
+    // refreshToken에서 userPK 추출
+    public Long getUserIdFromRefreshToken(String token) {
+        return Long.parseLong(
+                Jwts.parser()
+                .setSigningKey(refreshSecretKey)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject());
     }
 
     // access 토큰의 유효성 + 만료일자 확인 -> 유효하면 남은 유효시간 반환

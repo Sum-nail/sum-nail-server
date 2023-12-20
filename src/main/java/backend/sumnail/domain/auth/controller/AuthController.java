@@ -1,4 +1,4 @@
-package backend.sumnail.domain.auth.controller.dto;
+package backend.sumnail.domain.auth.controller;
 
 import backend.sumnail.domain.auth.controller.dto.request.AuthLoginRequest;
 import backend.sumnail.domain.auth.controller.dto.request.AuthRefreshRequest;
