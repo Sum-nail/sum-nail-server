@@ -23,15 +23,15 @@ public class RefreshToken {
     @Column(length=600)
     private String refreshToken;
 
-    private String keyUserId;
+    private Long keyUserId;
 
     @Builder
-    public RefreshToken(String refreshToken, String keyUserId) {
+    public RefreshToken(String refreshToken, Long keyUserId) {
         this.refreshToken = refreshToken;
         this.keyUserId = keyUserId;
     }
 
-    public static RefreshToken createRefreshToken(String refreshToken, String keyUserId) {
+    public static RefreshToken createRefreshToken(String refreshToken, Long keyUserId) {
         return RefreshToken.builder()
                 .refreshToken(refreshToken)
                 .keyUserId(keyUserId)

@@ -10,7 +10,14 @@ import org.springframework.stereotype.Repository;
 public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
     private final RefreshTokenJpaRepository refreshTokenJpaRepository;
     @Override
-    public Optional<RefreshToken> findByKeyLoginId(String loginId) {
-        return refreshTokenJpaRepository.findByKeyLoginId(loginId);
+    public Optional<RefreshToken> findByKeyUserId(Long keyUserId) {
+        return refreshTokenJpaRepository.findByKeyUserId(keyUserId);
     }
+
+    @Override
+    public void save(RefreshToken newRefreshToken) {
+        refreshTokenJpaRepository.save(newRefreshToken);
+    }
+
+
 }
