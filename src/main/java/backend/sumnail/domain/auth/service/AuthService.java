@@ -55,6 +55,25 @@ public class AuthService {
         return createAndSaveToken(user);
     }
 
+    public AuthTokenResponse refresh(String token) {
+        String refreshToken = token.replace("Bearer", "");
+
+        //refreshToken 유효성 확인
+        jwtTokenProvider.validateRefreshToken(refreshToken);
+
+        // userId 는 userPK
+        Long userId = jwtTokenProvider.getUserIdFromRefreshToken(refreshToken);
+
+        RefreshToken findRefreshToken = refreshTokenService.getByKeyUserId(userId);
+
+        if (!refreshToken.equals(findRefreshToken.getRefreshToken())) {
+            throw new CustomException(ErrorCode.TOKEN_INVALID);
+        }
+
+        User user = userRepository.getById(userId);
+        return createAndSaveToken(user);
+    }
+
 
     private AuthTokenResponse createAndSaveToken(User user){
         String accessToken = jwtTokenProvider.generateAccessToken(user);
