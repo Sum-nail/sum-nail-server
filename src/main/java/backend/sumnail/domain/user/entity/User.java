@@ -1,5 +1,6 @@
 package backend.sumnail.domain.user.entity;
 
+import backend.sumnail.domain.auth.controller.dto.AuthGoogleLoginDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,4 +41,11 @@ public class User {
                 .build();
     }
 
+    public static User createUserByGoogleLogin(AuthGoogleLoginDto dto) {
+        return User.builder()
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .profileImage(dto.getPicture())
+                .build();
+    }
 }
