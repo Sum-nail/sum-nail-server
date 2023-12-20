@@ -38,6 +38,10 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
+    //feign
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:2022.0.3")
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
 }
 
 tasks.named('bootBuildImage') {
