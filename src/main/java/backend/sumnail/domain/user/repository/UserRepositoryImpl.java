@@ -19,13 +19,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userJpaRepository.findByEmail(email);
+    public void save(User user) {
+        userJpaRepository.save(user);
     }
 
     @Override
-    public void save(User user) {
-        userJpaRepository.save(user);
+    public Optional<User> findBySsoId(String ssoId) {
+        return userJpaRepository.findBySsoId(ssoId);
     }
 
 }
