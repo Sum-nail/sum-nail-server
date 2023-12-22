@@ -24,7 +24,7 @@ public class AuthController {
      */
     @PostMapping("signin")
     public ResponseEntity<AuthTokenResponse> googleLogin(@RequestBody AuthLoginRequest request) {
-        AuthTokenResponse response = authService.signin(request.getProvider(), request.getIdToken());
+        AuthTokenResponse response = authService.signIn(request.getProvider(), request.getIdToken());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
