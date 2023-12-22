@@ -23,7 +23,7 @@ public class AuthController {
      * 소셜 로그인 ( 구글, 카카오 )
      */
     @PostMapping("signin")
-    public ResponseEntity<AuthTokenResponse> googleLogin(@RequestBody AuthLoginRequest request) {
+    public ResponseEntity<AuthTokenResponse> login(@RequestBody AuthLoginRequest request) {
         AuthTokenResponse response = authService.signIn(request.getProvider(), request.getIdToken());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
