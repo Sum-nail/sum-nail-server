@@ -19,4 +19,19 @@ public class RecentSearchRepositoryImpl implements RecentSearchRepository {
     public List<RecentSearch> findByUserId(long userId) {
         return recentSearchJpaRepository.findByUserId(userId);
     }
+
+    @Override
+    public RecentSearch save(RecentSearch recentSearch) {
+        return recentSearchJpaRepository.save(recentSearch);
+    }
+
+    @Override
+    public void deleteByStation(String station) {
+        recentSearchJpaRepository.deleteByStation(station);
+    }
+
+    @Override
+    public List<RecentSearch> findByStation(String station) {
+        return recentSearchJpaRepository.findByStation(station);
+    }
 }

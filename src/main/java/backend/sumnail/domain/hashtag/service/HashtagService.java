@@ -21,18 +21,9 @@ public class HashtagService {
     private final HashtagRepository hashtagRepository;
     private final NailShopHashtagService nailShopHashtagService;
 
-    public HashtagFindAllResponse findAllHashtag() {
-        List<String> list = new ArrayList<>();
-        List<Hashtag> hashtags = hashtagRepository.findAll();
-
-        for (Hashtag hashtag : hashtags
-        ) {
-            list.add(hashtag.getHashtagName());
-        }
-        HashtagFindAllResponse response = HashtagFindAllResponse.builder()
-                .hashtags(list)
-                .build();
-        return response;
+    public HashtagFindAllResponse findAllHashtag(){
+        List<Hashtag> hashtags=hashtagRepository.findAll();
+        return HashtagFindAllResponse.from(hashtags);
     }
 
     public List<Hashtag> findHashtags(final NailShop nailShop) {
