@@ -44,7 +44,7 @@ public class User {
 
     public static User createUserByKakaoLogin(AuthKakaoLoginDto dto) {
         return User.builder()
-                .name(dto.getKakaoAccount().getName())
+                .name(dto.getKakaoAccount().getProfile().getNickname())
                 .email(dto.getKakaoAccount().getEmail())
                 .profileImage(dto.getKakaoAccount().getProfile().getThumbnailImageUrl())
                 .build();

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class AuthKakaoLoginDto {
-    @JsonProperty(" kakao_account")
+    @JsonProperty("kakao_account")
     private KakaoAccount kakaoAccount;
 
     @NoArgsConstructor
@@ -17,19 +17,16 @@ public class AuthKakaoLoginDto {
     @Getter
     public static class KakaoAccount {
         private Profile profile;
-        private String name;
         private String email;
 
         @NoArgsConstructor
         @AllArgsConstructor
         @Getter
         public static class Profile {
-            @JsonProperty("is_default_image")
-            private boolean isDefaultImage;
+            private String nickname;
 
             @JsonProperty("thumbnail_image_url")
             private String thumbnailImageUrl;
-
         }
     }
 }
