@@ -24,8 +24,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findBySsoId(String ssoId) {
-        return userJpaRepository.findBySsoId(ssoId);
+    public Optional<User> findByEmail(String email) {
+        return userJpaRepository.findByEmail(email);
     }
 
 }
