@@ -1,8 +1,9 @@
 package backend.sumnail.domain.auth.service;
 
+import backend.sumnail.domain.auth.controller.dto.AuthKakaoLoginDto;
 import backend.sumnail.domain.auth.controller.dto.response.AuthTokenResponse;
 import backend.sumnail.domain.auth.entity.Provider;
-import backend.sumnail.domain.auth.service.helper.GoogleLoginHelper;
+import backend.sumnail.domain.auth.service.helper.GoogleClient;
 import backend.sumnail.domain.auth.service.helper.KakaoClient;
 import backend.sumnail.domain.refresh_token.entity.RefreshToken;
 import backend.sumnail.domain.refresh_token.service.RefreshTokenService;
@@ -20,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
-    private final GoogleLoginHelper googleLoginHelper;
+    private final GoogleClient googleClient;
     private final KakaoClient kakaoClient;
     private final UserRepository userRepository;
     private final RefreshTokenService refreshTokenService;
@@ -67,11 +68,14 @@ public class AuthService {
 
         // 구글 로그인
         if (Provider.GOOGLE.getProviderName().equals(provider)) {
-            return User.createUserByGoogleLogin(googleLoginHelper.getUserInfo(idToken));
+            System.out.println("?????"+googleClient.getUserInfo(idToken).getEmail());
+            return User.createUserByGoogleLogin(googleClient.getUserInfo(idToken));
         }
 
         // 카카오 로그인
-        return User.createUserByKakaoLogin(kakaoClient.getUserInfo(idToken));
+        AuthKakaoLoginDto userInfo = kakaoClient.getUserInfo("Bearer "+ idToken);
+        //System.out.println(userInfo.getKakaoAccount().getProfile()+"!!!!!!"+userInfo.getKakaoAccount().getProfile().getNickname()+userInfo.getKakaoAccount().getEmail());
+        return User.createUserByKakaoLogin(userInfo);
     }
 
 
