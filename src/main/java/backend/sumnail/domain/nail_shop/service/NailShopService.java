@@ -31,10 +31,19 @@ public class NailShopService {
     }
 
     public List<NailShopFindAllResponse> searchNailShop(String stationName, String hashtagName) {
-        if(stationName.isEmpty()){
-            stationName="";
+        List<NailShop> nailShops;
+        if(stationName.isEmpty() && hashtagName.isEmpty()){
+            nailShops = nailShopRepository.findAll();
         }
-        List<NailShop> nailShops= nailShopRepository.findNailShopsByHashtagAndStation(stationName,hashtagName);
+        else if(stationName.isEmpty()){
+            nailShops = nailShopRepository.findNailShopByHashtag(hashtagName);
+        }
+        else if(hashtagName.isEmpty()){
+            nailShops = nailShopRepository.findNailShopByStation(stationName);
+        }
+        else{
+            nailShops = nailShopRepository.findNailShopsByHashtagAndStation(stationName, hashtagName);
+        }
         List<NailShopFindAllResponse> response = nailShops
                 .stream()
                 .map(NailShop->NailShopFindAllResponse.from(NailShop))

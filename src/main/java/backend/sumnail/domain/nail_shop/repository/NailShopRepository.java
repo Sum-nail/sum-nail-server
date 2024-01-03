@@ -13,4 +13,8 @@ public interface NailShopRepository {
     Optional<NailShop> findById(Long id);
 
     NailShop getById(long id);
+
+    List<NailShop> findNailShopByHashtag(String hashtagName);
+
+    List<NailShop> findNailShopByStation(String stationName);
 }

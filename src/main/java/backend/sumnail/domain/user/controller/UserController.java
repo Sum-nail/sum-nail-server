@@ -1,5 +1,7 @@
 package backend.sumnail.domain.user.controller;
 
+import backend.sumnail.domain.recentsearch.service.RecentSearchService;
+import backend.sumnail.domain.user.controller.dto.request.RecentSearchSaveRequest;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
@@ -8,12 +10,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1/user")
@@ -21,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
-
+    private final RecentSearchService recentSearchService;
     // TODO 테스트 용 userId 1 번 사용중
 
     /**
@@ -77,6 +74,14 @@ public class UserController {
         userService.deleteSearchStationsUser(1);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
+    /**
+     * 지하철 역 검색 기록 추가
+     */
+    @PostMapping("search-station-history")
+    public ResponseEntity<Void> saveSearchStationsUser(@RequestBody RecentSearchSaveRequest request) {
+        recentSearchService.addRecentSearch(request.getStationName(), 1);
+        //jwt 인증 구현 필요
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
 }

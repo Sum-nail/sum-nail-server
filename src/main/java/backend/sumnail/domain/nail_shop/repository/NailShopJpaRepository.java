@@ -18,5 +18,15 @@ public interface NailShopJpaRepository extends JpaRepository<NailShop, Long> {
             String hashtagName
     );
 
+    @Query("SELECT DISTINCT ns FROM NailShop ns " +
+            "LEFT JOIN ns.hashtags nh " +
+            "WHERE (COALESCE(:hashtagName, '') = '' OR nh.hashtag.hashtagName = :hashtagName)")
+    List<NailShop> findNailShopByHashtag(String hashtagName);
+
+    @Query("SELECT DISTINCT ns FROM NailShop ns " +
+            "LEFT JOIN ns.stations s " +
+            "WHERE (COALESCE(:stationName, '') = '' OR s.station.stationName = :stationName)")
+    List<NailShop> findNailShopByStation(String stationName);
+
     Optional<NailShop> findById(Long id);
 }
