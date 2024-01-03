@@ -53,20 +53,20 @@ public class JwtTokenProvider {
     public Long getUserIdFromAccessToken(String token) {
         return Long.parseLong(
                 Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject());
+                        .setSigningKey(secretKey)
+                        .parseClaimsJws(token)
+                        .getBody()
+                        .getSubject());
     }
 
     // refreshToken에서 userPK 추출
     public Long getUserIdFromRefreshToken(String token) {
         return Long.parseLong(
                 Jwts.parser()
-                .setSigningKey(refreshSecretKey)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject());
+                        .setSigningKey(refreshSecretKey)
+                        .parseClaimsJws(token)
+                        .getBody()
+                        .getSubject());
     }
 
     // access 토큰의 유효성 + 만료일자 확인 -> 유효하면 남은 유효시간 반환
@@ -104,7 +104,6 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
     }
-
 
 
 }

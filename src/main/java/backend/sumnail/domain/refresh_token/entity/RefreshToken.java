@@ -20,7 +20,7 @@ public class RefreshToken {
     @Column(name = "refresh_token_id")
     private Long id;
 
-    @Column(length=600)
+    @Column(length = 600)
     private String refreshToken;
 
     private Long keyUserId;

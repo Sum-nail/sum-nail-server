@@ -72,7 +72,7 @@ public class AuthService {
         }
 
         // 카카오 로그인
-        AuthKakaoLoginDto userInfo = kakaoClient.getUserInfo("Bearer "+ idToken);
+        AuthKakaoLoginDto userInfo = kakaoClient.getUserInfo("Bearer " + idToken);
         return User.createUserByKakaoLogin(userInfo);
     }
 

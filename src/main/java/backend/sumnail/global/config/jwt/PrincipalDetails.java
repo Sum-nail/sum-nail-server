@@ -18,6 +18,7 @@ public class PrincipalDetails implements UserDetails {
         // 사용자 권한이 없으므로 빈 컬렉션 반환
         return Collections.emptyList();
     }
+
     @Override
     public String getPassword() {
         return "";

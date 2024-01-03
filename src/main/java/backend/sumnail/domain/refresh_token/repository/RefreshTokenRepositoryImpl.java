@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
     private final RefreshTokenJpaRepository refreshTokenJpaRepository;
+
     @Override
     public Optional<RefreshToken> findByKeyUserId(Long keyUserId) {
         return refreshTokenJpaRepository.findByKeyUserId(keyUserId);

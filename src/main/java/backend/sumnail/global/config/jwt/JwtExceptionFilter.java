@@ -16,8 +16,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtExceptionFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        try{
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        try {
             filterChain.doFilter(request, response); // JwtAuthorizationFilter로 이동
         } catch (JwtException ex) {
             setErrorResponse(response, ex); // JwtAuthorizationFilter에서 예외 발생하면 호출됨

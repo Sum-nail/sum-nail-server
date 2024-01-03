@@ -4,8 +4,8 @@ import backend.sumnail.domain.user.repository.UserRepository;
 import backend.sumnail.global.config.jwt.CustomAccessDeniedHandler;
 import backend.sumnail.global.config.jwt.CustomAuthenticationEntryPoint;
 import backend.sumnail.global.config.jwt.JwtAuthorizationFilter;
-import backend.sumnail.global.config.jwt.JwtTokenProvider;
 import backend.sumnail.global.config.jwt.JwtExceptionFilter;
+import backend.sumnail.global.config.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -58,7 +58,6 @@ public class WebSecurityConfig {
                         .requestMatchers("/v1/user/**").permitAll()
                         .requestMatchers("/v1/hashtags/**").permitAll()
                         .requestMatchers("/v1/station/**").permitAll()
-                        //.requestMatchers("/admin/**").access("hasRole('ROLE_ADMIN')") // TODO: 권한 부분 AuthorizationFilter에 추가해야함
                         .anyRequest().authenticated()
                 );
         return http.build();
