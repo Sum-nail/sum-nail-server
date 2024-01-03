@@ -21,11 +21,11 @@ public class FeignClientConfig {
         @Override
         public Exception decode(String methodKey, Response response) {
             if (response.status() == 401) {
-                // Unauthorized (401) 에러 처리 예시
+                // Unauthorized (401) 에러 처리
                 return new CustomException(ErrorCode.UNAUTHORIZED_TOKEN);
             } else if (response.status() == 404) {
-                // Not Found (404) 에러 처리 예시
-                return new CustomException(ErrorCode.BAD_REQUEST);
+                // Not Found (404) 에러 처리
+                return new CustomException(ErrorCode.NOT_FOUND);
             }
 
             // 기본적으로는 FeignException을 던집니다.

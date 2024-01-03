@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     // 공통 예외
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
+    NOT_FOUND(HttpStatus.NOT_FOUND,"요청한 리소스를 찾을 수 없습니다."),
     NOT_VALID_URI(HttpStatus.BAD_REQUEST, "유효한 경로로 요청해주세요."),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),
 
@@ -31,8 +32,8 @@ public enum ErrorCode {
 
     // HashTag 예외
     NOT_FOUND_HASHTAG(HttpStatus.NOT_FOUND, "해당 해시태그를 찾을 수 없습니다."),
-    EXCEEDED_MAX_HASHTAG(HttpStatus.BAD_REQUEST, "해시태그의 최대 갯수를 초과합니다."),
-    ;
+    EXCEEDED_MAX_HASHTAG(HttpStatus.BAD_REQUEST, "해시태그의 최대 갯수를 초과합니다.");
+
 
     private final HttpStatus status;
     private final String error;
