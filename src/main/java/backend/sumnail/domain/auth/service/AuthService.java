@@ -68,13 +68,11 @@ public class AuthService {
 
         // 구글 로그인
         if (Provider.GOOGLE.getProviderName().equals(provider)) {
-            System.out.println("?????"+googleClient.getUserInfo(idToken).getEmail());
             return User.createUserByGoogleLogin(googleClient.getUserInfo(idToken));
         }
 
         // 카카오 로그인
         AuthKakaoLoginDto userInfo = kakaoClient.getUserInfo("Bearer "+ idToken);
-        //System.out.println(userInfo.getKakaoAccount().getProfile()+"!!!!!!"+userInfo.getKakaoAccount().getProfile().getNickname()+userInfo.getKakaoAccount().getEmail());
         return User.createUserByKakaoLogin(userInfo);
     }
 
