@@ -1,4 +1,4 @@
-package backend.sumnail.domain.user.controller.dto;
+package backend.sumnail.domain.user.controller;
 
 import backend.sumnail.domain.recentsearch.service.RecentSearchService;
 import backend.sumnail.domain.user.controller.dto.request.RecentSearchSaveRequest;
