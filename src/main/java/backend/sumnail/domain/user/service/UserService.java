@@ -16,6 +16,7 @@ import backend.sumnail.domain.user_nail_shop.service.UserNailShopService;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -65,9 +66,11 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserFindSearchStationsResponse findSearchStationsUser(long userId) {
         List<RecentSearch> recentSearches = recentSearchService.findByUserId(userId);
-        Collections.sort(recentSearches, (a, b) -> b.getDateTime().compareTo(a.getDateTime()));
-        recentSearches=recentSearches.subList(0,Math.min(recentSearches.size(),3));
-        return UserFindSearchStationsResponse.from(recentSearches);
+        List<RecentSearch> limitedRecentSearches= recentSearches.stream()
+                .sorted(Comparator.comparing(RecentSearch::getDateTime).reversed())
+                .limit(Math.min(recentSearches.size(),3))
+                .toList();
+        return UserFindSearchStationsResponse.from(limitedRecentSearches);
     }
 
     public void deleteSearchStationsUser(long userId) {
