@@ -1,4 +1,4 @@
-package backend.sumnail.domain.user.controller.dto;
+package backend.sumnail.domain.user.controller;
 
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
