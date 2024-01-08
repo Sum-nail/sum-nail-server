@@ -52,8 +52,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/v1/auth/**").permitAll()
                         .requestMatchers("/v1/nail-shops/**").permitAll()
                         .requestMatchers("/v1/user/**").permitAll()
-                        .requestMatchers("/v1/hashtags/**").permitAll()
-                        .requestMatchers("/v1/station/**").permitAll()
+                        .requestMatchers("/v1/hashtags").permitAll()
+                        .requestMatchers("/v1/stations").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();
