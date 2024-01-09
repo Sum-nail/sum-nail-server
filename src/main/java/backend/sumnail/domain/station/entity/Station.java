@@ -21,5 +21,5 @@ public class Station {
     private String stationName;
 
     @Convert(converter = StringListConverter.class)
-    private List<String> stationLine;
+    private List<String> line;
 }
