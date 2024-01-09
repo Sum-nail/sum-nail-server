@@ -1,13 +1,12 @@
 package backend.sumnail.domain.station.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import backend.sumnail.global.util.StringListConverter;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,5 +20,6 @@ public class Station {
 
     private String stationName;
 
-    private String line;
+    @Convert(converter = StringListConverter.class)
+    private List<String> stationLine;
 }
