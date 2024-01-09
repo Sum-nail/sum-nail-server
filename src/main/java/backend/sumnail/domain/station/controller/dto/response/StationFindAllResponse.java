@@ -17,7 +17,7 @@ public class StationFindAllResponse {
 
         return StationFindAllResponse.builder()
                 .stationName(station.getStationName())
-                .stationLine(station.getStationLine())
+                .stationLine(station.getLine())
                 .build();
     }
 }
