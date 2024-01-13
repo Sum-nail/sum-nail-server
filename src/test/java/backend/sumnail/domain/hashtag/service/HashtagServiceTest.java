@@ -40,5 +40,19 @@ class HashtagServiceTest {
         //then
         assertThat(hashtagList).contains(HashtagName);
     }
- 
+    @Test
+    @DisplayName("해시태그 조회")
+    @Transactional
+    void findHashtags() {
+        //given
+        NailShop nailShop=nailShopRepository.getById(1L);
+
+        List<Hashtag> originHashtags=nailShop.getHashtags().stream().map(NailShopHashtag::getHashtag).toList();
+
+        //when
+        List<Hashtag> hashtags=hashtagService.findHashtags(nailShop);
+
+        //then
+        assertThat(hashtags).isEqualTo(originHashtags);
+    }
 }
