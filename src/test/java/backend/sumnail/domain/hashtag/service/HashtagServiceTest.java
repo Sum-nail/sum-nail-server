@@ -61,10 +61,9 @@ class HashtagServiceTest {
     void findHashtagsExceedMaxHashtagCount() {
         //given
         NailShop nailShop=nailShopRepository.getById(1L);
-        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(1L)).build());
-        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(2L)).build());
-        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(3L)).build());
-        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(4L)).build());
+        for(Long i=1L;i<=3L;i++){
+            nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(i)).build());
+        }
 
         //when
         Throwable throwable = catchThrowable(() -> hashtagService.findHashtags(nailShop));
