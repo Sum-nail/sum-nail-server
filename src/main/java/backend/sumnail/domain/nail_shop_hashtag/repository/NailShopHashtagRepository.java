@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface NailShopHashtagRepository {
     List<NailShopHashtag> getByNailShopId(Long id);
+
+    void save(NailShopHashtag nailShopHashtag);
 }

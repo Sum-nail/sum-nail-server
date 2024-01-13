@@ -14,4 +14,9 @@ public class NailShopHashtagRepositoryImpl implements NailShopHashtagRepository 
     public List<NailShopHashtag> getByNailShopId(Long id) {
         return nailShopHashTagJpaRepository.findByNailShopId(id);
     }
+
+    @Override
+    public void save(NailShopHashtag nailShopHashtag) {
+        nailShopHashTagJpaRepository.save(nailShopHashtag);
+    }
 }
