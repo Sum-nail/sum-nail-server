@@ -55,4 +55,21 @@ class HashtagServiceTest {
         //then
         assertThat(hashtags).isEqualTo(originHashtags);
     }
+    @Test
+    @DisplayName("해시태그 조회 실패 - 해시태그가 3개 이상일 때")
+    @Transactional
+    void findHashtagsExceedMaxHashtagCount() {
+        //given
+        NailShop nailShop=nailShopRepository.getById(1L);
+        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(1L)).build());
+        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(2L)).build());
+        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(3L)).build());
+        nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(4L)).build());
+
+        //when
+        Throwable throwable = catchThrowable(() -> hashtagService.findHashtags(nailShop));
+
+        //then
+        assertThat(throwable).isInstanceOf(CustomException.class);
+    }
 }
