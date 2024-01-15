@@ -51,7 +51,7 @@ class HashtagServiceTest {
     }
 
     @Test
-    @DisplayName("해시태그 전체 조회")
+    @DisplayName("findAllHashtag로 해시태그 전체 조회가 가능하다")
     void findAllHashtag() {
         //given
         String HashtagName="귀여운";
@@ -64,7 +64,7 @@ class HashtagServiceTest {
         assertThat(hashtagList).contains(HashtagName);
     }
     @Test
-    @DisplayName("해시태그 조회")
+    @DisplayName("findHashtags 특정 네일샵의 해시태그 조회가 가능하다")
     @Transactional
     void findHashtags() {
         //given
