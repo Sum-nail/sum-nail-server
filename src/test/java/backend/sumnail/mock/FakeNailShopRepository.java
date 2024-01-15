@@ -53,4 +53,18 @@ public class FakeNailShopRepository implements NailShopRepository {
                 .filter(item->item.getStations().stream().anyMatch(station->station.getStation().getStationName().equals(stationName)))
                 .toList();
     }
+
+    public NailShop save(NailShop nailShop){
+        if(nailShop.getId()==null||nailShop.getId()==0)
+        {
+            NailShop newNailShop=NailShop.builder()
+                    .id(id)
+                    .build();
+        }
+        else{
+            data.removeIf(it->it.getId()==nailShop.getId());
+        }
+        data.add(nailShop);
+        return nailShop;
+    }
 }

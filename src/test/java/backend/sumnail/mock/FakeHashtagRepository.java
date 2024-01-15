@@ -32,4 +32,19 @@ public class FakeHashtagRepository implements HashtagRepository {
                 .findAny()
                 .orElseThrow();
     }
+
+    public Hashtag save(Hashtag hashtag){
+        if(hashtag.getId()==null||hashtag.getId()==0)
+        {
+            Hashtag newHashtag=Hashtag.builder()
+                    .id(id)
+                    .hashtagName(hashtag.getHashtagName())
+                    .build();
+        }
+        else{
+            data.removeIf(it->it.getId()==hashtag.getId());
+        }
+        data.add(hashtag);
+        return hashtag;
+    }
 }
