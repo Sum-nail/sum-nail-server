@@ -26,7 +26,7 @@ public class FakeStationRepository implements StationRepository {
     }
 
     public Station save(Station station){
-        if(station.getId()==0||station.getId()==null)
+        if(station.getId()==null||station.getId()==0)
         {
             Station newStation=Station.builder()
                     .id(id)
