@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 //중형 테스트
 @SpringBootTest
-class HashtagServiceTest {
+class HashtagMediumServiceTest {
 
     @Autowired
     HashtagService hashtagService;
