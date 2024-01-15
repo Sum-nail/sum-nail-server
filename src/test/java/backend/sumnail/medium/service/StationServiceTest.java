@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import static org.assertj.core.api.Assertions.*;
-
+//중형 테스트
 @SpringBootTest
 class StationServiceTest {
 

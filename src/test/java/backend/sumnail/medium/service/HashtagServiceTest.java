@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.*;
 import java.util.List;
+//중형 테스트
 @SpringBootTest
 class HashtagServiceTest {
 
