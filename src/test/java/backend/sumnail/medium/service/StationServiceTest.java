@@ -1,9 +1,10 @@
-package backend.sumnail.domain.station.service;
+package backend.sumnail.medium.service;
 
 
 import backend.sumnail.domain.station.controller.dto.response.StationFindAllResponse;
 import backend.sumnail.domain.station.entity.Station;
 import backend.sumnail.domain.station.repository.StationRepository;
+import backend.sumnail.domain.station.service.StationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

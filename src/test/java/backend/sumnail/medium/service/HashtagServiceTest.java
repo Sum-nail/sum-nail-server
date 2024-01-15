@@ -1,8 +1,9 @@
-package backend.sumnail.domain.hashtag.service;
+package backend.sumnail.medium.service;
 
 import backend.sumnail.domain.hashtag.controller.dto.response.HashtagFindAllResponse;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
+import backend.sumnail.domain.hashtag.service.HashtagService;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
