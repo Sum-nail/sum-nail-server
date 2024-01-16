@@ -84,6 +84,7 @@ public class UserController {
     /**
      * 지하철 역 검색 기록 추가
      */
+    //TODO station name -> request param으로 이동?
     @PostMapping("search-station-history")
     public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody RecentSearchSaveRequest request) {
         recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName());

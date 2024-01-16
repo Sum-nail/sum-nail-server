@@ -19,8 +19,8 @@ values(1, 1);
 insert into nail_shop_hashtag (hashtag_id, nail_shop_id)
 values(2, 1);
 
-insert into recent_search(recent_search_id, date_time, user_id, station)
-values(1, '2018-10-08 16:38:00.000000',1, '배방');
-insert into recent_search(recent_search_id, date_time, user_id, station)
-values(2, '2018-10-09 16:38:00.000000',1, '외대앞');
+insert into recent_search(date_time, user_id, station)
+values('2018-10-08 16:38:00.000000',1, '배방');
+insert into recent_search(date_time, user_id, station)
+values('2018-10-09 16:38:00.000000',1, '외대앞');
 

@@ -10,16 +10,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
+import backend.sumnail.domain.user.controller.dto.request.RecentSearchSaveRequest;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
 import backend.sumnail.global.config.jwt.PrincipalDetails;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
@@ -40,9 +43,10 @@ class UserControllerTest {
     private UserNailShopRepository userNailShopRepository;
     @Autowired
     private RecentSearchRepository recentSearchRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void 자신의_프로필을_조회_할_수_있다() throws Exception{
+    void 자신의_프로필을_조회_할_수_있다() throws Exception {
 
         //given
         User user = User.builder()
@@ -55,7 +59,7 @@ class UserControllerTest {
         //when
         //then
         mockMvc.perform(get("/v1/user/profile")
-                .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("썸네일"))
                 .andExpect(jsonPath("$.email").value("sed@yahoo.edu"))
@@ -72,7 +76,7 @@ class UserControllerTest {
         //when
         //then
         mockMvc.perform(get("/v1/user/profile")
-                .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status").value("NOT_FOUND"))
                 .andExpect(jsonPath("$.error").value("해당 유저를 찾을 수 없습니다."));
@@ -80,7 +84,7 @@ class UserControllerTest {
     }
 
     @Test
-    void 저장한_네일샵을_조회할_수_있다() throws Exception{
+    void 저장한_네일샵을_조회할_수_있다() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
@@ -99,7 +103,7 @@ class UserControllerTest {
     }
 
     @Test
-    void 저장한_네일샵이_없을_경우_빈_배열을_받환한다() throws Exception{
+    void 저장한_네일샵이_없을_경우_빈_배열을_받환한다() throws Exception {
         //given
         User user = User.builder()
                 .id(2L)
@@ -116,7 +120,7 @@ class UserControllerTest {
 
 
     @Test
-    void 네일샵을_저장할_수_있다() throws Exception{
+    void 네일샵을_저장할_수_있다() throws Exception {
         //given
         User user = User.builder()
                 .id(2L)
@@ -185,7 +189,7 @@ class UserControllerTest {
 
 
     @Test
-    void 지하철_역_검색내역을_조회할_수_있다() throws Exception{
+    void 지하철_역_검색내역을_조회할_수_있다() throws Exception {
 
         //given
         User user = User.builder()
@@ -217,7 +221,54 @@ class UserControllerTest {
         assertThat(recentSearches.size()).isEqualTo(0);
     }
 
+    @Test
+    void 새로운_지하철역_검색기록을_추가_할_수_있다() throws Exception {
+        //given
+        User user = User.builder()
+                .id(1L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        RecentSearchSaveRequest request = RecentSearchSaveRequest.builder()
+                .stationName("합정")
+                .build();
+        //when
+        //then
+        mockMvc.perform(post("/v1/user/search-station-history")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isCreated());
 
+        List<RecentSearch> recentSearches = recentSearchRepository.findByUserId(1);
+        assertThat(recentSearches.size()).isEqualTo(3);
+        assertThat(recentSearches.get(0).getStation()).isEqualTo("배방");
+        assertThat(recentSearches.get(1).getStation()).isEqualTo("외대앞");
+        assertThat(recentSearches.get(2).getStation()).isEqualTo("합정");
+    }
+
+    @Test
+    void 같은_지하철역을_한번_더_검색하면_이전_검색내역이_삭제된다() throws Exception {
+        //given
+        User user = User.builder()
+                .id(1L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        RecentSearchSaveRequest request = RecentSearchSaveRequest.builder()
+                .stationName("배방")
+                .build();
+        //when
+        //then
+        mockMvc.perform(post("/v1/user/search-station-history")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isCreated());
+
+        List<RecentSearch> recentSearches = recentSearchRepository.findByUserId(1);
+        assertThat(recentSearches.size()).isEqualTo(2);
+        assertThat(recentSearches.get(0).getStation()).isEqualTo("외대앞");
+        assertThat(recentSearches.get(1).getStation()).isEqualTo("배방");
+    }
 
 
 }
