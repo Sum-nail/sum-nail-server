@@ -2,6 +2,7 @@ package backend.sumnail.domain.user.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -145,8 +146,38 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.error").value("이미 저장한 네일샵입니다."));
     }
 
+    @Test
+    void 네일샵을_저장을_취소할_수_있다() throws Exception {
+        //given
+        User user = User.builder()
+                .id(1L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        //when
+        //then
+        mockMvc.perform(delete("/v1/user/nail-shops/1")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                .andExpect(status().isNoContent());
 
+        List<UserNailShop> userNailShops = userNailShopRepository.findByUserId(2);
+        assertThat(userNailShops.size()).isEqualTo(0);
+    }
 
+    @Test
+    void 저장한_적_없는_네일샵을_취소하면_404_응답을_받는다() throws Exception {
+        //given
+        User user = User.builder()
+                .id(2L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        //when
+        //then
+        mockMvc.perform(delete("/v1/user/nail-shops/1")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status").value("NOT_FOUND"))
+                .andExpect(jsonPath("$.error").value("저장한 적 없는 네일샵입니다."));
+    }
 
 
 
