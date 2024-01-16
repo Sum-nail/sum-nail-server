@@ -12,10 +12,6 @@ import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user.repository.UserRepository;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import backend.sumnail.domain.user_nail_shop.service.UserNailShopService;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +36,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<UserFindNailShopResponse> findAllNailShopsUser(final long userId) {
+        userRepository.getById(userId);
         List<UserNailShop> userNailShops = userNailShopService.findByUserId(userId);
 
         return userNailShops.stream()
