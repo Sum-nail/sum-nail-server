@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import backend.sumnail.domain.recentsearch.entity.RecentSearch;
+import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
@@ -36,6 +38,8 @@ class UserControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private UserNailShopRepository userNailShopRepository;
+    @Autowired
+    private RecentSearchRepository recentSearchRepository;
 
     @Test
     void 자신의_프로필을_조회_할_수_있다() throws Exception{
@@ -194,6 +198,23 @@ class UserControllerTest {
                         .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.stations", containsInAnyOrder("외대앞", "배방")));
+    }
+
+    @Test
+    void 지하철역_검색_기록을_전체_삭제할_수_있다() throws Exception {
+        //given
+        User user = User.builder()
+                .id(1L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        //when
+        //then
+        mockMvc.perform(delete("/v1/user/search-station-history")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                .andExpect(status().isNoContent());
+
+        List<RecentSearch> recentSearches = recentSearchRepository.findByUserId(1);
+        assertThat(recentSearches.size()).isEqualTo(0);
     }
 
 
