@@ -180,6 +180,23 @@ class UserControllerTest {
     }
 
 
+    @Test
+    void 지하철_역_검색내역을_조회할_수_있다() throws Exception{
+
+        //given
+        User user = User.builder()
+                .id(1L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        //when
+        //then
+        mockMvc.perform(get("/v1/user/search-station-history")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.stations", containsInAnyOrder("외대앞", "배방")));
+    }
+
+
 
 
 }
