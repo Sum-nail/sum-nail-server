@@ -27,10 +27,14 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8'
+    testImplementation 'org.springframework.security:spring-security-test'
+
 
     // db
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testRuntimeOnly 'com.h2database:h2'
+
 
     // jwt
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
