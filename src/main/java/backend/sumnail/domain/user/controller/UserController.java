@@ -87,7 +87,6 @@ public class UserController {
     @PostMapping("search-station-history")
     public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody RecentSearchSaveRequest request) {
         recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName());
-        //jwt 인증 구현 필요
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

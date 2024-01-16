@@ -1,5 +1,6 @@
 package backend.sumnail.domain.user.controller;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,7 +30,7 @@ class UserControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void 사용자는_자신의_프로필을_조회_할_수_있다() throws Exception{
+    void 자신의_프로필을_조회_할_수_있다() throws Exception{
 
         //given
         User user = User.builder()
@@ -50,7 +51,7 @@ class UserControllerTest {
     }
 
     @Test
-    void 사용자는_존재하지_않는_유저의_아이디로_api_호출할_경우_404_응답을_받는다() throws Exception {
+    void 존재하지_않는_유저의_아이디로_요청할_경우_404_응답을_받는다() throws Exception {
         //given
         User user = User.builder()
                 .id(102934563L)
@@ -65,4 +66,46 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.error").value("해당 유저를 찾을 수 없습니다."));
 
     }
+
+    @Test
+    void 저장한_네일샵을_조회할_수_있다() throws Exception{
+        //given
+        User user = User.builder()
+                .id(1L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        //when
+        //then
+        mockMvc.perform(get("/v1/user/nail-shops")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].nailShopId").value(1))
+                .andExpect(jsonPath("$[0].nailShopName").value("썸네일네일샵"))
+                .andExpect(jsonPath("$[0].location").value("서울시 중구"))
+                .andExpect(jsonPath("$[0].titleImage").value("http://zoom.us?g=1"))
+                .andExpect(jsonPath("$[0].hashtags", containsInAnyOrder("심플한", "화한")));
+    }
+
+    @Test
+    void 저장한_네일샵이_없을_경우_빈_배열을_받환한다() throws Exception{
+        //given
+        User user = User.builder()
+                .id(2L)
+                .build();
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
+        //when
+        //then
+        mockMvc.perform(get("/v1/user/nail-shops")
+                        .with(SecurityMockMvcRequestPostProcessors.user(principalDetails)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").isEmpty());
+    }
+
+
+
+
+
+
+
 }
