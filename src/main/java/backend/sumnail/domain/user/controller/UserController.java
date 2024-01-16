@@ -27,7 +27,6 @@ public class UserController {
 
     private final UserService userService;
     private final RecentSearchService recentSearchService;
-    // TODO 테스트 용 userId 1 번 사용중
 
     /**
      * 나의 프로필 조회

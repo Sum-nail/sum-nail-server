@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Table(name="users")
 public class User {
     @Id
     @Column(name = "user_id")
@@ -28,7 +30,8 @@ public class User {
     private String profileImage;
 
     @Builder
-    public User(String name, String email, String profileImage) {
+    protected User(Long id, String name, String email, String profileImage) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.profileImage = profileImage;
