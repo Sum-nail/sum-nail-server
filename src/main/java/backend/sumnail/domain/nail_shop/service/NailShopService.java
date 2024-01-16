@@ -9,12 +9,14 @@ import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Builder
 @RequiredArgsConstructor
 @Transactional
 public class NailShopService {
