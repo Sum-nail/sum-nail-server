@@ -11,8 +11,8 @@ import lombok.Getter;
 public class UserFindSearchStationsResponse {
     private List<String> stations;
 
-    public static UserFindSearchStationsResponse from(List<RecentSearch> recentSearchs) {
-        List<String> stations = recentSearchs.stream()
+    public static UserFindSearchStationsResponse from(List<RecentSearch> recentSearches) {
+        List<String> stations = recentSearches.stream()
                 .map(RecentSearch::getStation)
                 .toList();
 
