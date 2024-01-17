@@ -15,7 +15,9 @@ public class FakeUserRepository implements UserRepository {
     private final List<User> data = new ArrayList<>();
     @Override
     public User getById(Long id) {
-        return data.stream().filter(item -> item.getId().equals(id)).findAny()
+        return data.stream()
+                .filter(item -> item.getId().equals(id))
+                .findAny()
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
     }
 
@@ -37,6 +39,8 @@ public class FakeUserRepository implements UserRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return data.stream().filter(item -> item.getEmail().equals(email)).findAny();
+        return data.stream()
+                .filter(item -> item.getEmail().equals(email))
+                .findAny();
     }
 }
