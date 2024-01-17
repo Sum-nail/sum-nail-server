@@ -2,11 +2,13 @@ package backend.sumnail.domain.auth.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Getter
 public class AuthKakaoLoginDto {
     @JsonProperty("kakao_account")
@@ -14,6 +16,7 @@ public class AuthKakaoLoginDto {
 
     @NoArgsConstructor
     @AllArgsConstructor
+    @Builder
     @Getter
     public static class KakaoAccount {
         private Profile profile;
@@ -21,6 +24,7 @@ public class AuthKakaoLoginDto {
 
         @NoArgsConstructor
         @AllArgsConstructor
+        @Builder
         @Getter
         public static class Profile {
             private String nickname;
