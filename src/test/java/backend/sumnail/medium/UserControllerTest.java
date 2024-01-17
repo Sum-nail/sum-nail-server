@@ -1,4 +1,4 @@
-package backend.sumnail.domain.user.controller;
+package backend.sumnail.medium;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
