@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,10 @@ public class Hashtag {
     private Long id;
 
     private String hashtagName;
+
+    @Builder
+    public Hashtag(Long id, String hashtagName) {
+        this.id = id;
+        this.hashtagName = hashtagName;
+    }
 }
