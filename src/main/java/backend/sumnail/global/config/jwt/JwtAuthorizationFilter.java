@@ -16,11 +16,11 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final UserRepository userRepository;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProviderImpl jwtTokenProvider;
 
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository,
-                                  JwtTokenProvider jwtTokenProvider) {
+                                  JwtTokenProviderImpl jwtTokenProvider) {
 
         super(authenticationManager);
         this.userRepository = userRepository;
