@@ -26,7 +26,8 @@ public class RefreshToken {
     private Long keyUserId;
 
     @Builder
-    public RefreshToken(String refreshToken, Long keyUserId) {
+    public RefreshToken(Long id, String refreshToken, Long keyUserId) {
+        this.id = id;
         this.refreshToken = refreshToken;
         this.keyUserId = keyUserId;
     }

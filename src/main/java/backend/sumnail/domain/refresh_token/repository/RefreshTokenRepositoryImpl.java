@@ -16,8 +16,8 @@ public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
     }
 
     @Override
-    public void save(RefreshToken newRefreshToken) {
-        refreshTokenJpaRepository.save(newRefreshToken);
+    public void save(RefreshToken refreshToken) {
+        refreshTokenJpaRepository.save(refreshToken);
     }
 
 
