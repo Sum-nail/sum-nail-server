@@ -32,7 +32,8 @@ public class RecentSearch {
     private LocalDateTime dateTime;
 
     @Builder
-    private RecentSearch(User user, String station) {
+    private RecentSearch(Long id, User user, String station) {
+        this.id = id;
         this.user = user;
         this.station = station;
     }
