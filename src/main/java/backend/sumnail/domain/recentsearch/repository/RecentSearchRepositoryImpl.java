@@ -21,8 +21,8 @@ public class RecentSearchRepositoryImpl implements RecentSearchRepository {
     }
 
     @Override
-    public RecentSearch save(RecentSearch recentSearch) {
-        return recentSearchJpaRepository.save(recentSearch);
+    public void save(RecentSearch recentSearch) {
+        recentSearchJpaRepository.save(recentSearch);
     }
 
     @Override

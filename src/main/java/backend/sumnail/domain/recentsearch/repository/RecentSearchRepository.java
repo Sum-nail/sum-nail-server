@@ -8,7 +8,7 @@ public interface RecentSearchRepository {
 
     List<RecentSearch> findByUserId(long userId);
 
-    RecentSearch save(RecentSearch recentSearch);
+    void save(RecentSearch recentSearch);
 
     void deleteByStation(String station);
 
