@@ -14,7 +14,7 @@ class UserFindNailShopResponseTest {
 
     @Test
     @DisplayName("NailShopFindSavedDto 객체로 응답을 생성할 수 있다.")
-    public void fromTest(){
+    public void fromTest() {
         //given
         NailShop nailShop = NailShop.builder()
                 .id(1L)

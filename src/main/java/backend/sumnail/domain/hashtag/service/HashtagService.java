@@ -7,7 +7,6 @@ import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,8 @@ public class HashtagService {
     private final HashtagRepository hashtagRepository;
     private final NailShopHashtagService nailShopHashtagService;
 
-    public HashtagFindAllResponse findAllHashtag(){
-        List<Hashtag> hashtags=hashtagRepository.findAll();
+    public HashtagFindAllResponse findAllHashtag() {
+        List<Hashtag> hashtags = hashtagRepository.findAll();
         return HashtagFindAllResponse.from(hashtags);
     }
 

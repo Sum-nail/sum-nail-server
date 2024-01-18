@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class UserTest {
     @Test
     @DisplayName("AuthGoogleLoginDto로 유저를 만들 수 있다.")
-    public void createUserByGoogleLoginTest(){
+    public void createUserByGoogleLoginTest() {
         //given
         AuthGoogleLoginDto authGoogleLoginDto = AuthGoogleLoginDto.builder()
                 .name("썸네일")
@@ -31,7 +31,7 @@ class UserTest {
 
     @Test
     @DisplayName("AuthKakaoLoginDto로 유저를 만들 수 있다.")
-    public void createUserByKakaoLoginTest(){
+    public void createUserByKakaoLoginTest() {
         //given
         Profile profile = Profile.builder()
                 .nickname("썸네일")
@@ -54,7 +54,6 @@ class UserTest {
         assertThat(user.getProfileImage()).isEqualTo("https://guardian.co.uk/one");
 
     }
-
 
 
 }

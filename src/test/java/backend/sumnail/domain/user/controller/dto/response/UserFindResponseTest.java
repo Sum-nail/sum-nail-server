@@ -10,7 +10,7 @@ class UserFindResponseTest {
 
     @Test
     @DisplayName("User로 응답을 생성할 수 있다.")
-    public void fromTest(){
+    public void fromTest() {
         //given
         User user = User.builder()
                 .name("썸네일")

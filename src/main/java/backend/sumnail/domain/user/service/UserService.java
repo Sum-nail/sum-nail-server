@@ -65,9 +65,9 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserFindSearchStationsResponse findSearchStationsUser(long userId) {
         List<RecentSearch> recentSearches = recentSearchService.findByUserId(userId);
-        List<RecentSearch> limitedRecentSearches= recentSearches.stream()
+        List<RecentSearch> limitedRecentSearches = recentSearches.stream()
                 .sorted(Comparator.comparing(RecentSearch::getDateTime).reversed())
-                .limit(Math.min(recentSearches.size(),3))
+                .limit(Math.min(recentSearches.size(), 3))
                 .toList();
         return UserFindSearchStationsResponse.from(limitedRecentSearches);
     }

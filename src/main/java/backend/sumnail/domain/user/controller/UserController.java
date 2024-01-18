@@ -41,7 +41,8 @@ public class UserController {
      * 저장한 네일샵 전체 조회
      */
     @GetMapping("nail-shops")
-    public ResponseEntity<List<UserFindNailShopResponse>> findAllNailShopsUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public ResponseEntity<List<UserFindNailShopResponse>> findAllNailShopsUser(
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
         List<UserFindNailShopResponse> responses = userService.findAllNailShopsUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
@@ -50,7 +51,8 @@ public class UserController {
      * 네일샵 저장하기
      */
     @PostMapping("nail-shops/{nailShopId}")
-    public ResponseEntity<Void> saveNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("nailShopId") long nailShopId) {
+    public ResponseEntity<Void> saveNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                 @PathVariable("nailShopId") long nailShopId) {
         userService.saveNailShopUser(principalDetails.getUser().getId(), nailShopId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -59,7 +61,8 @@ public class UserController {
      * 네일샵 저장 취소하기
      */
     @DeleteMapping("nail-shops/{nailShopId}")
-    public ResponseEntity<Void> deleteNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("nailShopId") long nailShopId) {
+    public ResponseEntity<Void> deleteNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                   @PathVariable("nailShopId") long nailShopId) {
         userService.deleteNailShopUser(principalDetails.getUser().getId(), nailShopId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -68,8 +71,10 @@ public class UserController {
      * 지하철 역 검색 내역 조회
      */
     @GetMapping("search-station-history")
-    public ResponseEntity<UserFindSearchStationsResponse> findSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        UserFindSearchStationsResponse response = userService.findSearchStationsUser(principalDetails.getUser().getId());
+    public ResponseEntity<UserFindSearchStationsResponse> findSearchStationsUser(
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        UserFindSearchStationsResponse response = userService.findSearchStationsUser(
+                principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -81,12 +86,14 @@ public class UserController {
         userService.deleteSearchStationsUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
     /**
      * 지하철 역 검색 기록 추가
      */
     //TODO station name -> request param으로 이동?
     @PostMapping("search-station-history")
-    public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody RecentSearchSaveRequest request) {
+    public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                       @RequestBody RecentSearchSaveRequest request) {
         recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

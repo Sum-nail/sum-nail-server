@@ -13,7 +13,7 @@ class UserFindSearchStationsResponseTest {
 
     @Test
     @DisplayName("RecentSearch 객체 리스트로 응답을 생성할 수 있다.")
-    public void fromTest(){
+    public void fromTest() {
         //given
         User user = User.builder()
                 .name("썸네일")
@@ -34,10 +34,11 @@ class UserFindSearchStationsResponseTest {
         recentSearches.add(recentSearch2);
 
         //when
-        UserFindSearchStationsResponse userFindSearchStationsResponse = UserFindSearchStationsResponse.from(recentSearches);
+        UserFindSearchStationsResponse userFindSearchStationsResponse = UserFindSearchStationsResponse.from(
+                recentSearches);
 
         //then
-        assertThat(userFindSearchStationsResponse.getStations()).isEqualTo(List.of("배방","외대앞"));
+        assertThat(userFindSearchStationsResponse.getStations()).isEqualTo(List.of("배방", "외대앞"));
 
     }
 

@@ -49,7 +49,8 @@ class UserServiceTest {
                         new HashtagService(fakeHashtagRepository,
                                 new NailShopHashtagService(fakeNailShopHashtagRepository))
                 ))
-                .recentSearchService(new RecentSearchService(fakeRecentSearchRepository, fakeUserRepository, new TestClockHolder("2002-01-29 16:19:00.000000")))
+                .recentSearchService(new RecentSearchService(fakeRecentSearchRepository, fakeUserRepository,
+                        new TestClockHolder("2002-01-29 16:19:00.000000")))
                 .build();
 
         User user1 = User.builder()
@@ -94,7 +95,7 @@ class UserServiceTest {
 
         fakeRecentSearchRepository.save(
                 RecentSearch.createRecentSearch(user1, "배방", new TestClockHolder("2002-01-29 16:19:00.000000"))
-              );
+        );
         fakeRecentSearchRepository.save(
                 RecentSearch.createRecentSearch(user1, "외대앞", new TestClockHolder("2002-02-29 16:19:00.000000"))
         );
@@ -182,18 +183,18 @@ class UserServiceTest {
 
     @Test
     @DisplayName("findSearchStationUser를 이용해서 지하철 검색 내역을 조회 할 수 있다.")
-    void findSearchStationUserTest(){
+    void findSearchStationUserTest() {
         //given
         //when
         UserFindSearchStationsResponse result = userService.findSearchStationsUser(1L);
         //then
-        assertThat(result.getStations()).isEqualTo(List.of("외대앞","배방"));
+        assertThat(result.getStations()).isEqualTo(List.of("외대앞", "배방"));
     }
 
 
     @Test
     @DisplayName("deleteSearchStationUser를 이용해서 지하철 검색 내역 전체를 삭제할 수 있다.")
-    void deleteSearchStationUserTest(){
+    void deleteSearchStationUserTest() {
         //given
         //when
         userService.deleteSearchStationsUser(1L);

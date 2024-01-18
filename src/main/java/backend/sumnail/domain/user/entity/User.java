@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
     @Column(name = "user_id")

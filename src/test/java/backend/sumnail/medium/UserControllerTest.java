@@ -37,13 +37,13 @@ import org.springframework.test.web.servlet.MockMvc;
         @Sql(value = "/sql/delete-all-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 })
 class UserControllerTest {
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private UserNailShopRepository userNailShopRepository;
     @Autowired
     private RecentSearchRepository recentSearchRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     void 자신의_프로필을_조회_할_수_있다() throws Exception {

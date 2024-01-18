@@ -1,9 +1,9 @@
 package backend.sumnail.domain.nail_shop.controller.dto.response;
 
 import backend.sumnail.domain.nail_shop.entity.NailShop;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
-import java.util.List;
 
 @Builder
 @Getter
@@ -24,7 +24,7 @@ public class NailShopFindOneResponse {
     private String reservationLink;
     private String monthlyNailLink;
 
-    public static NailShopFindOneResponse from(NailShop nailShop){
+    public static NailShopFindOneResponse from(NailShop nailShop) {
         List<String> hashtags = nailShop.getHashtags()
                 .stream()
                 .map(nailShopHashtag -> nailShopHashtag.getHashtag().getHashtagName())
