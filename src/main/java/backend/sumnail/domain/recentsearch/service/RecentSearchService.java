@@ -1,5 +1,6 @@
 package backend.sumnail.domain.recentsearch.service;
 
+import backend.sumnail.domain.common.service.port.ClockHolder;
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RecentSearchService {
     private final RecentSearchRepository recentSearchRepository;
     private final UserRepository userRepository;
+    private final ClockHolder clockHolder;
 
     public void deleteAll(long userId) {
         recentSearchRepository.deleteByUserId(userId);
@@ -29,7 +31,7 @@ public class RecentSearchService {
             recentSearchRepository.deleteByStation(station);
         }
         User user=userRepository.getById(userId);
-        RecentSearch recentSearch = RecentSearch.createRecentSearch(user,station);
+        RecentSearch recentSearch = RecentSearch.createRecentSearch(user,station,clockHolder);
         recentSearchRepository.save(recentSearch);
     }
 }

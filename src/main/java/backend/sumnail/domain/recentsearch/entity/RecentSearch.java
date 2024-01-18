@@ -1,5 +1,6 @@
 package backend.sumnail.domain.recentsearch.entity;
 
+import backend.sumnail.domain.common.service.port.ClockHolder;
 import backend.sumnail.domain.user.entity.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -32,16 +33,18 @@ public class RecentSearch {
     private LocalDateTime dateTime;
 
     @Builder
-    private RecentSearch(Long id, User user, String station) {
+    private RecentSearch(Long id, User user, String station, LocalDateTime dateTime) {
         this.id = id;
         this.user = user;
         this.station = station;
+        this.dateTime = dateTime;
     }
 
-    public static RecentSearch createRecentSearch(User user, String station) {
+    public static RecentSearch createRecentSearch(User user, String station, ClockHolder clockHolder ) {
         return RecentSearch.builder()
                 .user(user)
                 .station(station)
+                .dateTime(clockHolder.millis())
                 .build();
     }
 }
