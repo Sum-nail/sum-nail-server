@@ -34,7 +34,8 @@ public class UserNailShop {
 
 
     @Builder
-    public UserNailShop(User user, NailShop nailShop) {
+    public UserNailShop(Long id, User user, NailShop nailShop) {
+        this.id = id;
         this.user = user;
         this.nailShop = nailShop;
     }

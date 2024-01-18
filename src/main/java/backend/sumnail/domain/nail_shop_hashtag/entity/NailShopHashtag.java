@@ -34,7 +34,8 @@ public class NailShopHashtag {
     private Hashtag hashtag;
 
     @Builder
-    public NailShopHashtag(NailShop nailShop, Hashtag hashtag) {
+    public NailShopHashtag(Long id, NailShop nailShop, Hashtag hashtag) {
+        this.id = id;
         this.nailShop = nailShop;
         this.hashtag = hashtag;
     }
