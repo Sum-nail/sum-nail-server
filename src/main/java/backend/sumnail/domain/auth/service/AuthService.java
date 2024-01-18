@@ -12,12 +12,14 @@ import backend.sumnail.domain.user.repository.UserRepository;
 import backend.sumnail.global.config.jwt.JwtTokenProvider;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Builder
 @Transactional
 public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;

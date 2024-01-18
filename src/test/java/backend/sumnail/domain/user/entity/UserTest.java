@@ -33,16 +33,14 @@ class UserTest {
     @DisplayName("AuthKakaoLoginDto로 유저를 만들 수 있다.")
     public void createUserByKakaoLoginTest() {
         //given
-        Profile profile = Profile.builder()
-                .nickname("썸네일")
-                .thumbnailImageUrl("https://guardian.co.uk/one")
-                .build();
-        KakaoAccount kakaoAccount = KakaoAccount.builder()
-                .profile(profile)
-                .email("sed@yahoo.edu")
-                .build();
         AuthKakaoLoginDto authKakaoLoginDto = AuthKakaoLoginDto.builder()
-                .kakaoAccount(kakaoAccount)
+                .kakaoAccount(KakaoAccount.builder()
+                        .profile(Profile.builder()
+                                .nickname("썸네일")
+                                .thumbnailImageUrl("https://guardian.co.uk/one")
+                                .build())
+                        .email("sed@yahoo.edu")
+                        .build())
                 .build();
 
         //when
