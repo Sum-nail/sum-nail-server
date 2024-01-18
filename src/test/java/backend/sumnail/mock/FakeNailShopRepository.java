@@ -59,15 +59,15 @@ public class FakeNailShopRepository implements NailShopRepository {
                 .toList();
     }
 
-    public NailShop save(NailShop nailShop) {
+    public void save(NailShop nailShop) {
         if (nailShop.getId() == null || nailShop.getId() == 0) {
             NailShop newNailShop = NailShop.builder()
                     .id(id)
                     .build();
+            data.add(newNailShop);
         } else {
             data.removeIf(it -> Objects.equals(it.getId(), nailShop.getId()));
+            data.add(nailShop);
         }
-        data.add(nailShop);
-        return nailShop;
     }
 }
