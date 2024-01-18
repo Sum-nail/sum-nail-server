@@ -55,8 +55,8 @@ public class FakeUserNailShopRepository implements UserNailShopRepository {
     @Override
     public Optional<UserNailShop> findByUserAndNailShop(User user, NailShop nailShop) {
         return data.stream()
-                .filter(item -> item.getUser().equals(user))
-                .filter(item -> item.getNailShop().equals(nailShop))
+                .filter(item -> item.getUser().getId().equals(user.getId()))
+                .filter(item -> item.getNailShop().getId().equals(nailShop.getId()))
                 .findAny();
     }
 }
