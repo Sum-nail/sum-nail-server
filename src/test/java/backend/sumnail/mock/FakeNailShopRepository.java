@@ -4,6 +4,7 @@ import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -64,7 +65,7 @@ public class FakeNailShopRepository implements NailShopRepository {
                     .id(id)
                     .build();
         } else {
-            data.removeIf(it -> it.getId() == nailShop.getId());
+            data.removeIf(it -> Objects.equals(it.getId(), nailShop.getId()));
         }
         data.add(nailShop);
         return nailShop;
