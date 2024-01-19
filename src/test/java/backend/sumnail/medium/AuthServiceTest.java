@@ -48,8 +48,7 @@ class AuthServiceTest {
     @DisplayName("카카오 로그인을 할 수 있다.")
     void signInWithKakaoTest() {
         //given
-        BDDMockito
-                .given(kakaoClient.getUserInfo("Bearer idToken"))
+        BDDMockito.given(kakaoClient.getUserInfo("Bearer idToken"))
                 .willReturn(AuthKakaoLoginDto.builder()
                         .kakaoAccount(KakaoAccount.builder()
                                 .profile(Profile.builder()
@@ -59,12 +58,9 @@ class AuthServiceTest {
                                 .email("sed@yahoo.edu")
                                 .build())
                         .build());
-
-        BDDMockito
-                .given(jwtTokenProvider.generateAccessToken(any(User.class)))
+        BDDMockito.given(jwtTokenProvider.generateAccessToken(any(User.class)))
                 .willReturn("accessToken");
-        BDDMockito
-                .given(jwtTokenProvider.generateRefreshToken(any(User.class)))
+        BDDMockito.given(jwtTokenProvider.generateRefreshToken(any(User.class)))
                 .willReturn("refreshToken");
 
         //when
@@ -79,19 +75,15 @@ class AuthServiceTest {
     @DisplayName("구글 로그인을 할 수 있다.")
     void signInWithGoogleTest() {
         //given
-        BDDMockito
-                .given(googleClient.getUserInfo("idToken"))
+        BDDMockito.given(googleClient.getUserInfo("idToken"))
                 .willReturn(AuthGoogleLoginDto.builder()
                         .email("sed@yahoo.edu")
                         .name("썸네일")
                         .picture("https://guardian.co.uk/one")
                         .build());
-
-        BDDMockito
-                .given(jwtTokenProvider.generateAccessToken(any(User.class)))
+        BDDMockito.given(jwtTokenProvider.generateAccessToken(any(User.class)))
                 .willReturn("accessToken");
-        BDDMockito
-                .given(jwtTokenProvider.generateRefreshToken(any(User.class)))
+        BDDMockito.given(jwtTokenProvider.generateRefreshToken(any(User.class)))
                 .willReturn("refreshToken");
         //when
         AuthTokenResponse result = authService.signIn("google", "idToken");
@@ -117,19 +109,13 @@ class AuthServiceTest {
     @DisplayName("토큰 재발급을 할 수 있다.")
     void refreshTest() {
         //given
-        BDDMockito
-                .given(jwtTokenProvider.validateRefreshToken("refreshToken"))
+        BDDMockito.given(jwtTokenProvider.validateRefreshToken("refreshToken"))
                 .willReturn(true);
-
-        BDDMockito
-                .given(jwtTokenProvider.getUserIdFromRefreshToken("refreshToken"))
+        BDDMockito.given(jwtTokenProvider.getUserIdFromRefreshToken("refreshToken"))
                 .willReturn(1L);
-
-        BDDMockito
-                .given(jwtTokenProvider.generateAccessToken(any(User.class)))
+        BDDMockito.given(jwtTokenProvider.generateAccessToken(any(User.class)))
                 .willReturn("accessToken");
-        BDDMockito
-                .given(jwtTokenProvider.generateRefreshToken(any(User.class)))
+        BDDMockito.given(jwtTokenProvider.generateRefreshToken(any(User.class)))
                 .willReturn("refreshToken");
         //when
         AuthTokenResponse result = authService.refresh("refreshToken");
