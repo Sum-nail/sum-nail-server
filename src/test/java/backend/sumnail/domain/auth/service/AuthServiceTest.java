@@ -65,8 +65,8 @@ class AuthServiceTest {
         AuthTokenResponse result = authService.signIn("kakao", "idToken");
 
         //then
-        assertThat(result.getAccessToken()).isEqualTo("sed@yahoo.edu");
-        assertThat(result.getRefreshToken()).isEqualTo("sed@yahoo.edu");
+        assertThat(result.getAccessToken()).isEqualTo("accessToken:sed@yahoo.edu");
+        assertThat(result.getRefreshToken()).isEqualTo("refreshToken:sed@yahoo.edu");
     }
 
     @Test
@@ -77,8 +77,8 @@ class AuthServiceTest {
         AuthTokenResponse result = authService.signIn("google","idToken");
 
         //then
-        assertThat(result.getAccessToken()).isEqualTo("sed@yahoo.edu");
-        assertThat(result.getRefreshToken()).isEqualTo("sed@yahoo.edu");
+        assertThat(result.getAccessToken()).isEqualTo("accessToken:sed@yahoo.edu");
+        assertThat(result.getRefreshToken()).isEqualTo("refreshToken:sed@yahoo.edu");
     }
 
     @Test
@@ -88,7 +88,7 @@ class AuthServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            authService.signIn("abcd", "5diiQ5_zfqNzwEwkm2JIMyuoVIUQin6eqeUKPXPrAAABjRubkAItjdRiIM79qQ");
+            authService.signIn("abcd", "idToken");
         }).isInstanceOf(CustomException.class).hasMessage("유효하지 않은 providerName 입니다.");
     }
 
@@ -101,8 +101,8 @@ class AuthServiceTest {
         AuthTokenResponse result = authService.refresh("sed@yahoo.edu");
 
         //then
-        assertThat(result.getAccessToken()).isEqualTo("sed@yahoo.edu");
-        assertThat(result.getRefreshToken()).isEqualTo("sed@yahoo.edu");
+        assertThat(result.getAccessToken()).isEqualTo("accessToken:sed@yahoo.edu");
+        assertThat(result.getRefreshToken()).isEqualTo("refreshToken:sed@yahoo.edu");
     }
 
     @Test
@@ -110,8 +110,6 @@ class AuthServiceTest {
     void refreshErrorTest() {
         //given
         //when
-        AuthTokenResponse result = authService.refresh("sed@yahoo.edu");
-
         //then
         assertThatThrownBy(() -> {
             authService.refresh("abc@yahoo.edu");

@@ -10,12 +10,12 @@ public class TestJwtTokenProvider implements JwtTokenProvider {
 
     @Override
     public String generateAccessToken(User user) {
-        return user.getEmail();
+        return "accessToken:" + user.getEmail();
     }
 
     @Override
     public String generateRefreshToken(User user) {
-        return user.getEmail();
+        return "refreshToken:" + user.getEmail();
     }
 
     @Override
