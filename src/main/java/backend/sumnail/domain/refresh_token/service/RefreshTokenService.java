@@ -4,12 +4,14 @@ import backend.sumnail.domain.refresh_token.entity.RefreshToken;
 import backend.sumnail.domain.refresh_token.repository.RefreshTokenRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Builder
 @Transactional
 public class RefreshTokenService {
 
