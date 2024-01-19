@@ -17,6 +17,7 @@ import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
 import backend.sumnail.global.config.jwt.PrincipalDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -46,8 +47,8 @@ class UserControllerTest {
     private RecentSearchRepository recentSearchRepository;
 
     @Test
-    void 자신의_프로필을_조회_할_수_있다() throws Exception {
-
+    @DisplayName("자신의 프로필을 조회할 수 있다.")
+    void findUserTest() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
@@ -67,7 +68,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 존재하지_않는_유저의_아이디로_요청할_경우_404_응답을_받는다() throws Exception {
+    @DisplayName("존재하지 않는 유저의 아이디로 요청할 경우 404 응답을 받는다")
+    void findUserErrorTest() throws Exception {
         //given
         User user = User.builder()
                 .id(102934563L)
@@ -84,7 +86,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 저장한_네일샵을_조회할_수_있다() throws Exception {
+    @DisplayName("저장한 네일샵을 조회할 수 있다.")
+    void findAllNailShopsUserTest() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
@@ -103,7 +106,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 저장한_네일샵이_없을_경우_빈_배열을_받환한다() throws Exception {
+    @DisplayName("저장한 네일샵이 없을 경우 빈 배열을 반환한다.")
+    void findAllNailShopsUserEmptyTest() throws Exception {
         //given
         User user = User.builder()
                 .id(2L)
@@ -120,7 +124,8 @@ class UserControllerTest {
 
 
     @Test
-    void 네일샵을_저장할_수_있다() throws Exception {
+    @DisplayName("네일샵을 저장할 수 있다.")
+    void saveNailShopUserTest() throws Exception {
         //given
         User user = User.builder()
                 .id(2L)
@@ -139,7 +144,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 네일샵을_중복해서_저장하면_409_응답을_받는다() throws Exception {
+    @DisplayName("네일샵을 중복해서 저장하면 409 응답을 받는다.")
+    void saveNailShopUserConflictTest() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
@@ -155,7 +161,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 네일샵을_저장을_취소할_수_있다() throws Exception {
+    @DisplayName("네일샵 저장을 취소할 수 있다.")
+    void deleteNailShopUserTest() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
@@ -172,7 +179,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 저장한_적_없는_네일샵을_취소하면_404_응답을_받는다() throws Exception {
+    @DisplayName("저장한 적 없는 네일샵을 취소하면 404 응답을 받는다.")
+    void deleteNailShopUserNotFoundTest() throws Exception {
         //given
         User user = User.builder()
                 .id(2L)
@@ -189,7 +197,8 @@ class UserControllerTest {
 
 
     @Test
-    void 지하철_역_검색내역을_조회할_수_있다() throws Exception {
+    @DisplayName("지하철 역 검색내역을 조회할 수 있다.")
+    void findSearchStationsUserTest() throws Exception {
 
         //given
         User user = User.builder()
@@ -205,7 +214,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 지하철역_검색_기록을_전체_삭제할_수_있다() throws Exception {
+    @DisplayName("지하철 역 검색 기록을 전체 삭제할 수 있다.")
+    void deleteSearchStationsUserTest() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
@@ -222,7 +232,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 새로운_지하철역_검색기록을_추가_할_수_있다() throws Exception {
+    @DisplayName("새로운 지하철역 검색기록을 추가할 수 있다.")
+    void saveSearchStationsUserTest() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
@@ -247,7 +258,8 @@ class UserControllerTest {
     }
 
     @Test
-    void 같은_지하철역을_한번_더_검색하면_이전_검색내역이_삭제된다() throws Exception {
+    @DisplayName("같은 지하철역을 한번 더 검색하면 이전 검색내역이 삭제된다.")
+    void saveSearchStationsUserDuplicateTest() throws Exception {
         //given
         User user = User.builder()
                 .id(1L)
