@@ -28,3 +28,6 @@ where 1;
 delete
 from hashtag
 where 2;
+delete
+from refresh_token
+where 1;
