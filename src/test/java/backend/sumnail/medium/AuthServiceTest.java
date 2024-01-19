@@ -118,11 +118,11 @@ class AuthServiceTest {
     void refreshTest() {
         //given
         BDDMockito
-                .given(jwtTokenProvider.validateRefreshToken("sed@yahoo.edu"))
+                .given(jwtTokenProvider.validateRefreshToken("refreshToken"))
                 .willReturn(true);
 
         BDDMockito
-                .given(jwtTokenProvider.getUserIdFromRefreshToken("sed@yahoo.edu"))
+                .given(jwtTokenProvider.getUserIdFromRefreshToken("refreshToken"))
                 .willReturn(1L);
 
         BDDMockito
@@ -132,7 +132,7 @@ class AuthServiceTest {
                 .given(jwtTokenProvider.generateRefreshToken(any(User.class)))
                 .willReturn("refreshToken");
         //when
-        AuthTokenResponse result = authService.refresh("sed@yahoo.edu");
+        AuthTokenResponse result = authService.refresh("refreshToken");
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken");
@@ -146,7 +146,7 @@ class AuthServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            authService.refresh("abc@yahoo.edu");
+            authService.refresh("refreshToken2");
         }).isInstanceOf(CustomException.class).hasMessage("토큰이 유효하지 않습니다.");
     }
 
