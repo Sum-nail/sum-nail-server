@@ -25,12 +25,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8'
+
+    //test
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+    testImplementation 'org.springframework.security:spring-security-test'
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8'
-    testImplementation 'org.springframework.security:spring-security-test'
-
 
     // db
     runtimeOnly 'com.mysql:mysql-connector-j'
