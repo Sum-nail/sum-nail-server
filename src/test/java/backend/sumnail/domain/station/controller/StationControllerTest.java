@@ -30,6 +30,9 @@ class StationControllerTest {
     @Test
     @DisplayName("findStationByKeywords로 조회하였을때, 200 상태를 반환한다.")
     void findStationByKeywordsResponse() throws Exception {
+        //given
+        //when
+        //then
         mockMvc.perform(get("/v1/stations?keyword=서울역"))
                 .andExpect(status().isOk());
     }
@@ -37,15 +40,22 @@ class StationControllerTest {
     @Test
     @DisplayName("findStationByKeywords로 조회하였을때, 키워드를 포함한 지하철역 정보들을 반환한다")
     void findStationByKeywords() throws Exception {
+        //given
+        //when
+        String keyword="서울역";
+        //then
         mockMvc.perform((get("/v1/stations?keyword=서울역")))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].stationName").value("서울역"))
+                .andExpect(jsonPath("$[0].stationName").value(keyword))
                 .andExpect(jsonPath("$[0].stationLine[0]").value("01호선"));
     }
 
     @Test
     @DisplayName("findStationByKeywords로 조회하였을때, 키워드가 없을때는 모든 지하철역 정보들을 반환한다")
     void findStationWithoutKeywords() throws Exception {
+        //given
+        //when
+        //then
         mockMvc.perform((get("/v1/stations?keyword=")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2));

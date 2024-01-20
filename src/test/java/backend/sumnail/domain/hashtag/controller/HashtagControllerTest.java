@@ -29,17 +29,25 @@ class HashtagControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("findAllHashtags로 조회하였을때, 200 상태를 리스폰스한다.")
+    @DisplayName("findAllHashtags로 조회하였을때, 200 상태를 반환한다.")
     void findAllHashtagsResponse() throws Exception {
+        //given
+        //when
+        //then
         mockMvc.perform(get("/v1/hashtags"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("findHashtags로 조회하였을때, 해시태그 정보들을 가지고 있다")
+    @DisplayName("findHashtags로 조회하였을때, 모든 해시태그 정보들을 반환한다")
     void findAllHashtags() throws Exception {
+        //given
+        //when
+        String expectedHashtag="귀여운";
+        //then
         mockMvc.perform(get("/v1/hashtags"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.hashtags[0]").value("귀여운"));
+                .andExpect(jsonPath("$.hashtags[0]").value(expectedHashtag))
+                .andExpect(jsonPath("$.hashtags.length()").value(2));
     }
 }
