@@ -35,7 +35,7 @@ class StationServiceTest {
                 .build()));
     }
     @Test
-    @DisplayName("findStations 검색명을 포함하는 역들을 조회할 수 있다.")
+    @DisplayName("findStations로 해당 이름을 포함하고 있는 지하철역 전체 조회가 가능하다")
     void findStations() {
         //given
         String stationName="서울역";

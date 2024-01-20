@@ -51,7 +51,7 @@ class NailShopServiceTest {
     }
 
     @Test
-    @DisplayName("findAllShop은 모든 네일샵을 조회할 수 있다.")
+    @DisplayName("findAllShop로 모든 네일샵을 조회할 수 있다.")
     void findAllShop() {
         //given
         //when

@@ -30,7 +30,7 @@ class HashtagMediumServiceTest {
     @Autowired
     NailShopHashtagRepository nailShopHashtagRepository;
     @Test
-    @DisplayName("해시태그 전체 조회")
+    @DisplayName("findAllHashtags로 해시태그 전체 조회가 가능하다")
     void findAllHashtag() {
         //given
         String HashtagName=hashtagRepository.getById(1L).getHashtagName();
@@ -43,7 +43,7 @@ class HashtagMediumServiceTest {
         assertThat(hashtagList).contains(HashtagName);
     }
     @Test
-    @DisplayName("해시태그 조회")
+    @DisplayName("해당 네일샵이 가지고 있는 해시태그 조회가 가능하다")
     @Transactional
     void findHashtags() {
         //given
@@ -58,7 +58,7 @@ class HashtagMediumServiceTest {
         assertThat(hashtags).isEqualTo(originHashtags);
     }
     @Test
-    @DisplayName("해시태그 조회 실패 - 해시태그가 3개 이상일 때")
+    @DisplayName("해시태그가 3개 이상일 때, 해시태그 조회에 실패한다.")
     @Transactional
     void findHashtagsExceedMaxHashtagCount() {
         //given
