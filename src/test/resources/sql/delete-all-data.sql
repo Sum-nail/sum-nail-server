@@ -5,6 +5,12 @@ delete
 from nail_shop_hashtag
 where 2;
 delete
+from nail_shop_station
+where 1;
+delete
+from nail_shop_station
+where 2;
+delete
 from recent_search
 where 1;
 delete
