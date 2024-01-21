@@ -1,4 +1,4 @@
-package backend.sumnail.medium.service;
+package backend.sumnail.medium;
 
 import backend.sumnail.domain.hashtag.controller.dto.response.HashtagFindAllResponse;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 //중형 테스트
 @SpringBootTest
-class HashtagMediumServiceTest {
+class HashtagServiceTest {
 
     @Autowired
     HashtagService hashtagService;

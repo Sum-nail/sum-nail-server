@@ -1,4 +1,4 @@
-package backend.sumnail.medium.service;
+package backend.sumnail.medium;
 
 
 import backend.sumnail.domain.station.controller.dto.response.StationFindAllResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 //중형 테스트
 @SpringBootTest
-class StationMediumServiceTest {
+class StationServiceTest {
 
     @Autowired
     StationService stationService;

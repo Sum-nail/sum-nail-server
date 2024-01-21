@@ -1,4 +1,4 @@
-package backend.sumnail.domain.station.controller;
+package backend.sumnail.medium;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
