@@ -96,7 +96,8 @@ public class UserController {
     public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
                                                        @RequestBody RecentSearchSaveRequest request) {
 
-        recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName(), new SystemClockHolder());
+        recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName(),
+                new SystemClockHolder());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

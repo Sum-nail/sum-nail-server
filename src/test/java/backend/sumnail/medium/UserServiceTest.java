@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.jdbc.SqlGroup;
+
 @SpringBootTest
 @SqlGroup({
         @Sql(value = "/sql/user-controller-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
@@ -50,7 +51,7 @@ class UserServiceTest {
         assertThat(result.get(0).getNailShopName()).isEqualTo("썸네일네일샵");
         assertThat(result.get(0).getLocation()).isEqualTo("서울시 중구");
         assertThat(result.get(0).getTitleImage()).isEqualTo("http://zoom.us?g=1");
-        assertThat(result.get(0).getHashtags()).isEqualTo(List.of("심플한","화려한"));
+        assertThat(result.get(0).getHashtags()).isEqualTo(List.of("심플한", "화려한"));
     }
 
     @Test
@@ -66,7 +67,7 @@ class UserServiceTest {
         assertThat(result.get(0).getNailShopName()).isEqualTo("썸네일네일샵");
         assertThat(result.get(0).getLocation()).isEqualTo("서울시 중구");
         assertThat(result.get(0).getTitleImage()).isEqualTo("http://zoom.us?g=1");
-        assertThat(result.get(0).getHashtags()).isEqualTo(List.of("심플한","화려한"));
+        assertThat(result.get(0).getHashtags()).isEqualTo(List.of("심플한", "화려한"));
     }
 
     @Test

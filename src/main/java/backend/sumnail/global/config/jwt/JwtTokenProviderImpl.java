@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class JwtTokenProviderImpl implements JwtTokenProvider{
+public class JwtTokenProviderImpl implements JwtTokenProvider {
 
     @Value("${jwt.secret}")
     private String secretKey;

@@ -30,7 +30,6 @@ class RefreshTokenTest {
         //when
         refreshToken.updateToken("refreshToken2");
 
-
         //then
         assertThat(refreshToken.getRefreshToken()).isEqualTo("refreshToken2");
         assertThat(refreshToken.getKeyUserId()).isEqualTo(1L);

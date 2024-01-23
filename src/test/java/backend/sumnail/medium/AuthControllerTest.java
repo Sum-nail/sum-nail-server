@@ -54,7 +54,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("카카오 로그인을 할 수 있다.")
-    void kakaoSignInTest() throws Exception{
+    void kakaoSignInTest() throws Exception {
         //given
         AuthLoginRequest request = AuthLoginRequest.builder()
                 .provider("kakao")
@@ -87,7 +87,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("구글 로그인을 할 수 있다.")
-    void googleSignInTest() throws Exception{
+    void googleSignInTest() throws Exception {
         //given
         AuthLoginRequest request = AuthLoginRequest.builder()
                 .provider("google")
@@ -135,7 +135,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("토큰을 리프레시 할 수 있다.")
-    void refreshTest() throws Exception{
+    void refreshTest() throws Exception {
         //given
         AuthRefreshRequest request = AuthRefreshRequest.builder()
                 .refreshToken("refreshToken")
@@ -161,7 +161,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("토큰이 일치하지 않을 때 요청할 경우 401 응답을 받는다.")
-    void refreshUnauthorizedTest() throws Exception{
+    void refreshUnauthorizedTest() throws Exception {
         //given
         AuthRefreshRequest request = AuthRefreshRequest.builder()
                 .refreshToken("refreshToken2")

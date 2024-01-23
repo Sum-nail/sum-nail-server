@@ -47,7 +47,7 @@ class AuthServiceTest {
         fakeUserRepository.save(User.createUserByGoogleLogin(authGoogleLoginDto));
         fakeUserRepository.save(User.createUserByKakaoLogin(authKakaoLoginDto));
         FakeRefreshTokenRepository fakeRefreshTokenRepository = new FakeRefreshTokenRepository();
-        fakeRefreshTokenRepository.save(RefreshToken.createRefreshToken("sed@yahoo.edu",1L));
+        fakeRefreshTokenRepository.save(RefreshToken.createRefreshToken("sed@yahoo.edu", 1L));
         this.authService = AuthService.builder()
                 .jwtTokenProvider(testJwtTokenProvider)
                 .googleClient(testGoogleClient)
@@ -74,7 +74,7 @@ class AuthServiceTest {
     void signInWithGoogleTest() {
         //given
         //when
-        AuthTokenResponse result = authService.signIn("google","idToken");
+        AuthTokenResponse result = authService.signIn("google", "idToken");
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken:sed@yahoo.edu");

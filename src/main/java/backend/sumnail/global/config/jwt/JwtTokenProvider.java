@@ -8,6 +8,7 @@ public interface JwtTokenProvider {
 
     // RefreshToken 생성
     String generateRefreshToken(User user);
+
     // accessToken에서 userPk 추출
     Long getUserIdFromAccessToken(String token);
 
