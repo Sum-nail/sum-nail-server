@@ -26,7 +26,7 @@ public class RecentSearchService {
         return recentSearchRepository.findByUserId(userId);
     }
 
-    public void addRecentSearch(long userId, String station) {
+    public void addRecentSearch(long userId, String station, ClockHolder clockHolder) {
         if (!recentSearchRepository.findByStation(station).isEmpty()) {
             recentSearchRepository.deleteByStation(station);
         }
