@@ -49,8 +49,7 @@ class UserServiceTest {
                         new HashtagService(fakeHashtagRepository,
                                 new NailShopHashtagService(fakeNailShopHashtagRepository))
                 ))
-                .recentSearchService(new RecentSearchService(fakeRecentSearchRepository, fakeUserRepository,
-                        new TestClockHolder("2002-01-29 16:19:00.000000")))
+                .recentSearchService(new RecentSearchService(fakeRecentSearchRepository, fakeUserRepository))
                 .build();
 
         User user1 = User.builder()

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RecentSearchService {
     private final RecentSearchRepository recentSearchRepository;
     private final UserRepository userRepository;
-    private final ClockHolder clockHolder;
+
 
     public void deleteAll(long userId) {
         recentSearchRepository.deleteByUserId(userId);
