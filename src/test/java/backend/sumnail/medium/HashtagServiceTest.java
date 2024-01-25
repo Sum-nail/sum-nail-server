@@ -17,12 +17,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.transaction.annotation.Transactional;
+
 import static org.assertj.core.api.Assertions.*;
+
 import java.util.List;
+
 //중형 테스트
 @SpringBootTest
 @SqlGroup({
-        @Sql(value= "/sql/nail_shop-controller-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(value = "/sql/nail_shop-controller-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "/sql/delete-all-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 })
 class HashtagServiceTest {
@@ -35,41 +38,44 @@ class HashtagServiceTest {
     NailShopRepository nailShopRepository;
     @Autowired
     NailShopHashtagRepository nailShopHashtagRepository;
+
     @Test
     @DisplayName("findAllHashtags로 해시태그 전체 조회가 가능하다")
     void findAllHashtag() {
         //given
-        String HashtagName=hashtagRepository.getById(1L).getHashtagName();
+        String HashtagName = hashtagRepository.getById(1L).getHashtagName();
 
         //when
         HashtagFindAllResponse hashtagFindAllResponse = hashtagService.findAllHashtag();
-        List<String> hashtagList=hashtagFindAllResponse.getHashtags();
+        List<String> hashtagList = hashtagFindAllResponse.getHashtags();
 
         //then
         assertThat(hashtagList).contains(HashtagName);
     }
+
     @Test
     @DisplayName("해당 네일샵이 가지고 있는 해시태그 조회가 가능하다")
     @Transactional
     void findHashtags() {
         //given
-        NailShop nailShop=nailShopRepository.getById(1L);
+        NailShop nailShop = nailShopRepository.getById(1L);
 
-        List<Hashtag> originHashtags=nailShop.getHashtags().stream().map(NailShopHashtag::getHashtag).toList();
+        List<Hashtag> originHashtags = nailShop.getHashtags().stream().map(NailShopHashtag::getHashtag).toList();
 
         //when
-        List<Hashtag> hashtags=hashtagService.findHashtags(nailShop);
+        List<Hashtag> hashtags = hashtagService.findHashtags(nailShop);
 
         //then
         assertThat(hashtags).isEqualTo(originHashtags);
     }
+
     @Test
     @DisplayName("해시태그가 3개 이상일 때, 해시태그 조회에 실패한다.")
     @Transactional
     void findHashtagsExceedMaxHashtagCount() {
         //given
-        NailShop nailShop=nailShopRepository.getById(1L);
-        for(Long i=1L;i<=3L;i++){
+        NailShop nailShop = nailShopRepository.getById(1L);
+        for (Long i = 1L; i <= 3L; i++) {
             nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(i)).build());
         }
 
@@ -77,6 +83,9 @@ class HashtagServiceTest {
         Throwable throwable = catchThrowable(() -> hashtagService.findHashtags(nailShop));
 
         //then
-        assertThat(throwable).isInstanceOf(CustomException.class);
+        assertThatThrownBy(() -> {
+            hashtagService.findHashtags(nailShop);
+        }).isInstanceOf(CustomException.class)
+                .hasMessage("해시태그의 최대 갯수를 초과합니다.");
     }
 }

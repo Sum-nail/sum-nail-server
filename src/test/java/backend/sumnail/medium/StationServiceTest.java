@@ -13,11 +13,13 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
+
 //중형 테스트
 @SpringBootTest
 @SqlGroup({
-        @Sql(value= "/sql/station-controller-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(value = "/sql/station-controller-test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "/sql/delete-all-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 })
 class StationServiceTest {
@@ -27,16 +29,17 @@ class StationServiceTest {
 
     @Autowired
     StationRepository stationRepository;
+
     @Test
     @DisplayName("findStations로 해당 이름을 포함하고 있는 지하철역 전체 조회가 가능하다")
     void findStations() {
         //given
-        Station station=stationRepository.findByStationName("서울역").orElseThrow();
-        String stationName=station.getStationName();
-        List<String> stationLines=station.getLine();
+        Station station = stationRepository.findByStationName("서울역").orElseThrow();
+        String stationName = station.getStationName();
+        List<String> stationLines = station.getLine();
 
         //when
-        List<StationFindAllResponse> stationResponses=stationService.findStations(stationName);
+        List<StationFindAllResponse> stationResponses = stationService.findStations(stationName);
 
         //then
         assertThat(stationResponses.get(0).getStationLine()).isEqualTo(stationLines);

@@ -20,13 +20,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
 @SqlGroup({
-        @Sql(value= "/sql/station-controller-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(value = "/sql/station-controller-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "/sql/delete-all-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 })
 class StationControllerTest {
 
     @Autowired
     MockMvc mockMvc;
+
     @Test
     @DisplayName("findStationByKeywords로 조회하였을때, 200 상태를 반환한다.")
     void findStationByKeywordsResponse() throws Exception {
@@ -41,13 +42,14 @@ class StationControllerTest {
     @DisplayName("findStationByKeywords로 조회하였을때, 키워드를 포함한 지하철역 정보들을 반환한다")
     void findStationByKeywords() throws Exception {
         //given
+        String keyword = "서울역";
+        String line = "01호선";
         //when
-        String keyword="서울역";
         //then
         mockMvc.perform((get("/v1/stations?keyword=서울역")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].stationName").value(keyword))
-                .andExpect(jsonPath("$[0].stationLine[0]").value("01호선"));
+                .andExpect(jsonPath("$[0].stationLine[0]").value(line));
     }
 
     @Test

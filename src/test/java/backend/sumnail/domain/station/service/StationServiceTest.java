@@ -12,20 +12,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 
-
 class StationServiceTest {
 
     private StationService stationService;
 
     @BeforeEach
-    void init(){
-        FakeStationRepository fakeStationRepository=new FakeStationRepository();
-        this.stationService=StationService.builder()
+    void init() {
+        FakeStationRepository fakeStationRepository = new FakeStationRepository();
+        this.stationService = StationService.builder()
                 .stationRepository(fakeStationRepository)
                 .build();
         fakeStationRepository.save(fakeStationRepository.save(Station.builder()
                 .id(1L)
-                .line(List.of("1호선","2호선"))
+                .line(List.of("1호선", "2호선"))
                 .stationName("서울역")
                 .build()));
         fakeStationRepository.save(fakeStationRepository.save(Station.builder()
@@ -34,15 +33,16 @@ class StationServiceTest {
                 .stationName("서울대입구역")
                 .build()));
     }
+
     @Test
     @DisplayName("findStations로 해당 이름을 포함하고 있는 지하철역 전체 조회가 가능하다")
     void findStations() {
         //given
-        String stationName="서울역";
-        List<String> stationLines=List.of("1호선","2호선");
+        String stationName = "서울역";
+        List<String> stationLines = List.of("1호선", "2호선");
 
         //when
-        List<StationFindAllResponse> stationResponses=stationService.findStations("서울");
+        List<StationFindAllResponse> stationResponses = stationService.findStations("서울");
 
         //then
         assertThat(stationResponses.get(0).getStationLine()).isEqualTo(stationLines);

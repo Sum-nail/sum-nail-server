@@ -3,7 +3,9 @@ package backend.sumnail.domain.user.repository;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
+
 import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

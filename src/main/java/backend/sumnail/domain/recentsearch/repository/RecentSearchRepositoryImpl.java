@@ -1,7 +1,9 @@
 package backend.sumnail.domain.recentsearch.repository;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
+
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

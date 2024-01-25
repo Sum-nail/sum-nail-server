@@ -13,7 +13,7 @@ public class StationFindAllResponse {
     private String stationName;
     private List<String> stationLine;
 
-    public static StationFindAllResponse from(Station station){
+    public static StationFindAllResponse from(Station station) {
 
         return StationFindAllResponse.builder()
                 .stationName(station.getStationName())

@@ -1,7 +1,9 @@
 package backend.sumnail.domain.refresh_token.repository;
 
 import backend.sumnail.domain.refresh_token.entity.RefreshToken;
+
 import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

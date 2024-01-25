@@ -8,6 +8,7 @@ import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagReposi
 import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class HashtagService {
     private final HashtagRepository hashtagRepository;
     private final NailShopHashtagRepository nailShopHashtagRepository;
 
-    public HashtagFindAllResponse findAllHashtag(){
-        List<Hashtag> hashtags=hashtagRepository.findAll();
+    public HashtagFindAllResponse findAllHashtag() {
+        List<Hashtag> hashtags = hashtagRepository.findAll();
         return HashtagFindAllResponse.from(hashtags);
     }
 

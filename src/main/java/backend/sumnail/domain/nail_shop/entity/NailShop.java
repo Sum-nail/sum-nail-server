@@ -10,7 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+
 import java.util.List;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -71,11 +73,11 @@ public class NailShop {
     private List<String> detailImages;
 
     @Builder
-    public NailShop(Long id,String name, String location, Double mapLat, Double mapLng, Long employeeNum,
-        String businessHour, String reservationTable, String naverMapLink, String streetAddress,
-        String monthlyNailLink, Long minimumPrice, Long maximumPrice, String titleImage,
-        List<NailShopHashtag> hashtags, List<NailShopStation> stations, List<String> detailImages) {
-        this.id=id;
+    public NailShop(Long id, String name, String location, Double mapLat, Double mapLng, Long employeeNum,
+                    String businessHour, String reservationTable, String naverMapLink, String streetAddress,
+                    String monthlyNailLink, Long minimumPrice, Long maximumPrice, String titleImage,
+                    List<NailShopHashtag> hashtags, List<NailShopStation> stations, List<String> detailImages) {
+        this.id = id;
         this.name = name;
         this.location = location;
         this.mapLat = mapLat;

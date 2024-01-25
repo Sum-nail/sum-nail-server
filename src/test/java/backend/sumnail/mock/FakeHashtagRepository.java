@@ -11,12 +11,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public class FakeHashtagRepository implements HashtagRepository {
 
     private final AtomicLong id = new AtomicLong(0);
-    private final List<Hashtag> data=new ArrayList<>();
+    private final List<Hashtag> data = new ArrayList<>();
 
     @Override
     public Optional<Hashtag> findByHashtagName(String hashtagName) {
         return data.stream()
-                .filter(item->item.getHashtagName().equals(hashtagName))
+                .filter(item -> item.getHashtagName().equals(hashtagName))
                 .findAny();
     }
 
@@ -28,23 +28,21 @@ public class FakeHashtagRepository implements HashtagRepository {
     @Override
     public Hashtag getById(Long id) {
         return data.stream()
-                .filter(item->item.getId().equals(id))
+                .filter(item -> item.getId().equals(id))
                 .findAny()
                 .orElseThrow();
     }
 
-    public Hashtag save(Hashtag hashtag){
-        if(hashtag.getId()==null||hashtag.getId()==0)
-        {
-            Hashtag newHashtag=Hashtag.builder()
+    public Hashtag save(Hashtag hashtag) {
+        if (hashtag.getId() == null || hashtag.getId() == 0) {
+            Hashtag newHashtag = Hashtag.builder()
                     .id(id.get())
                     .hashtagName(hashtag.getHashtagName())
                     .build();
             data.add(newHashtag);
             return newHashtag;
-        }
-        else{
-            data.removeIf(it->it.getId()==hashtag.getId());
+        } else {
+            data.removeIf(it -> it.getId() == hashtag.getId());
             data.add(hashtag);
             return hashtag;
         }

@@ -24,11 +24,11 @@ class HashtagServiceTest {
 
 
     @BeforeEach
-    void init(){
-        FakeNailShopRepository fakeNailShopRepository=new FakeNailShopRepository();
-        FakeNailShopHashtagRepository fakeNailShopHashtagRepository=new FakeNailShopHashtagRepository();
-        FakeHashtagRepository fakeHashtagRepository=new FakeHashtagRepository();
-        this.hashtagService=HashtagService.builder()
+    void init() {
+        FakeNailShopRepository fakeNailShopRepository = new FakeNailShopRepository();
+        FakeNailShopHashtagRepository fakeNailShopHashtagRepository = new FakeNailShopHashtagRepository();
+        FakeHashtagRepository fakeHashtagRepository = new FakeHashtagRepository();
+        this.hashtagService = HashtagService.builder()
                 .hashtagRepository(fakeHashtagRepository)
                 .nailShopHashtagRepository(fakeNailShopHashtagRepository)
                 .build();
@@ -48,16 +48,16 @@ class HashtagServiceTest {
                 .id(4L)
                 .hashtagName("훈훈한")
                 .build());
-        NailShop nailShop=NailShop.builder()
+        NailShop nailShop = NailShop.builder()
                 .id(1L)
                 .build();
         fakeNailShopRepository.save(nailShop);
         fakeNailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(fakeHashtagRepository.getById(1L)).build());
-        NailShop nailShopOverHashtag=NailShop.builder()
+        NailShop nailShopOverHashtag = NailShop.builder()
                 .id(2L)
                 .build();
         fakeNailShopRepository.save(nailShopOverHashtag);
-        for(Long i=1L;i<=4L;i++){
+        for (Long i = 1L; i <= 4L; i++) {
             fakeNailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShopOverHashtag).hashtag(fakeHashtagRepository.getById(i)).build());
         }
     }
@@ -66,26 +66,28 @@ class HashtagServiceTest {
     @DisplayName("findAllHashtags로 해시태그 전체 조회가 가능하다")
     void findAllHashtag() {
         //given
-        String HashtagName="귀여운";
+        String HashtagName = "귀여운";
         //when
-        //then
         HashtagFindAllResponse hashtagFindAllResponse = hashtagService.findAllHashtag();
-        List<String> hashtagList=hashtagFindAllResponse.getHashtags();
+        //then
+        List<String> hashtagList = hashtagFindAllResponse.getHashtags();
         assertThat(hashtagList.get(0)).isEqualTo(HashtagName);
     }
+
     @Test
     @DisplayName("해당 네일샵이 가지고 있는 해시태그 조회가 가능하다")
     void findHashtags() {
         //given
-        String HashtagName="귀여운";
-        NailShop nailShop=NailShop.builder()
+        String HashtagName = "귀여운";
+        NailShop nailShop = NailShop.builder()
                 .id(1L)
                 .build();
         //when
+        List<Hashtag> hashtags = hashtagService.findHashtags(nailShop);
         //then
-        List<Hashtag> hashtags=hashtagService.findHashtags(nailShop);
         assertThat(hashtags.get(0).getHashtagName()).isEqualTo("귀여운");
     }
+
     @Test
     @DisplayName("해시태그가 3개 이상일 때, 해시태그 조회에 실패한다.")
     void findHashtagsExceedMaxHashtagCount() {

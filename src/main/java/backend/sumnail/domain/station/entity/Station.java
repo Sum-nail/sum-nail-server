@@ -25,8 +25,8 @@ public class Station {
     private List<String> line;
 
     @Builder
-    public Station(Long id,String stationName, List<String> line) {
-        this.id= id;
+    public Station(Long id, String stationName, List<String> line) {
+        this.id = id;
         this.stationName = stationName;
         this.line = line;
     }

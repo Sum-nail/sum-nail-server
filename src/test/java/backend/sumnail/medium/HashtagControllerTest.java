@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
 @SqlGroup({
-        @Sql(value= "/sql/hashtag-controller-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(value = "/sql/hashtag-controller-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value = "/sql/delete-all-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 })
 class HashtagControllerTest {
@@ -42,8 +42,8 @@ class HashtagControllerTest {
     @DisplayName("findHashtags로 조회하였을때, 모든 해시태그 정보들을 반환한다")
     void findAllHashtags() throws Exception {
         //given
+        String expectedHashtag = "귀여운";
         //when
-        String expectedHashtag="귀여운";
         //then
         mockMvc.perform(get("/v1/hashtags"))
                 .andExpect(status().isOk())
