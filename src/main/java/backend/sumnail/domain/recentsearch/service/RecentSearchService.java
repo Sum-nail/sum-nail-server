@@ -2,14 +2,13 @@ package backend.sumnail.domain.recentsearch.service;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
-
-import java.util.List;
-
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor

@@ -6,13 +6,12 @@ import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopRespo
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
 import backend.sumnail.domain.user.service.UserService;
-
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("v1/user")

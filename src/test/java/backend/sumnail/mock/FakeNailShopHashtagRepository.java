@@ -1,6 +1,5 @@
 package backend.sumnail.mock;
 
-import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
 

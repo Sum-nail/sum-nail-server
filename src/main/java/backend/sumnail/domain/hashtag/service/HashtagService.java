@@ -5,17 +5,14 @@ import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
-import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Builder

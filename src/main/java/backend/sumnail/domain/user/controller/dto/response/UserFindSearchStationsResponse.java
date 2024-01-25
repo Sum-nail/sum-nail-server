@@ -1,11 +1,10 @@
 package backend.sumnail.domain.user.controller.dto.response;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
-
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.List;
 
 
 @Builder

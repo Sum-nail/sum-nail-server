@@ -7,7 +7,6 @@ import backend.sumnail.domain.hashtag.service.HashtagService;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
-
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
 import backend.sumnail.global.exception.CustomException;
 import org.junit.jupiter.api.DisplayName;
@@ -18,9 +17,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
-
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 //중형 테스트
 @SpringBootTest

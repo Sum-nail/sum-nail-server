@@ -6,12 +6,11 @@ import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
-
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor

@@ -3,12 +3,11 @@ package backend.sumnail.domain.user_nail_shop.repository;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor

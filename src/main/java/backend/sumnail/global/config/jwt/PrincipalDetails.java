@@ -1,14 +1,13 @@
 package backend.sumnail.global.config.jwt;
 
 import backend.sumnail.domain.user.entity.User;
-
-import java.util.Collection;
-import java.util.Collections;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Getter
 @AllArgsConstructor

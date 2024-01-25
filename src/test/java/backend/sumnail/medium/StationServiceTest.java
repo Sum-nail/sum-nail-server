@@ -14,7 +14,7 @@ import org.springframework.test.context.jdbc.SqlGroup;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 //중형 테스트
 @SpringBootTest
