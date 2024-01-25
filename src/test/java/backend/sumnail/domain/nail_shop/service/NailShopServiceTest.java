@@ -18,11 +18,11 @@ import static org.assertj.core.api.Assertions.*;
 class NailShopServiceTest {
 
     private NailShopService nailShopService;
-    FakeNailShopRepository fakeNailShopRepository=new FakeNailShopRepository();
-    FakeHashtagRepository fakeHashtagRepository=new FakeHashtagRepository();
-    FakeNailShopHashtagRepository fakeNailShopHashtagRepository=new FakeNailShopHashtagRepository();
     @BeforeEach
     void init(){
+        FakeNailShopRepository fakeNailShopRepository=new FakeNailShopRepository();
+        FakeHashtagRepository fakeHashtagRepository=new FakeHashtagRepository();
+        FakeNailShopHashtagRepository fakeNailShopHashtagRepository=new FakeNailShopHashtagRepository();
         this.nailShopService=NailShopService.builder()
                 .nailShopRepository(fakeNailShopRepository)
                 .build();
@@ -54,37 +54,52 @@ class NailShopServiceTest {
     @DisplayName("findAllShop로 모든 네일샵을 조회할 수 있다.")
     void findAllShop() {
         //given
+        String hashtagName="귀여운";
+        Long nailShopId=1L;
+        String nailShopName="네일샵1";
+
         //when
         List<NailShopFindAllResponse> nailShopFindAllResponses=nailShopService.findAllShop();
 
         //then
         assertThat(nailShopFindAllResponses.size()).isEqualTo(1);
+        assertThat(nailShopFindAllResponses.get(0).getNailShopId()).isEqualTo(nailShopId);
+        assertThat(nailShopFindAllResponses.get(0).getHashtags().get(0)).isEqualTo(hashtagName);
+        assertThat(nailShopFindAllResponses.get(0).getNailShopName()).isEqualTo(nailShopName);
     }
 
     @Test
     @DisplayName("searchNailShop는 역과 해시태그를 포함하는 네일샵을 조회할 수 있다.")
     void searchNailShop() {
         //given
+        Long nailShopId=1L;
         String hashtagName="귀여운";
+        String nailShopName="네일샵1";
 
         //when
         List<NailShopFindAllResponse> nailShopFindAllResponses=nailShopService.searchNailShop("",hashtagName);
 
         //then
-        assertThat(nailShopFindAllResponses).extracting("nailShopId").contains(1L);
+        assertThat(nailShopFindAllResponses.get(0).getNailShopId()).isEqualTo(nailShopId);
+        assertThat(nailShopFindAllResponses.get(0).getHashtags().get(0)).isEqualTo(hashtagName);
+        assertThat(nailShopFindAllResponses.get(0).getNailShopName()).isEqualTo(nailShopName);
     }
 
     @Test
     @DisplayName("findNailShopById는 id로 네일샵이 포함된 DTO를 조회할 수 있다.")
     void findNailShopById() {
         //given
-        Long id=1L;
+        Long nailShopId=1L;
+        String hashtagName="귀여운";
+        String nailShopName="네일샵1";
 
         //when
-        NailShopFindOneResponse nailShopFindOneResponse=nailShopService.findNailShopById(id);
+        NailShopFindOneResponse nailShopFindOneResponse=nailShopService.findNailShopById(nailShopId);
 
         //then
-        assertThat(nailShopFindOneResponse.getNailShopId()).isEqualTo(id);
+        assertThat(nailShopFindOneResponse.getNailShopId()).isEqualTo(nailShopId);
+        assertThat(nailShopFindOneResponse.getHashtags().get(0)).isEqualTo(hashtagName);
+        assertThat(nailShopFindOneResponse.getNailShopName()).isEqualTo(nailShopName);
     }
 
     @Test
@@ -96,12 +111,16 @@ class NailShopServiceTest {
     @DisplayName("getById는 id로 네일샵을 조회할 수 있다.")
     void getById() {
         //given
-        Long id=1L;
+        Long nailShopId=1L;
+        String hashtagName="귀여운";
+        String nailShopName="네일샵1";
 
         //when
-        NailShop nailshop=nailShopService.getById(id);
+        NailShop nailshop=nailShopService.getById(nailShopId);
 
         //then
-        assertThat(nailshop.getId()).isEqualTo(id);
+        assertThat(nailshop.getId()).isEqualTo(nailShopId);
+        assertThat(nailshop.getHashtags().get(0).getHashtag().getHashtagName()).isEqualTo(hashtagName);
+        assertThat(nailshop.getName()).isEqualTo(nailShopName);
     }
 }

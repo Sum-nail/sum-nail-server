@@ -45,8 +45,7 @@ class StationServiceTest {
         List<StationFindAllResponse> stationResponses=stationService.findStations("서울");
 
         //then
-        assertThat(stationResponses)
-                .extracting("stationName","stationLine")
-                .contains(tuple(stationName,stationLines));
+        assertThat(stationResponses.get(0).getStationLine()).isEqualTo(stationLines);
+        assertThat(stationResponses.get(0).getStationName()).isEqualTo(stationName);
     }
 }
