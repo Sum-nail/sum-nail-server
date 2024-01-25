@@ -25,11 +25,11 @@ public class RecentSearchService {
         return recentSearchRepository.findByUserId(userId);
     }
 
-    public void addRecentSearch(String station, long userId) {
-        if (station.length() == 0) {
-            return;
-        }
-        if (!recentSearchRepository.findByStation(station).isEmpty()) {
+
+    public void addRecentSearch(long userId, String station) {
+        if(station.isEmpty()) return;
+
+        if(!recentSearchRepository.findByStation(station).isEmpty()){
             recentSearchRepository.deleteByStation(station);
         }
         User user = userRepository.getById(userId);

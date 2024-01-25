@@ -6,10 +6,19 @@ import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopRespo
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
 import backend.sumnail.domain.user.service.UserService;
+import backend.sumnail.global.config.jwt.PrincipalDetails;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -26,8 +35,8 @@ public class UserController {
      * 나의 프로필 조회
      */
     @GetMapping("profile")
-    public ResponseEntity<UserFindResponse> findUser() {
-        UserFindResponse response = userService.findUser(1);
+    public ResponseEntity<UserFindResponse> findUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        UserFindResponse response = userService.findUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -35,8 +44,8 @@ public class UserController {
      * 저장한 네일샵 전체 조회
      */
     @GetMapping("nail-shops")
-    public ResponseEntity<List<UserFindNailShopResponse>> findAllNailShopsUser() {
-        List<UserFindNailShopResponse> responses = userService.findAllNailShopsUser(1);
+    public ResponseEntity<List<UserFindNailShopResponse>> findAllNailShopsUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        List<UserFindNailShopResponse> responses = userService.findAllNailShopsUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
@@ -44,8 +53,8 @@ public class UserController {
      * 네일샵 저장하기
      */
     @PostMapping("nail-shops/{nailShopId}")
-    public ResponseEntity<Void> saveNailShopUser(@PathVariable("nailShopId") long nailShopId) {
-        userService.saveNailShopUser(1, nailShopId);
+    public ResponseEntity<Void> saveNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("nailShopId") long nailShopId) {
+        userService.saveNailShopUser(principalDetails.getUser().getId(), nailShopId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -53,8 +62,8 @@ public class UserController {
      * 네일샵 저장 취소하기
      */
     @DeleteMapping("nail-shops/{nailShopId}")
-    public ResponseEntity<Void> deleteNailShopUser(@PathVariable("nailShopId") long nailShopId) {
-        userService.deleteNailShopUser(1, nailShopId);
+    public ResponseEntity<Void> deleteNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("nailShopId") long nailShopId) {
+        userService.deleteNailShopUser(principalDetails.getUser().getId(), nailShopId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
@@ -62,8 +71,8 @@ public class UserController {
      * 지하철 역 검색 내역 조회
      */
     @GetMapping("search-station-history")
-    public ResponseEntity<UserFindSearchStationsResponse> findSearchStationsUser() {
-        UserFindSearchStationsResponse response = userService.findSearchStationsUser(1);
+    public ResponseEntity<UserFindSearchStationsResponse> findSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        UserFindSearchStationsResponse response = userService.findSearchStationsUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -71,8 +80,8 @@ public class UserController {
      * 지하철 역 검색 기록 전체 삭제
      */
     @DeleteMapping("search-station-history")
-    public ResponseEntity<Void> deleteSearchStationsUser() {
-        userService.deleteSearchStationsUser(1);
+    public ResponseEntity<Void> deleteSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        userService.deleteSearchStationsUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
@@ -80,8 +89,8 @@ public class UserController {
      * 지하철 역 검색 기록 추가
      */
     @PostMapping("search-station-history")
-    public ResponseEntity<Void> saveSearchStationsUser(@RequestBody RecentSearchSaveRequest request) {
-        recentSearchService.addRecentSearch(request.getStationName(), 1);
+    public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody RecentSearchSaveRequest request) {
+        recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName());
         //jwt 인증 구현 필요
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
