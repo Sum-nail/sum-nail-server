@@ -105,8 +105,10 @@ class UserServiceTest {
     @DisplayName("findUser는 특정 유저를 찾아올 수 있다.")
     void findUserTest() {
         //given
+        long userId = 1L;
+
         //when
-        UserFindResponse result = userService.findUser(1L);
+        UserFindResponse result = userService.findUser(userId);
 
         //then
         assertThat(result.getName()).isEqualTo("썸네일");
@@ -118,8 +120,10 @@ class UserServiceTest {
     @DisplayName("findAllNAilShopUser는 유저가 저장한 네일샵 전체를 찾아올 수 있다.")
     void findAllNailShopUserTest() {
         //given
+        long userId = 1L;
+
         //when
-        List<UserFindNailShopResponse> result = userService.findAllNailShopsUser(1L);
+        List<UserFindNailShopResponse> result = userService.findAllNailShopsUser(userId);
 
         //then
         assertThat(result.get(0).getNailShopId()).isEqualTo(1L);
@@ -133,11 +137,14 @@ class UserServiceTest {
     @DisplayName("saveNailShopUser를 이용해서 네일샵을 저장할 수 있다.")
     void saveNailShopUserTest() {
         //given
+        long userId = 2L;
+        long nailShopId = 1L;
+
         //when
-        userService.saveNailShopUser(2L, 1L);
+        userService.saveNailShopUser(userId, nailShopId);
 
         //then
-        List<UserFindNailShopResponse> result = userService.findAllNailShopsUser(2L);
+        List<UserFindNailShopResponse> result = userService.findAllNailShopsUser(userId);
         assertThat(result.get(0).getNailShopId()).isEqualTo(1L);
         assertThat(result.get(0).getNailShopName()).isEqualTo("썸네일네일샵");
         assertThat(result.get(0).getLocation()).isEqualTo("서울시 중구");
@@ -149,10 +156,13 @@ class UserServiceTest {
     @DisplayName("이미 저장한 네일샵을 다시 저장하면 에러를 던진다.")
     void saveNailShopUserErrorTest() {
         //given
+        long userId = 1L;
+        long nailShopId = 1L;
+
         //when
         //then
         assertThatThrownBy(() -> {
-            userService.saveNailShopUser(1L, 1L);
+            userService.saveNailShopUser(userId,nailShopId);
         }).isInstanceOf(CustomException.class).hasMessage("이미 저장한 네일샵입니다.");
     }
 
@@ -161,11 +171,14 @@ class UserServiceTest {
     @DisplayName("deleteNailShopUser를 이용해서 저장한 네일샵을 삭제할 수 있다.")
     void deleteNailShopUserTest() {
         //given
+        long userId = 1L;
+        long nailShopId = 1L;
+
         //when
-        userService.deleteNailShopUser(1L, 1L);
+        userService.deleteNailShopUser(userId,nailShopId);
 
         //then
-        List<UserFindNailShopResponse> result = userService.findAllNailShopsUser(2L);
+        List<UserFindNailShopResponse> result = userService.findAllNailShopsUser(userId);
         assertThat(result.size()).isEqualTo(0);
     }
 
@@ -173,10 +186,13 @@ class UserServiceTest {
     @DisplayName("저장하지 않은 네일샵을 삭제하면 에러를 던진다.")
     void deleteNailShopUserErrorTest() {
         //given
+        long userId = 2L;
+        long nailShopId = 1L;
+
         //when
         //then
         assertThatThrownBy(() -> {
-            userService.deleteNailShopUser(2L, 1L);
+            userService.deleteNailShopUser(userId,nailShopId);
         }).isInstanceOf(CustomException.class).hasMessage("저장한 적 없는 네일샵입니다.");
     }
 
@@ -184,8 +200,10 @@ class UserServiceTest {
     @DisplayName("findSearchStationUser를 이용해서 지하철 검색 내역을 조회 할 수 있다.")
     void findSearchStationUserTest() {
         //given
+        long userId = 1L;
+
         //when
-        UserFindSearchStationsResponse result = userService.findSearchStationsUser(1L);
+        UserFindSearchStationsResponse result = userService.findSearchStationsUser(userId);
         //then
         assertThat(result.getStations()).isEqualTo(List.of("외대앞", "배방"));
     }
@@ -195,10 +213,12 @@ class UserServiceTest {
     @DisplayName("deleteSearchStationUser를 이용해서 지하철 검색 내역 전체를 삭제할 수 있다.")
     void deleteSearchStationUserTest() {
         //given
+        long userId = 1L;
+
         //when
-        userService.deleteSearchStationsUser(1L);
+        userService.deleteSearchStationsUser(userId);
         //then
-        UserFindSearchStationsResponse result = userService.findSearchStationsUser(1L);
+        UserFindSearchStationsResponse result = userService.findSearchStationsUser(userId);
         assertThat(result.getStations().size()).isEqualTo(0);
     }
 

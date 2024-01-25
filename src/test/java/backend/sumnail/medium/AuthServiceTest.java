@@ -62,9 +62,11 @@ class AuthServiceTest {
                 .willReturn("accessToken");
         BDDMockito.given(jwtTokenProvider.generateRefreshToken(any(User.class)))
                 .willReturn("refreshToken");
+        String provider = "kakao";
+        String idToken = "idToken";
 
         //when
-        AuthTokenResponse result = authService.signIn("kakao", "idToken");
+        AuthTokenResponse result = authService.signIn(provider,idToken);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken");
@@ -85,8 +87,11 @@ class AuthServiceTest {
                 .willReturn("accessToken");
         BDDMockito.given(jwtTokenProvider.generateRefreshToken(any(User.class)))
                 .willReturn("refreshToken");
+        String provider = "google";
+        String idToken = "idToken";
+
         //when
-        AuthTokenResponse result = authService.signIn("google", "idToken");
+        AuthTokenResponse result = authService.signIn(provider,idToken);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken");
@@ -97,10 +102,12 @@ class AuthServiceTest {
     @DisplayName("provider가 카카오나 구글이 아닐 시 에러를 던진다.")
     void signInErrorTest() {
         //given
+        String provider = "abcd";
+        String idToken = "idToken";
         //when
         //then
         assertThatThrownBy(() -> {
-            authService.signIn("abcd", "idToken");
+            authService.signIn(provider,idToken);
         }).isInstanceOf(CustomException.class).hasMessage("유효하지 않은 providerName 입니다.");
     }
 
@@ -117,8 +124,10 @@ class AuthServiceTest {
                 .willReturn("accessToken");
         BDDMockito.given(jwtTokenProvider.generateRefreshToken(any(User.class)))
                 .willReturn("refreshToken");
+        String token = "refreshToken";
+
         //when
-        AuthTokenResponse result = authService.refresh("refreshToken");
+        AuthTokenResponse result = authService.refresh(token);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken");
@@ -129,10 +138,11 @@ class AuthServiceTest {
     @DisplayName("토큰이 일치하지 않으면 에러를 던진다.")
     void refreshErrorTest() {
         //given
+        String token = "refreshToken2";
         //when
         //then
         assertThatThrownBy(() -> {
-            authService.refresh("refreshToken2");
+            authService.refresh(token);
         }).isInstanceOf(CustomException.class).hasMessage("토큰이 유효하지 않습니다.");
     }
 

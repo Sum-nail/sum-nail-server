@@ -10,10 +10,11 @@ class AuthTokenResponseTest {
     @DisplayName("accessToken과 refreshToken으로 응답을 생성할 수 있다.")
     public void ofTest() {
         //given
+        String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsImlhdCI6MTcwNDE5MjMzMSwiZXhwIjoxNzA1NDAxOTMxfQ.04RTRdIdMbIDLyTZLK1H2rAsysYysDx3ClPkr7LTCk8";
+        String refreshToken ="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsImlhdCI6MTcwNDE5MjMzMSwiZXhwIjoxNzA1NDAxOTMxfQ.04RTRdIdMbIDLyTZLK1H2rAsysYysDx3ClPkr7LTCk8";
+
         //when
-        AuthTokenResponse authTokenResponse = AuthTokenResponse.of(
-                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsImlhdCI6MTcwNDE5MjMzMSwiZXhwIjoxNzA1NDAxOTMxfQ.04RTRdIdMbIDLyTZLK1H2rAsysYysDx3ClPkr7LTCk8",
-                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsImlhdCI6MTcwNDE5MjMzMSwiZXhwIjoxNzA1NDAxOTMxfQ.04RTRdIdMbIDLyTZLK1H2rAsysYysDx3ClPkr7LTCk8");
+        AuthTokenResponse authTokenResponse = AuthTokenResponse.of(accessToken,refreshToken);
 
         //then
         assertThat(authTokenResponse.getAccessToken()).isEqualTo(

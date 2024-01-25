@@ -61,8 +61,11 @@ class AuthServiceTest {
     @DisplayName("카카오 로그인을 할 수 있다.")
     void signInWithKakaoTest() {
         //given
+        String provider = "kakao";
+        String idToken = "idToken";
+
         //when
-        AuthTokenResponse result = authService.signIn("kakao", "idToken");
+        AuthTokenResponse result = authService.signIn(provider, idToken);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken:sed@yahoo.edu");
@@ -73,8 +76,11 @@ class AuthServiceTest {
     @DisplayName("구글 로그인을 할 수 있다.")
     void signInWithGoogleTest() {
         //given
+        String provider = "google";
+        String idToken = "idToken";
+
         //when
-        AuthTokenResponse result = authService.signIn("google", "idToken");
+        AuthTokenResponse result = authService.signIn(provider, idToken);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken:sed@yahoo.edu");
@@ -85,10 +91,13 @@ class AuthServiceTest {
     @DisplayName("provider가 카카오나 구글이 아닐 시 에러를 던진다.")
     void signInErrorTest() {
         //given
+        String provider = "abcd";
+        String idToken = "idToken";
+
         //when
         //then
         assertThatThrownBy(() -> {
-            authService.signIn("abcd", "idToken");
+            authService.signIn(provider, idToken);
         }).isInstanceOf(CustomException.class).hasMessage("유효하지 않은 providerName 입니다.");
     }
 
@@ -97,8 +106,9 @@ class AuthServiceTest {
     @DisplayName("토큰 재발급을 할 수 있다.")
     void refreshTest() {
         //given
+        String token = "sed@yahoo.edu";
         //when
-        AuthTokenResponse result = authService.refresh("sed@yahoo.edu");
+        AuthTokenResponse result = authService.refresh(token);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken:sed@yahoo.edu");
@@ -109,10 +119,12 @@ class AuthServiceTest {
     @DisplayName("토큰이 일치하지 않으면 에러를 던진다.")
     void refreshErrorTest() {
         //given
+        String token = "abc@yahoo.edu";
+
         //when
         //then
         assertThatThrownBy(() -> {
-            authService.refresh("abc@yahoo.edu");
+            authService.refresh(token);
         }).isInstanceOf(CustomException.class).hasMessage("토큰이 유효하지 않습니다.");
     }
 

@@ -10,12 +10,15 @@ class RefreshTokenTest {
     @DisplayName("refreshToken과 keyUserId로 RefreshToken을 만들 수 있다.")
     public void createRefreshTokenTest() {
         //given
+        String refreshToken = "refreshToken";
+        Long keyUserId = 1L;
+
         //when
-        RefreshToken refreshToken = RefreshToken.createRefreshToken("refreshToken", 1L);
+        RefreshToken newRefreshToken = RefreshToken.createRefreshToken(refreshToken, keyUserId);
 
         //then
-        assertThat(refreshToken.getRefreshToken()).isEqualTo("refreshToken");
-        assertThat(refreshToken.getKeyUserId()).isEqualTo(1L);
+        assertThat(newRefreshToken.getRefreshToken()).isEqualTo("refreshToken");
+        assertThat(newRefreshToken.getKeyUserId()).isEqualTo(1L);
     }
 
     @Test
@@ -26,9 +29,10 @@ class RefreshTokenTest {
                 .keyUserId(1L)
                 .refreshToken("refreshToken")
                 .build();
+        String updateToken = "refreshToken2";
 
         //when
-        refreshToken.updateToken("refreshToken2");
+        refreshToken.updateToken(updateToken);
 
         //then
         assertThat(refreshToken.getRefreshToken()).isEqualTo("refreshToken2");

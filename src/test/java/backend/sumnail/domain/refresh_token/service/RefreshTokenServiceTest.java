@@ -32,13 +32,15 @@ class RefreshTokenServiceTest {
     @DisplayName("리프레시 토큰을 저장 할 수 있다.")
     void saveRefreshTokenTest() {
         //given
+        String refreshToken = "refreshToken";
+        Long keyUserId = 2L;
 
         //when
-        refreshTokenService.saveRefreshToken("refreshToken", 2L);
+        refreshTokenService.saveRefreshToken(refreshToken,keyUserId);
 
         //then
-        RefreshToken refreshToken = refreshTokenService.getByKeyUserId(2L);
-        assertThat(refreshToken.getRefreshToken()).isEqualTo("refreshToken");
+        RefreshToken newRefreshToken = refreshTokenService.getByKeyUserId(2L);
+        assertThat(newRefreshToken.getRefreshToken()).isEqualTo("refreshToken");
     }
 
 
@@ -46,21 +48,25 @@ class RefreshTokenServiceTest {
     @DisplayName("리프레시 토큰을 업데이트 할 수 있다.")
     void updateRefreshTokenTest() {
         //given
+        String refreshToken = "refreshToken";
+        Long keyUserId = 1L;
 
         //when
-        refreshTokenService.saveRefreshToken("refreshToken", 1L);
+        refreshTokenService.saveRefreshToken(refreshToken,keyUserId);
 
         //then
-        RefreshToken refreshToken = refreshTokenService.getByKeyUserId(1L);
-        assertThat(refreshToken.getRefreshToken()).isEqualTo("refreshToken");
+        RefreshToken updatedRefreshToken = refreshTokenService.getByKeyUserId(1L);
+        assertThat(updatedRefreshToken.getRefreshToken()).isEqualTo("refreshToken");
     }
 
     @Test
     @DisplayName("UserId에 해당하는 refreshToken을 가져올 수 있다.")
     void getByKeyUserIdTest() {
         //given
+        Long keyUserId = 1L;
+
         //when
-        RefreshToken refreshToken = refreshTokenService.getByKeyUserId(1L);
+        RefreshToken refreshToken = refreshTokenService.getByKeyUserId(keyUserId);
 
         //then
         assertThat(refreshToken.getRefreshToken()).isEqualTo("refreshToken");
@@ -70,10 +76,12 @@ class RefreshTokenServiceTest {
     @DisplayName("UserId에 해당하는 refreshToken이 없다면 에러를 던진다.")
     void getByKeyUserIdErrorTest() {
         //given
+        Long keyUserId = 2L;
+
         //when
         //then
         assertThatThrownBy(() -> {
-            refreshTokenService.getByKeyUserId(2L);
+            refreshTokenService.getByKeyUserId(keyUserId);
         }).isInstanceOf(CustomException.class).hasMessage("토큰이 유효하지 않습니다.");
     }
 
