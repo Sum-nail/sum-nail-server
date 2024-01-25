@@ -87,7 +87,7 @@ class UserServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            userService.saveNailShopUser(userId,nailShopId);
+            userService.saveNailShopUser(userId, nailShopId);
         }).isInstanceOf(CustomException.class).hasMessage("이미 저장한 네일샵입니다.");
     }
 
@@ -100,7 +100,7 @@ class UserServiceTest {
         long nailShopId = 1L;
 
         //when
-        userService.deleteNailShopUser(userId,nailShopId);
+        userService.deleteNailShopUser(userId, nailShopId);
 
         //then
         List<UserFindNailShopResponse> result = userService.findAllNailShopsUser(userId);
@@ -117,7 +117,7 @@ class UserServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            userService.deleteNailShopUser(userId,nailShopId);
+            userService.deleteNailShopUser(userId, nailShopId);
         }).isInstanceOf(CustomException.class).hasMessage("저장한 적 없는 네일샵입니다.");
     }
 

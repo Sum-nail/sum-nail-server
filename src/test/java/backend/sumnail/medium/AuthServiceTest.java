@@ -66,7 +66,7 @@ class AuthServiceTest {
         String idToken = "idToken";
 
         //when
-        AuthTokenResponse result = authService.signIn(provider,idToken);
+        AuthTokenResponse result = authService.signIn(provider, idToken);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken");
@@ -91,7 +91,7 @@ class AuthServiceTest {
         String idToken = "idToken";
 
         //when
-        AuthTokenResponse result = authService.signIn(provider,idToken);
+        AuthTokenResponse result = authService.signIn(provider, idToken);
 
         //then
         assertThat(result.getAccessToken()).isEqualTo("accessToken");
@@ -107,7 +107,7 @@ class AuthServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            authService.signIn(provider,idToken);
+            authService.signIn(provider, idToken);
         }).isInstanceOf(CustomException.class).hasMessage("유효하지 않은 providerName 입니다.");
     }
 

@@ -11,10 +11,10 @@ class AuthTokenResponseTest {
     public void ofTest() {
         //given
         String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsImlhdCI6MTcwNDE5MjMzMSwiZXhwIjoxNzA1NDAxOTMxfQ.04RTRdIdMbIDLyTZLK1H2rAsysYysDx3ClPkr7LTCk8";
-        String refreshToken ="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsImlhdCI6MTcwNDE5MjMzMSwiZXhwIjoxNzA1NDAxOTMxfQ.04RTRdIdMbIDLyTZLK1H2rAsysYysDx3ClPkr7LTCk8";
+        String refreshToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsImlhdCI6MTcwNDE5MjMzMSwiZXhwIjoxNzA1NDAxOTMxfQ.04RTRdIdMbIDLyTZLK1H2rAsysYysDx3ClPkr7LTCk8";
 
         //when
-        AuthTokenResponse authTokenResponse = AuthTokenResponse.of(accessToken,refreshToken);
+        AuthTokenResponse authTokenResponse = AuthTokenResponse.of(accessToken, refreshToken);
 
         //then
         assertThat(authTokenResponse.getAccessToken()).isEqualTo(

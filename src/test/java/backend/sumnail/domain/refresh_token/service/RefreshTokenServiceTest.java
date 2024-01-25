@@ -36,7 +36,7 @@ class RefreshTokenServiceTest {
         Long keyUserId = 2L;
 
         //when
-        refreshTokenService.saveRefreshToken(refreshToken,keyUserId);
+        refreshTokenService.saveRefreshToken(refreshToken, keyUserId);
 
         //then
         RefreshToken newRefreshToken = refreshTokenService.getByKeyUserId(2L);
@@ -52,7 +52,7 @@ class RefreshTokenServiceTest {
         Long keyUserId = 1L;
 
         //when
-        refreshTokenService.saveRefreshToken(refreshToken,keyUserId);
+        refreshTokenService.saveRefreshToken(refreshToken, keyUserId);
 
         //then
         RefreshToken updatedRefreshToken = refreshTokenService.getByKeyUserId(1L);
