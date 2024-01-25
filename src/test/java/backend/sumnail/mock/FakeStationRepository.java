@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeStationRepository implements StationRepository {
-    private final Long id=new AtomicLong().getAndIncrement();
+    private final AtomicLong id = new AtomicLong(0);
     private final List<Station> data=new ArrayList<>();
     @Override
     public Optional<Station> findByStationName(String stationName) {
@@ -29,7 +29,7 @@ public class FakeStationRepository implements StationRepository {
         if(station.getId()==null||station.getId()==0)
         {
             Station newStation=Station.builder()
-                    .id(id)
+                    .id(id.get())
                     .stationName(station.getStationName())
                     .build();
         }

@@ -6,6 +6,8 @@ insert into station (station_id, line, station_name) values (2, '02호선', '강
 
 insert into hashtag (hashtag_id, hashtag_name) values (1, '귀여운');
 insert into hashtag (hashtag_id, hashtag_name) values (2, '쿨한');
+insert into hashtag (hashtag_id, hashtag_name) values (3, '멋진');
+insert into hashtag (hashtag_id, hashtag_name) values (4, '따뜻한');
 
 insert into nail_shop_hashtag (nail_shop_hashtag_id,nail_shop_id, hashtag_id) values (1, 1, 1);
 insert into nail_shop_hashtag (nail_shop_hashtag_id,nail_shop_id, hashtag_id) values (2, 2, 2);

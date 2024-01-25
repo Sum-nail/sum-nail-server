@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeHashtagRepository implements HashtagRepository {
 
-    private final Long id=new AtomicLong().getAndIncrement();
+    private final AtomicLong id = new AtomicLong(0);
     private final List<Hashtag> data=new ArrayList<>();
 
     @Override
@@ -37,14 +37,16 @@ public class FakeHashtagRepository implements HashtagRepository {
         if(hashtag.getId()==null||hashtag.getId()==0)
         {
             Hashtag newHashtag=Hashtag.builder()
-                    .id(id)
+                    .id(id.get())
                     .hashtagName(hashtag.getHashtagName())
                     .build();
+            data.add(newHashtag);
+            return newHashtag;
         }
         else{
             data.removeIf(it->it.getId()==hashtag.getId());
+            data.add(hashtag);
+            return hashtag;
         }
-        data.add(hashtag);
-        return hashtag;
     }
 }

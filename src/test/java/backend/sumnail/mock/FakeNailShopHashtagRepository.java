@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeNailShopHashtagRepository implements NailShopHashtagRepository {
-    private final Long id=new AtomicLong().getAndIncrement();
+    private final AtomicLong id = new AtomicLong(0);
     private final List<NailShopHashtag> data=new ArrayList<>();
 
     @Override

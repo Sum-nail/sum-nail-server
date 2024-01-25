@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeNailShopRepository implements NailShopRepository {
 
-    private final Long id=new AtomicLong().getAndIncrement();
+    private final AtomicLong id = new AtomicLong(0);
     private final List<NailShop> data=new ArrayList<>();
     @Override
     public List<NailShop> findAll() {
@@ -58,7 +58,7 @@ public class FakeNailShopRepository implements NailShopRepository {
         if(nailShop.getId()==null||nailShop.getId()==0)
         {
             NailShop newNailShop=NailShop.builder()
-                    .id(id)
+                    .id(id.get())
                     .build();
         }
         else{
