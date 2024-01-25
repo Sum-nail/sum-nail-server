@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("v1/user")
 @RequiredArgsConstructor
@@ -82,6 +84,7 @@ public class UserController {
         userService.deleteSearchStationsUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
     /**
      * 지하철 역 검색 기록 추가
      */

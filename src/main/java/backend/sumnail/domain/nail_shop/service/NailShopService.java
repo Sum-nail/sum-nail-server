@@ -7,52 +7,52 @@ import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllR
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
-import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
+@Builder
 @RequiredArgsConstructor
 @Transactional
 public class NailShopService {
 
     private final NailShopRepository nailShopRepository;
     private final HashtagService hashtagService;
+
     public List<NailShopFindAllResponse> findAllShop() {
         List<NailShop> nailShops = nailShopRepository.findAll();
         List<NailShopFindAllResponse> response = nailShops
                 .stream()
-                .map(NailShop->NailShopFindAllResponse.from(NailShop))
+                .map(NailShop -> NailShopFindAllResponse.from(NailShop))
                 .toList();
         return response;
     }
 
     public List<NailShopFindAllResponse> searchNailShop(String stationName, String hashtagName) {
         List<NailShop> nailShops;
-        if(stationName.isEmpty() && hashtagName.isEmpty()){
+        if (stationName.isEmpty() && hashtagName.isEmpty()) {
             nailShops = nailShopRepository.findAll();
-        }
-        else if(stationName.isEmpty()){
+        } else if (stationName.isEmpty()) {
             nailShops = nailShopRepository.findNailShopByHashtag(hashtagName);
-        }
-        else if(hashtagName.isEmpty()){
+        } else if (hashtagName.isEmpty()) {
             nailShops = nailShopRepository.findNailShopByStation(stationName);
-        }
-        else{
+        } else {
             nailShops = nailShopRepository.findNailShopsByHashtagAndStation(stationName, hashtagName);
         }
         List<NailShopFindAllResponse> response = nailShops
                 .stream()
-                .map(NailShop->NailShopFindAllResponse.from(NailShop))
+                .map(NailShop -> NailShopFindAllResponse.from(NailShop))
                 .toList();
         return response;
     }
 
-    public NailShopFindOneResponse findNailShopById(Long id){
-        NailShop nailShop=nailShopRepository.getById(id);
+    public NailShopFindOneResponse findNailShopById(Long id) {
+        NailShop nailShop = nailShopRepository.getById(id);
 
         return NailShopFindOneResponse.from(nailShop);
     }
