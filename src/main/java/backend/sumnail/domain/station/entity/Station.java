@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,11 @@ public class Station {
 
     @Convert(converter = StringListConverter.class)
     private List<String> line;
+
+    @Builder
+    public Station(Long id, String stationName, List<String> line) {
+        this.id = id;
+        this.stationName = stationName;
+        this.line = line;
+    }
 }

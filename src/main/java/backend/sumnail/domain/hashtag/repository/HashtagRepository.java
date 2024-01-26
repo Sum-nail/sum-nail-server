@@ -1,6 +1,7 @@
 package backend.sumnail.domain.hashtag.repository;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
+
 import java.util.List;
 import java.util.Optional;
 

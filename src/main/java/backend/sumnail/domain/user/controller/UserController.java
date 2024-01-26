@@ -1,6 +1,6 @@
 package backend.sumnail.domain.user.controller;
 
-import backend.sumnail.domain.common.infrastructure.SystemClockHolder;
+import backend.sumnail.domain.common.service.port.ClockHolder;
 import backend.sumnail.domain.recentsearch.service.RecentSearchService;
 import backend.sumnail.domain.user.controller.dto.request.RecentSearchSaveRequest;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
@@ -28,6 +28,7 @@ public class UserController {
 
     private final UserService userService;
     private final RecentSearchService recentSearchService;
+    private final ClockHolder clockHolder;
 
     /**
      * 나의 프로필 조회
@@ -96,8 +97,7 @@ public class UserController {
     public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
                                                        @RequestBody RecentSearchSaveRequest request) {
 
-        recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName(),
-                new SystemClockHolder());
+        recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName(), clockHolder);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

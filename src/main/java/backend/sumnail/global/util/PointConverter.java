@@ -2,6 +2,7 @@ package backend.sumnail.global.util;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
+
 import java.awt.geom.Point2D;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

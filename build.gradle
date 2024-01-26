@@ -50,7 +50,6 @@ dependencies {
     //feign
     implementation platform("org.springframework.cloud:spring-cloud-dependencies:2022.0.3")
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-
 }
 
 tasks.named('bootBuildImage') {
