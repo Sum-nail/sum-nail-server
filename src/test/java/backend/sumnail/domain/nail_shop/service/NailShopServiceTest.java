@@ -1,5 +1,7 @@
 package backend.sumnail.domain.nail_shop.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllResponse;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
@@ -8,13 +10,10 @@ import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
 import backend.sumnail.mock.FakeHashtagRepository;
 import backend.sumnail.mock.FakeNailShopHashtagRepository;
 import backend.sumnail.mock.FakeNailShopRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class NailShopServiceTest {
 

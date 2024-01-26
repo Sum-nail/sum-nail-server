@@ -2,9 +2,8 @@ package backend.sumnail.domain.recentsearch.repository;
 
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RecentSearchJpaRepository extends JpaRepository<RecentSearch, Long> {
 

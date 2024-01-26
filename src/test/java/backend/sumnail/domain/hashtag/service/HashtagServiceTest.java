@@ -51,13 +51,16 @@ class HashtagServiceTest {
                 .id(1L)
                 .build();
         fakeNailShopRepository.save(nailShop);
-        fakeNailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(fakeHashtagRepository.getById(1L)).build());
+        fakeNailShopHashtagRepository.save(
+                NailShopHashtag.builder().nailShop(nailShop).hashtag(fakeHashtagRepository.getById(1L)).build());
         NailShop nailShopOverHashtag = NailShop.builder()
                 .id(2L)
                 .build();
         fakeNailShopRepository.save(nailShopOverHashtag);
         for (Long i = 1L; i <= 4L; i++) {
-            fakeNailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShopOverHashtag).hashtag(fakeHashtagRepository.getById(i)).build());
+            fakeNailShopHashtagRepository.save(
+                    NailShopHashtag.builder().nailShop(nailShopOverHashtag).hashtag(fakeHashtagRepository.getById(i))
+                            .build());
         }
     }
 

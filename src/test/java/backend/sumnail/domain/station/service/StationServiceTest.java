@@ -1,15 +1,14 @@
 package backend.sumnail.domain.station.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import backend.sumnail.domain.station.controller.dto.response.StationFindAllResponse;
 import backend.sumnail.domain.station.entity.Station;
 import backend.sumnail.mock.FakeStationRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 class StationServiceTest {

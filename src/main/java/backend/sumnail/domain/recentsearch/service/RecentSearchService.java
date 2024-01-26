@@ -28,9 +28,11 @@ public class RecentSearchService {
 
 
     public void addRecentSearch(long userId, String station, ClockHolder clockHolder) {
-        if(station.isEmpty()) return;
+        if (station.isEmpty()) {
+            return;
+        }
 
-        if(!recentSearchRepository.findByStation(station).isEmpty()){
+        if (!recentSearchRepository.findByStation(station).isEmpty()) {
             recentSearchRepository.deleteByStation(station);
         }
         User user = userRepository.getById(userId);

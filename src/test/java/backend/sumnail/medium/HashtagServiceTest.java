@@ -1,5 +1,9 @@
 package backend.sumnail.medium;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowable;
+
 import backend.sumnail.domain.hashtag.controller.dto.response.HashtagFindAllResponse;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
@@ -9,6 +13,7 @@ import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
 import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
 import backend.sumnail.global.exception.CustomException;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +21,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
 
 //중형 테스트
 @SpringBootTest
@@ -75,7 +76,8 @@ class HashtagServiceTest {
         //given
         NailShop nailShop = nailShopRepository.getById(1L);
         for (Long i = 1L; i <= 3L; i++) {
-            nailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(i)).build());
+            nailShopHashtagRepository.save(
+                    NailShopHashtag.builder().nailShop(nailShop).hashtag(hashtagRepository.getById(i)).build());
         }
 
         //when

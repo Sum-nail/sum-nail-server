@@ -3,11 +3,10 @@ package backend.sumnail.domain.nail_shop.repository;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor

@@ -5,9 +5,6 @@ import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -24,8 +21,10 @@ public class FakeNailShopRepository implements NailShopRepository {
     @Override
     public List<NailShop> findNailShopsByHashtagAndStation(String stationName, String hashtagName) {
         return data.stream()
-                .filter(item -> item.getStations().stream().anyMatch(station -> station.getStation().getStationName().contains(stationName))
-                        && item.getHashtags().stream().anyMatch(hashtag -> hashtag.getHashtag().getHashtagName().contains(hashtagName)))
+                .filter(item -> item.getStations().stream()
+                        .anyMatch(station -> station.getStation().getStationName().contains(stationName))
+                        && item.getHashtags().stream()
+                        .anyMatch(hashtag -> hashtag.getHashtag().getHashtagName().contains(hashtagName)))
                 .toList();
     }
 
@@ -47,14 +46,16 @@ public class FakeNailShopRepository implements NailShopRepository {
     @Override
     public List<NailShop> findNailShopByHashtag(String hashtagName) {
         return data.stream()
-                .filter(item -> item.getHashtags().stream().anyMatch(hashtag -> hashtag.getHashtag().getHashtagName().equals(hashtagName)))
+                .filter(item -> item.getHashtags().stream()
+                        .anyMatch(hashtag -> hashtag.getHashtag().getHashtagName().equals(hashtagName)))
                 .toList();
     }
 
     @Override
     public List<NailShop> findNailShopByStation(String stationName) {
         return data.stream()
-                .filter(item -> item.getStations().stream().anyMatch(station -> station.getStation().getStationName().equals(stationName)))
+                .filter(item -> item.getStations().stream()
+                        .anyMatch(station -> station.getStation().getStationName().equals(stationName)))
                 .toList();
     }
 

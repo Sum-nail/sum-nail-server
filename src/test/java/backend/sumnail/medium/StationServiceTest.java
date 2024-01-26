@@ -1,20 +1,19 @@
 package backend.sumnail.medium;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import backend.sumnail.domain.station.controller.dto.response.StationFindAllResponse;
 import backend.sumnail.domain.station.entity.Station;
 import backend.sumnail.domain.station.repository.StationRepository;
 import backend.sumnail.domain.station.service.StationService;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 //중형 테스트
 @SpringBootTest

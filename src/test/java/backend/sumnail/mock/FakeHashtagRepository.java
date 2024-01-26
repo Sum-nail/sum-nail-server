@@ -2,7 +2,6 @@ package backend.sumnail.mock;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.repository.HashtagRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
