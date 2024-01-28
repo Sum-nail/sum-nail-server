@@ -5,4 +5,26 @@
 <img width="1055" alt="스크린샷 2024-01-29 오전 2 04 11" src="https://github.com/Sum-nail/sum-nail-server/assets/78267146/4f739e4f-0705-4607-a305-fc2db113a044">
 <img width="1056" alt="스크린샷 2024-01-29 오전 2 04 28" src="https://github.com/Sum-nail/sum-nail-server/assets/78267146/1b0b5f3e-f858-4d73-82d5-b74f38debb10">
 <img width="1054" alt="스크린샷 2024-01-29 오전 2 04 45" src="https://github.com/Sum-nail/sum-nail-server/assets/78267146/ff4580c8-0bb1-427e-ba20-392abecac224">
+
+<br>
+
+### API Document
+> https://groovy-need-069.notion.site/API-b6b179eeec7d49cb8d0d428695e67b57?pvs=4
+
+<br> 
+
+### Tech
+`back-end` : Java , Spring boot , Spring boot data jpa <br>
+`Database`: MySQL<br>
+`DevOps` : GitHub Action, Docker, CloudWatch, Grafana
+
+<br>
+
+### ERD
+<img width="737" alt="스크린샷 2024-01-29 오전 2 12 37" src="https://github.com/Sum-nail/sum-nail-server/assets/78267146/b46ee2ba-732e-4274-a4c7-de73711cbad4">
+
+
+<br>
+
+### Contributer
 <img width="1055" alt="스크린샷 2024-01-29 오전 2 05 05" src="https://github.com/Sum-nail/sum-nail-server/assets/78267146/542cf4eb-a822-4e6a-a296-627cab674fbd">
