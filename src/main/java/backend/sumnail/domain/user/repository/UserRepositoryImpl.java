@@ -28,4 +28,10 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.findByEmail(email);
     }
 
+    @Override
+    public User getByEmail(String email) {
+        return userJpaRepository.findByEmail(email)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    }
+
 }

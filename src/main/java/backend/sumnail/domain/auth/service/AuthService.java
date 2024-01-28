@@ -31,14 +31,17 @@ public class AuthService {
     public AuthTokenResponse signIn(String provider, String idToken) {
         User user = signInByProvider(provider, idToken);
 
-        User findUser = userRepository.findByEmail(user.getEmail()).
-                orElse(null);
+        User findUser = userRepository.findByEmail(user.getEmail())
+                        .orElse(null);
+
 
         if (findUser == null) { // 최초 로그인이라면 회원가입 시키기
             userRepository.save(user);
         }
 
-        return createAndSaveToken(user);
+        User newUser = userRepository.getByEmail(user.getEmail());
+
+        return createAndSaveToken(newUser);
 
     }
 
@@ -80,8 +83,10 @@ public class AuthService {
 
 
     private AuthTokenResponse createAndSaveToken(User user) {
+        System.out.println("^^^^"+user.getId());
         String accessToken = jwtTokenProvider.generateAccessToken(user);
         String refreshToken = jwtTokenProvider.generateRefreshToken(user);
+        System.out.println("$$$");
 
         refreshTokenService.saveRefreshToken(refreshToken, user.getId());
 
