@@ -1,7 +1,7 @@
 package backend.sumnail.mock;
 
 import backend.sumnail.domain.refresh_token.entity.RefreshToken;
-import backend.sumnail.domain.refresh_token.repository.RefreshTokenRepository;
+import backend.sumnail.domain.refresh_token.service.port.RefreshTokenRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

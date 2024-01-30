@@ -1,6 +1,7 @@
 package backend.sumnail.domain.hashtag.repository;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
+import backend.sumnail.domain.hashtag.service.port.HashtagRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
 import java.util.List;

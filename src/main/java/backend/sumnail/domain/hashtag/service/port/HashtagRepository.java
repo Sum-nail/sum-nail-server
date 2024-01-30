@@ -1,4 +1,4 @@
-package backend.sumnail.domain.hashtag.repository;
+package backend.sumnail.domain.hashtag.service.port;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import java.util.List;

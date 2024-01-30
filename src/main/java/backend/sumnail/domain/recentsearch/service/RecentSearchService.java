@@ -2,9 +2,9 @@ package backend.sumnail.domain.recentsearch.service;
 
 import backend.sumnail.domain.common.service.port.ClockHolder;
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
-import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
+import backend.sumnail.domain.recentsearch.service.port.RecentSearchRepository;
 import backend.sumnail.domain.user.entity.User;
-import backend.sumnail.domain.user.repository.UserRepository;
+import backend.sumnail.domain.user.service.port.UserRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

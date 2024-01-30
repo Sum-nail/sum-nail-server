@@ -8,7 +8,7 @@ import backend.sumnail.domain.auth.service.helper.KakaoClient;
 import backend.sumnail.domain.refresh_token.entity.RefreshToken;
 import backend.sumnail.domain.refresh_token.service.RefreshTokenService;
 import backend.sumnail.domain.user.entity.User;
-import backend.sumnail.domain.user.repository.UserRepository;
+import backend.sumnail.domain.user.service.port.UserRepository;
 import backend.sumnail.global.config.jwt.JwtTokenProvider;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;

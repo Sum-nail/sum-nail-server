@@ -1,6 +1,7 @@
 package backend.sumnail.domain.nail_shop.repository;
 
 import backend.sumnail.domain.nail_shop.entity.NailShop;
+import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
 import java.util.List;

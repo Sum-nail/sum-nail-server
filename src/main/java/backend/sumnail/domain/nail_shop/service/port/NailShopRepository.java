@@ -1,4 +1,4 @@
-package backend.sumnail.domain.nail_shop.repository;
+package backend.sumnail.domain.nail_shop.service.port;
 
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import java.util.List;

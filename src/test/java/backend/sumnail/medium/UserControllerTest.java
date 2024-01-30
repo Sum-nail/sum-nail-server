@@ -9,11 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
-import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
+import backend.sumnail.domain.recentsearch.service.port.RecentSearchRepository;
 import backend.sumnail.domain.user.controller.dto.request.RecentSearchSaveRequest;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
-import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
+import backend.sumnail.domain.user_nail_shop.service.port.UserNailShopRepository;
 import backend.sumnail.global.config.jwt.PrincipalDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;

@@ -6,7 +6,7 @@ import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindSavedDto;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllResponse;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
-import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
+import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import java.util.List;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package backend.sumnail.domain.refresh_token.service;
 
 import backend.sumnail.domain.refresh_token.entity.RefreshToken;
-import backend.sumnail.domain.refresh_token.repository.RefreshTokenRepository;
+import backend.sumnail.domain.refresh_token.service.port.RefreshTokenRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
 import lombok.Builder;
