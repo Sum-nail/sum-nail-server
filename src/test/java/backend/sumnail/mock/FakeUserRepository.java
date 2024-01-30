@@ -44,4 +44,14 @@ public class FakeUserRepository implements UserRepository {
                 .filter(item -> item.getEmail().equals(email))
                 .findAny();
     }
+
+    @Override
+    public User getByEmail(String email) {
+        return data.stream()
+                .filter(item -> item.getEmail().equals(email))
+                .findAny()
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    }
+
+
 }
