@@ -1,4 +1,4 @@
-package backend.sumnail.domain.recentsearch.repository;
+package backend.sumnail.domain.recentsearch.service.port;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
 import java.util.List;

@@ -1,4 +1,4 @@
-package backend.sumnail.domain.refresh_token.repository;
+package backend.sumnail.domain.refresh_token.service.port;
 
 import backend.sumnail.domain.refresh_token.entity.RefreshToken;
 import java.util.Optional;

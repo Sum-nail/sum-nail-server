@@ -1,7 +1,7 @@
 package backend.sumnail.global.config.jwt;
 
 import backend.sumnail.domain.user.entity.User;
-import backend.sumnail.domain.user.repository.UserRepository;
+import backend.sumnail.domain.user.service.port.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

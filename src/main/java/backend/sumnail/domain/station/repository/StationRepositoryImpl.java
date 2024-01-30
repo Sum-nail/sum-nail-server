@@ -1,6 +1,7 @@
 package backend.sumnail.domain.station.repository;
 
 import backend.sumnail.domain.station.entity.Station;
+import backend.sumnail.domain.station.service.port.StationRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

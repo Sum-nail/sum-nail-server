@@ -1,7 +1,7 @@
 package backend.sumnail.mock;
 
 import backend.sumnail.domain.nail_shop.entity.NailShop;
-import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
+import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

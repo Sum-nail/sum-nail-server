@@ -1,4 +1,4 @@
-package backend.sumnail.domain.station.repository;
+package backend.sumnail.domain.station.service.port;
 
 import backend.sumnail.domain.station.entity.Station;
 import java.util.List;

@@ -9,7 +9,7 @@ import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopRespo
 import backend.sumnail.domain.user.controller.dto.response.UserFindResponse;
 import backend.sumnail.domain.user.controller.dto.response.UserFindSearchStationsResponse;
 import backend.sumnail.domain.user.entity.User;
-import backend.sumnail.domain.user.repository.UserRepository;
+import backend.sumnail.domain.user.service.port.UserRepository;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
 import backend.sumnail.domain.user_nail_shop.service.UserNailShopService;
 import java.util.Comparator;

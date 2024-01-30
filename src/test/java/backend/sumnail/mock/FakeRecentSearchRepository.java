@@ -1,7 +1,7 @@
 package backend.sumnail.mock;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
-import backend.sumnail.domain.recentsearch.repository.RecentSearchRepository;
+import backend.sumnail.domain.recentsearch.service.port.RecentSearchRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

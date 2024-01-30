@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import backend.sumnail.domain.station.controller.dto.response.StationFindAllResponse;
 import backend.sumnail.domain.station.entity.Station;
-import backend.sumnail.domain.station.repository.StationRepository;
+import backend.sumnail.domain.station.service.port.StationRepository;
 import backend.sumnail.domain.station.service.StationService;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

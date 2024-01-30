@@ -3,7 +3,7 @@ package backend.sumnail.domain.user_nail_shop.service;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.entity.User;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
-import backend.sumnail.domain.user_nail_shop.repository.UserNailShopRepository;
+import backend.sumnail.domain.user_nail_shop.service.port.UserNailShopRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
 import java.util.List;

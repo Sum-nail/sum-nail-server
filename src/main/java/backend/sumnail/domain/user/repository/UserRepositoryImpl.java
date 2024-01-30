@@ -1,6 +1,7 @@
 package backend.sumnail.domain.user.repository;
 
 import backend.sumnail.domain.user.entity.User;
+import backend.sumnail.domain.user.service.port.UserRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
 import java.util.Optional;

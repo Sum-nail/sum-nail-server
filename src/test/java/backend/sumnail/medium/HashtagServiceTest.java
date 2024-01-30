@@ -6,12 +6,12 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 import backend.sumnail.domain.hashtag.controller.dto.response.HashtagFindAllResponse;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
-import backend.sumnail.domain.hashtag.repository.HashtagRepository;
+import backend.sumnail.domain.hashtag.service.port.HashtagRepository;
 import backend.sumnail.domain.hashtag.service.HashtagService;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
-import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
+import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
-import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
+import backend.sumnail.domain.nail_shop_hashtag.service.port.NailShopHashtagRepository;
 import backend.sumnail.global.exception.CustomException;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

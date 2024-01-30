@@ -1,4 +1,4 @@
-package backend.sumnail.domain.user_nail_shop.repository;
+package backend.sumnail.domain.user_nail_shop.service.port;
 
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.user.entity.User;

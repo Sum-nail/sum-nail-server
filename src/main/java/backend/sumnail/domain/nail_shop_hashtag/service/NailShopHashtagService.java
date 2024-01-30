@@ -2,7 +2,7 @@ package backend.sumnail.domain.nail_shop_hashtag.service;
 
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
-import backend.sumnail.domain.nail_shop_hashtag.repository.NailShopHashtagRepository;
+import backend.sumnail.domain.nail_shop_hashtag.service.port.NailShopHashtagRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package backend.sumnail.domain.hashtag.service;
 
 import backend.sumnail.domain.hashtag.controller.dto.response.HashtagFindAllResponse;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
-import backend.sumnail.domain.hashtag.repository.HashtagRepository;
+import backend.sumnail.domain.hashtag.service.port.HashtagRepository;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
 import backend.sumnail.global.exception.CustomException;
