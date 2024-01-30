@@ -1,7 +1,6 @@
 package backend.sumnail.domain.recentsearch.repository;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
-
 import java.util.List;
 
 public interface RecentSearchRepository {
@@ -9,7 +8,7 @@ public interface RecentSearchRepository {
 
     List<RecentSearch> findByUserId(long userId);
 
-    RecentSearch save(RecentSearch recentSearch);
+    void save(RecentSearch recentSearch);
 
     void deleteByStation(String station);
 

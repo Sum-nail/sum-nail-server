@@ -8,12 +8,11 @@ import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneR
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.repository.NailShopRepository;
 import backend.sumnail.domain.user_nail_shop.entity.UserNailShop;
+import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Builder
@@ -28,7 +27,7 @@ public class NailShopService {
         List<NailShop> nailShops = nailShopRepository.findAll();
         List<NailShopFindAllResponse> response = nailShops
                 .stream()
-                .map(NailShop -> NailShopFindAllResponse.from(NailShop))
+                .map(NailShopFindAllResponse::from)
                 .toList();
         return response;
     }
@@ -46,7 +45,7 @@ public class NailShopService {
         }
         List<NailShopFindAllResponse> response = nailShops
                 .stream()
-                .map(NailShop -> NailShopFindAllResponse.from(NailShop))
+                .map(NailShopFindAllResponse::from)
                 .toList();
         return response;
     }

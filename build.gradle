@@ -25,13 +25,21 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8'
+
+    //test
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // db
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    testRuntimeOnly('com.h2database:h2')
+    testRuntimeOnly 'com.h2database:h2'
+
 
     // jwt
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -42,15 +50,6 @@ dependencies {
     //feign
     implementation platform("org.springframework.cloud:spring-cloud-dependencies:2022.0.3")
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-
-    //test
-    testImplementation 'org.mockito:mockito-core'
-    testImplementation 'org.mockito:mockito-junit-jupiter'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testCompileOnly 'org.projectlombok:lombok'
-    testAnnotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
 }
 
 tasks.named('bootBuildImage') {

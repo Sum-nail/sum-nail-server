@@ -1,10 +1,9 @@
 package backend.sumnail.domain.refresh_token.repository;
 
 import backend.sumnail.domain.refresh_token.entity.RefreshToken;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,8 +16,8 @@ public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
     }
 
     @Override
-    public void save(RefreshToken newRefreshToken) {
-        refreshTokenJpaRepository.save(newRefreshToken);
+    public void save(RefreshToken refreshToken) {
+        refreshTokenJpaRepository.save(refreshToken);
     }
 
 

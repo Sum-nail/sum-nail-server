@@ -1,10 +1,9 @@
 package backend.sumnail.domain.recentsearch.repository;
 
 import backend.sumnail.domain.recentsearch.entity.RecentSearch;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -22,8 +21,8 @@ public class RecentSearchRepositoryImpl implements RecentSearchRepository {
     }
 
     @Override
-    public RecentSearch save(RecentSearch recentSearch) {
-        return recentSearchJpaRepository.save(recentSearch);
+    public void save(RecentSearch recentSearch) {
+        recentSearchJpaRepository.save(recentSearch);
     }
 
     @Override

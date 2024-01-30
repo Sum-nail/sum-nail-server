@@ -2,7 +2,6 @@ package backend.sumnail.global.util;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

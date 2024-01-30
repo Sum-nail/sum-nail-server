@@ -1,21 +1,21 @@
 package backend.sumnail.domain.hashtag.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import backend.sumnail.domain.hashtag.controller.dto.response.HashtagFindAllResponse;
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop_hashtag.entity.NailShopHashtag;
+import backend.sumnail.domain.nail_shop_hashtag.service.NailShopHashtagService;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.mock.FakeHashtagRepository;
 import backend.sumnail.mock.FakeNailShopHashtagRepository;
 import backend.sumnail.mock.FakeNailShopRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class HashtagServiceTest {
 
@@ -29,7 +29,7 @@ class HashtagServiceTest {
         FakeHashtagRepository fakeHashtagRepository = new FakeHashtagRepository();
         this.hashtagService = HashtagService.builder()
                 .hashtagRepository(fakeHashtagRepository)
-                .nailShopHashtagRepository(fakeNailShopHashtagRepository)
+                .nailShopHashtagService(new NailShopHashtagService(fakeNailShopHashtagRepository))
                 .build();
         fakeHashtagRepository.save(Hashtag.builder()
                 .id(1L)
@@ -51,13 +51,16 @@ class HashtagServiceTest {
                 .id(1L)
                 .build();
         fakeNailShopRepository.save(nailShop);
-        fakeNailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShop).hashtag(fakeHashtagRepository.getById(1L)).build());
+        fakeNailShopHashtagRepository.save(
+                NailShopHashtag.builder().nailShop(nailShop).hashtag(fakeHashtagRepository.getById(1L)).build());
         NailShop nailShopOverHashtag = NailShop.builder()
                 .id(2L)
                 .build();
         fakeNailShopRepository.save(nailShopOverHashtag);
         for (Long i = 1L; i <= 4L; i++) {
-            fakeNailShopHashtagRepository.save(NailShopHashtag.builder().nailShop(nailShopOverHashtag).hashtag(fakeHashtagRepository.getById(i)).build());
+            fakeNailShopHashtagRepository.save(
+                    NailShopHashtag.builder().nailShop(nailShopOverHashtag).hashtag(fakeHashtagRepository.getById(i))
+                            .build());
         }
     }
 

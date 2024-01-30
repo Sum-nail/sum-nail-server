@@ -1,6 +1,10 @@
 package backend.sumnail.domain.refresh_token.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +26,8 @@ public class RefreshToken {
     private Long keyUserId;
 
     @Builder
-    public RefreshToken(String refreshToken, Long keyUserId) {
+    public RefreshToken(Long id, String refreshToken, Long keyUserId) {
+        this.id = id;
         this.refreshToken = refreshToken;
         this.keyUserId = keyUserId;
     }

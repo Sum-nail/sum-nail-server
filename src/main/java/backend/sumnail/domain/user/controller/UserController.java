@@ -1,5 +1,6 @@
 package backend.sumnail.domain.user.controller;
 
+import backend.sumnail.domain.common.service.port.ClockHolder;
 import backend.sumnail.domain.recentsearch.service.RecentSearchService;
 import backend.sumnail.domain.user.controller.dto.request.RecentSearchSaveRequest;
 import backend.sumnail.domain.user.controller.dto.response.UserFindNailShopResponse;
@@ -20,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("v1/user")
 @RequiredArgsConstructor
@@ -29,7 +28,7 @@ public class UserController {
 
     private final UserService userService;
     private final RecentSearchService recentSearchService;
-    // TODO 테스트 용 userId 1 번 사용중
+    private final ClockHolder clockHolder;
 
     /**
      * 나의 프로필 조회
@@ -44,7 +43,8 @@ public class UserController {
      * 저장한 네일샵 전체 조회
      */
     @GetMapping("nail-shops")
-    public ResponseEntity<List<UserFindNailShopResponse>> findAllNailShopsUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public ResponseEntity<List<UserFindNailShopResponse>> findAllNailShopsUser(
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
         List<UserFindNailShopResponse> responses = userService.findAllNailShopsUser(principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
@@ -53,7 +53,8 @@ public class UserController {
      * 네일샵 저장하기
      */
     @PostMapping("nail-shops/{nailShopId}")
-    public ResponseEntity<Void> saveNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("nailShopId") long nailShopId) {
+    public ResponseEntity<Void> saveNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                 @PathVariable("nailShopId") long nailShopId) {
         userService.saveNailShopUser(principalDetails.getUser().getId(), nailShopId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -62,7 +63,8 @@ public class UserController {
      * 네일샵 저장 취소하기
      */
     @DeleteMapping("nail-shops/{nailShopId}")
-    public ResponseEntity<Void> deleteNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable("nailShopId") long nailShopId) {
+    public ResponseEntity<Void> deleteNailShopUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                   @PathVariable("nailShopId") long nailShopId) {
         userService.deleteNailShopUser(principalDetails.getUser().getId(), nailShopId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -71,8 +73,10 @@ public class UserController {
      * 지하철 역 검색 내역 조회
      */
     @GetMapping("search-station-history")
-    public ResponseEntity<UserFindSearchStationsResponse> findSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        UserFindSearchStationsResponse response = userService.findSearchStationsUser(principalDetails.getUser().getId());
+    public ResponseEntity<UserFindSearchStationsResponse> findSearchStationsUser(
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        UserFindSearchStationsResponse response = userService.findSearchStationsUser(
+                principalDetails.getUser().getId());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -88,10 +92,12 @@ public class UserController {
     /**
      * 지하철 역 검색 기록 추가
      */
+    //TODO station name -> request param으로 이동?
     @PostMapping("search-station-history")
-    public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody RecentSearchSaveRequest request) {
-        recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName());
-        //jwt 인증 구현 필요
+    public ResponseEntity<Void> saveSearchStationsUser(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                                       @RequestBody RecentSearchSaveRequest request) {
+
+        recentSearchService.addRecentSearch(principalDetails.getUser().getId(), request.getStationName(), clockHolder);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

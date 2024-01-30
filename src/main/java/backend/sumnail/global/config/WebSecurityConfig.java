@@ -1,7 +1,11 @@
 package backend.sumnail.global.config;
 
 import backend.sumnail.domain.user.repository.UserRepository;
-import backend.sumnail.global.config.jwt.*;
+import backend.sumnail.global.config.jwt.CustomAccessDeniedHandler;
+import backend.sumnail.global.config.jwt.CustomAuthenticationEntryPoint;
+import backend.sumnail.global.config.jwt.JwtAuthorizationFilter;
+import backend.sumnail.global.config.jwt.JwtExceptionFilter;
+import backend.sumnail.global.config.jwt.JwtTokenProviderImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +26,7 @@ public class WebSecurityConfig {
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final UserRepository userRepository;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProviderImpl jwtTokenProvider;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

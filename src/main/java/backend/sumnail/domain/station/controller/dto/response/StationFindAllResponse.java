@@ -1,10 +1,9 @@
 package backend.sumnail.domain.station.controller.dto.response;
 
 import backend.sumnail.domain.station.entity.Station;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.util.List;
 
 @Getter
 @Builder

@@ -2,7 +2,6 @@ package backend.sumnail.mock;
 
 import backend.sumnail.domain.station.entity.Station;
 import backend.sumnail.domain.station.repository.StationRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -12,12 +12,14 @@ import backend.sumnail.domain.user.repository.UserRepository;
 import backend.sumnail.global.config.jwt.JwtTokenProvider;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Builder
 @Transactional
 public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
@@ -29,14 +31,17 @@ public class AuthService {
     public AuthTokenResponse signIn(String provider, String idToken) {
         User user = signInByProvider(provider, idToken);
 
-        User findUser = userRepository.findByEmail(user.getEmail()).
-                orElse(null);
+        User findUser = userRepository.findByEmail(user.getEmail())
+                        .orElse(null);
+
 
         if (findUser == null) { // 최초 로그인이라면 회원가입 시키기
             userRepository.save(user);
         }
 
-        return createAndSaveToken(user);
+        User newUser = userRepository.getByEmail(user.getEmail());
+
+        return createAndSaveToken(newUser);
 
     }
 
@@ -78,8 +83,10 @@ public class AuthService {
 
 
     private AuthTokenResponse createAndSaveToken(User user) {
+        System.out.println("^^^^"+user.getId());
         String accessToken = jwtTokenProvider.generateAccessToken(user);
         String refreshToken = jwtTokenProvider.generateRefreshToken(user);
+        System.out.println("$$$");
 
         refreshTokenService.saveRefreshToken(refreshToken, user.getId());
 
