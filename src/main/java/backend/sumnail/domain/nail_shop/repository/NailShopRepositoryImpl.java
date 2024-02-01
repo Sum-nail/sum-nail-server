@@ -66,7 +66,7 @@ public class NailShopRepositoryImpl implements NailShopRepository {
         return query.selectFrom(nailShop)
                 .leftJoin(nailShop.stations)
                 .where(
-                station.stationName.eq(stationName)
+                        station.stationName.eq(stationName)
                 )
                 .fetch();
     }
