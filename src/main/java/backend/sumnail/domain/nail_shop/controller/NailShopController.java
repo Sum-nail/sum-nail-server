@@ -30,7 +30,7 @@ public class NailShopController {
     }
 
     @GetMapping("search")
-    public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam String hashtags,
+    public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam List<String> hashtags,
                                                                      @RequestParam String station) {
         List<NailShopFindAllResponse> response = nailShopService.searchNailShop(station, hashtags);
         return ResponseEntity.status(HttpStatus.OK).body(response);

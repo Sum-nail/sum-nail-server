@@ -32,16 +32,16 @@ public class NailShopService {
         return response;
     }
 
-    public List<NailShopFindAllResponse> searchNailShop(String stationName, String hashtagName) {
+    public List<NailShopFindAllResponse> searchNailShop(String stationName, List<String> hashtags) {
         List<NailShop> nailShops;
-        if (stationName.isEmpty() && hashtagName.isEmpty()) {
+        if (stationName.isEmpty() && hashtags.isEmpty()) {
             nailShops = nailShopRepository.findAll();
         } else if (stationName.isEmpty()) {
-            nailShops = nailShopRepository.findNailShopByHashtag(hashtagName);
-        } else if (hashtagName.isEmpty()) {
-            nailShops = nailShopRepository.findNailShopByStation(stationName);
+            nailShops = nailShopRepository.findByHashtag(hashtags);
+        } else if (hashtags.isEmpty()) {
+            nailShops = nailShopRepository.findByStation(stationName);
         } else {
-            nailShops = nailShopRepository.findNailShopsByHashtagAndStation(stationName, hashtagName);
+            nailShops = nailShopRepository.findByHashtagAndStation(stationName, hashtags);
         }
         List<NailShopFindAllResponse> response = nailShops
                 .stream()
