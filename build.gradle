@@ -50,6 +50,26 @@ dependencies {
     //feign
     implementation platform("org.springframework.cloud:spring-cloud-dependencies:2022.0.3")
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    //queryDsl
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+}
+///// Querydsl 빌드 옵션
+def generated = 'src/main/generated'
+
+tasks.withType(JavaCompile) {
+    options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+sourceSets {
+    main.java.srcDirs += [ generated ]
+}
+
+clean {
+    delete file(generated)
 }
 
 tasks.named('bootBuildImage') {
