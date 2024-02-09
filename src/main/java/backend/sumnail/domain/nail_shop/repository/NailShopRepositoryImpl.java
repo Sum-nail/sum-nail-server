@@ -1,17 +1,17 @@
 package backend.sumnail.domain.nail_shop.repository;
 
-import backend.sumnail.domain.hashtag.entity.QHashtag;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
-import backend.sumnail.domain.station.entity.QStation;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
-import java.util.List;
-import java.util.Optional;
-
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 import static backend.sumnail.domain.hashtag.entity.QHashtag.hashtag;
 import static backend.sumnail.domain.nail_shop.entity.QNailShop.nailShop;
@@ -34,10 +34,24 @@ public class NailShopRepositoryImpl implements NailShopRepository {
                 .leftJoin(nailShop.hashtags)
                 .leftJoin(nailShop.stations)
                 .where(
-                        hashtag.hashtagName.in(hashtags)
-                                .and(station.stationName.eq(stationName))
+                        allEq(stationName, hashtags)
                 )
                 .fetch();
+    }
+
+    private BooleanExpression stationEq(String stationNameCond) {
+        return stationNameCond.isEmpty() ? null : station.stationName.eq(stationNameCond);
+    }
+
+    private BooleanExpression ageEq(List<String> hashtags) {
+        return hashtags.isEmpty() ? null : hashtag.hashtagName.in(hashtags);
+    }
+
+    private BooleanBuilder allEq(String stationNameCond, List<String> hashtags) {
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(stationEq(stationNameCond));
+        builder.and(ageEq(hashtags));
+        return builder;
     }
 
     @Override

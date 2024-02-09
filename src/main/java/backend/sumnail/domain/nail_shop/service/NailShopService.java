@@ -33,16 +33,8 @@ public class NailShopService {
     }
 
     public List<NailShopFindAllResponse> searchNailShop(String stationName, List<String> hashtags) {
-        List<NailShop> nailShops;
-        if (stationName.isEmpty() && hashtags.isEmpty()) {
-            nailShops = nailShopRepository.findAll();
-        } else if (stationName.isEmpty()) {
-            nailShops = nailShopRepository.findByHashtag(hashtags);
-        } else if (hashtags.isEmpty()) {
-            nailShops = nailShopRepository.findByStation(stationName);
-        } else {
-            nailShops = nailShopRepository.findByHashtagAndStation(stationName, hashtags);
-        }
+        List<NailShop> nailShops = nailShopRepository.findByHashtagAndStation(stationName, hashtags);
+
         List<NailShopFindAllResponse> response = nailShops
                 .stream()
                 .map(NailShopFindAllResponse::from)
