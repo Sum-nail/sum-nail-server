@@ -10,6 +10,7 @@ import backend.sumnail.global.exception.ErrorCode;
 import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class HashtagService {
     private final HashtagRepository hashtagRepository;
     private final NailShopHashtagService nailShopHashtagService;
 
+    @Cacheable(cacheNames = "HASHTAG", cacheManager = "cacheManager")
     public HashtagFindAllResponse findAllHashtag() {
         List<Hashtag> hashtags = hashtagRepository.findAll();
         return HashtagFindAllResponse.from(hashtags);
