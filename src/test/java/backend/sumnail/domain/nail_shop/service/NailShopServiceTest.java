@@ -14,6 +14,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 class NailShopServiceTest {
 
@@ -59,9 +61,10 @@ class NailShopServiceTest {
         String hashtagName = "귀여운";
         Long nailShopId = 1L;
         String nailShopName = "네일샵1";
+        Pageable pageable = PageRequest.of(0, 6);
 
         //when
-        NailShopFindAllResponse nailShopFindResponse = nailShopService.findAllShop();
+        NailShopFindAllResponse nailShopFindResponse = nailShopService.findAllShop(pageable);
 
         //then
         assertThat(nailShopFindResponse.getNailShops().size()).isEqualTo(1);

@@ -2,8 +2,8 @@ package backend.sumnail.domain.nail_shop.service;
 
 import backend.sumnail.domain.hashtag.entity.Hashtag;
 import backend.sumnail.domain.hashtag.service.HashtagService;
-import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindSavedDto;
 import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindDto;
+import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindSavedDto;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllResponse;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
@@ -15,6 +15,8 @@ import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +31,9 @@ public class NailShopService {
     private final NailShopHashtagRepository nailShopHashtagRepository;
 
     @Cacheable(cacheNames = "NAILSHOP", cacheManager = "cacheManager")
-    public NailShopFindAllResponse findAllShop() {
-        List<NailShop> nailShops = nailShopRepository.findAll();
+    public NailShopFindAllResponse findAllShop(Pageable pageable) {
+        Page<NailShop> nailShopPage = nailShopRepository.findAll(pageable);
+        List<NailShop> nailShops = nailShopPage.getContent();
 
         return toNailShopFindAllResponse(nailShops);
     }

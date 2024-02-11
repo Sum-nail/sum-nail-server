@@ -4,9 +4,11 @@ import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,6 +19,11 @@ public class NailShopRepositoryImpl implements NailShopRepository {
     @Override
     public List<NailShop> findAll() {
         return nailShopJpaRepository.findAll();
+    }
+
+    @Override
+    public Page<NailShop> findAll(Pageable pageable) {
+        return nailShopJpaRepository.findAll(pageable);
     }
 
     @Override

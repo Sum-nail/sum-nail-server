@@ -2,7 +2,6 @@ package backend.sumnail.domain.nail_shop.repository;
 
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -27,6 +26,4 @@ public interface NailShopJpaRepository extends JpaRepository<NailShop, Long> {
             "LEFT JOIN ns.stations s " +
             "WHERE (COALESCE(:stationName, '') = '' OR s.station.stationName = :stationName)")
     List<NailShop> findNailShopByStation(String stationName);
-
-    Optional<NailShop> findById(Long id);
 }
