@@ -4,7 +4,6 @@ import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllR
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.service.NailShopService;
 import backend.sumnail.domain.recentsearch.service.RecentSearchService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +22,16 @@ public class NailShopController {
     private final RecentSearchService recentSearchService;
 
     @GetMapping("")
-    public ResponseEntity<List<NailShopFindAllResponse>> getAllShops() {
-        List<NailShopFindAllResponse> response = nailShopService.findAllShop();
+    public ResponseEntity<NailShopFindAllResponse> getAllShops() {
+        NailShopFindAllResponse response = nailShopService.findAllShop();
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("search")
-    public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam String hashtags,
-                                                                     @RequestParam String station) {
-        List<NailShopFindAllResponse> response = nailShopService.searchNailShop(station, hashtags);
+    public ResponseEntity<NailShopFindAllResponse> searchShops(@RequestParam String hashtags,
+                                                               @RequestParam String station) {
+        NailShopFindAllResponse response = nailShopService.searchNailShop(station, hashtags);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
