@@ -47,7 +47,8 @@ class UserServiceTest {
                 .nailShopService(new NailShopService(
                         fakeNailShopRepository,
                         new HashtagService(fakeHashtagRepository,
-                                new NailShopHashtagService(fakeNailShopHashtagRepository))
+                                new NailShopHashtagService(fakeNailShopHashtagRepository)),
+                        fakeNailShopHashtagRepository
                 ))
                 .recentSearchService(new RecentSearchService(fakeRecentSearchRepository, fakeUserRepository))
                 .build();

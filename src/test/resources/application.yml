@@ -10,6 +10,10 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
 
 jwt:
   secret: ${JWT_SECRET}

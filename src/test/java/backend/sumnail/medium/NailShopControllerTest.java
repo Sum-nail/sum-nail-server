@@ -34,7 +34,8 @@ class NailShopControllerTest {
         //then
         mockMvc.perform(get("/v1/nail-shops"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2));
+                .andExpect(jsonPath("$.nailShops[0].nailShopId").value(1))
+                .andExpect(jsonPath("$.nailShops[1].nailShopId").value(2));
     }
 
     @Test

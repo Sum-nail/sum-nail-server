@@ -26,6 +26,7 @@ class NailShopServiceTest {
         FakeNailShopHashtagRepository fakeNailShopHashtagRepository = new FakeNailShopHashtagRepository();
         this.nailShopService = NailShopService.builder()
                 .nailShopRepository(fakeNailShopRepository)
+                .nailShopHashtagRepository(fakeNailShopHashtagRepository)
                 .build();
 
         Hashtag hashtag = Hashtag.builder()
@@ -60,13 +61,13 @@ class NailShopServiceTest {
         String nailShopName = "네일샵1";
 
         //when
-        List<NailShopFindAllResponse> nailShopFindAllResponses = nailShopService.findAllShop();
+        NailShopFindAllResponse nailShopFindResponse = nailShopService.findAllShop();
 
         //then
-        assertThat(nailShopFindAllResponses.size()).isEqualTo(1);
-        assertThat(nailShopFindAllResponses.get(0).getNailShopId()).isEqualTo(nailShopId);
-        assertThat(nailShopFindAllResponses.get(0).getHashtags().get(0)).isEqualTo(hashtagName);
-        assertThat(nailShopFindAllResponses.get(0).getNailShopName()).isEqualTo(nailShopName);
+        assertThat(nailShopFindResponse.getNailShops().size()).isEqualTo(1);
+        assertThat(nailShopFindResponse.getNailShops().get(0).getNailShopId()).isEqualTo(nailShopId);
+        assertThat(nailShopFindResponse.getNailShops().get(0).getHashtags().get(0)).isEqualTo(hashtagName);
+        assertThat(nailShopFindResponse.getNailShops().get(0).getNailShopName()).isEqualTo(nailShopName);
     }
 
     @Test
@@ -78,12 +79,12 @@ class NailShopServiceTest {
         String nailShopName = "네일샵1";
 
         //when
-        List<NailShopFindAllResponse> nailShopFindAllResponses = nailShopService.searchNailShop("", hashtagName);
+        NailShopFindAllResponse nailShopFindAllResponse = nailShopService.searchNailShop("", hashtagName);
 
         //then
-        assertThat(nailShopFindAllResponses.get(0).getNailShopId()).isEqualTo(nailShopId);
-        assertThat(nailShopFindAllResponses.get(0).getHashtags().get(0)).isEqualTo(hashtagName);
-        assertThat(nailShopFindAllResponses.get(0).getNailShopName()).isEqualTo(nailShopName);
+        assertThat(nailShopFindAllResponse.getNailShops().get(0).getNailShopId()).isEqualTo(nailShopId);
+        assertThat(nailShopFindAllResponse.getNailShops().get(0).getHashtags().get(0)).isEqualTo(hashtagName);
+        assertThat(nailShopFindAllResponse.getNailShops().get(0).getNailShopName()).isEqualTo(nailShopName);
     }
 
     @Test
