@@ -3,10 +3,14 @@ package backend.sumnail.mock;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 public class FakeNailShopRepository implements NailShopRepository {
 
@@ -16,6 +20,23 @@ public class FakeNailShopRepository implements NailShopRepository {
     @Override
     public List<NailShop> findAll() {
         return data;
+    }
+
+    @Override
+    public Page<NailShop> findAll(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<NailShop> pageData;
+
+        if (data.size() < startItem) {
+            pageData = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, data.size());
+            pageData = data.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<>(pageData, pageable, data.size());
     }
 
     @Override
