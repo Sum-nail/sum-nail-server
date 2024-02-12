@@ -30,7 +30,7 @@ public class NailShopService {
     private final HashtagService hashtagService;
     private final NailShopHashtagRepository nailShopHashtagRepository;
 
-    @Cacheable(cacheNames = "NAILSHOP", cacheManager = "cacheManager")
+    @Cacheable(cacheNames = "NAILSHOP", key = "#pageable.pageNumber.toString()", condition = "#pageable.pageNumber <= 50", cacheManager = "cacheManager")
     public NailShopFindAllResponse findAllShop(Pageable pageable) {
         Page<NailShop> nailShopPage = nailShopRepository.findAll(pageable);
         List<NailShop> nailShops = nailShopPage.getContent();
