@@ -64,24 +64,4 @@ public class NailShopRepositoryImpl implements NailShopRepository {
         return nailShopJpaRepository.findById(nailShopId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_NAIL_SHOP));
     }
-
-    @Override
-    public List<NailShop> findByHashtag(List<String> hashtags) {
-        return query.selectFrom(nailShop)
-                .leftJoin(nailShop.hashtags)
-                .where(
-                        hashtag.hashtagName.in(hashtags)
-                )
-                .fetch();
-    }
-
-    @Override
-    public List<NailShop> findByStation(String stationName) {
-        return query.selectFrom(nailShop)
-                .leftJoin(nailShop.stations)
-                .where(
-                        station.stationName.eq(stationName)
-                )
-                .fetch();
-    }
 }
