@@ -8,13 +8,13 @@ import java.util.Optional;
 public interface NailShopRepository {
     List<NailShop> findAll();
 
-    List<NailShop> findNailShopsByHashtagAndStation(String stationName, String hashtagName);
+    List<NailShop> findByHashtagAndStation(String stationName, List<String> hashtagName);
 
     Optional<NailShop> findById(Long id);
 
     NailShop getById(long id);
 
-    List<NailShop> findNailShopByHashtag(String hashtagName);
+    List<NailShop> findByHashtag(List<String> hashtags);
 
-    List<NailShop> findNailShopByStation(String stationName);
+    List<NailShop> findByStation(String stationName);
 }

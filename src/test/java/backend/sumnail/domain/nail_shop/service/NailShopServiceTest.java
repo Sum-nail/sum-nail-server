@@ -75,10 +75,11 @@ class NailShopServiceTest {
         //given
         Long nailShopId = 1L;
         String hashtagName = "귀여운";
+        List<String> hashtags = List.of(hashtagName);
         String nailShopName = "네일샵1";
 
         //when
-        List<NailShopFindAllResponse> nailShopFindAllResponses = nailShopService.searchNailShop("", hashtagName);
+        List<NailShopFindAllResponse> nailShopFindAllResponses = nailShopService.searchNailShop("", hashtags);
 
         //then
         assertThat(nailShopFindAllResponses.get(0).getNailShopId()).isEqualTo(nailShopId);

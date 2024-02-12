@@ -19,12 +19,12 @@ public class FakeNailShopRepository implements NailShopRepository {
     }
 
     @Override
-    public List<NailShop> findNailShopsByHashtagAndStation(String stationName, String hashtagName) {
+    public List<NailShop> findByHashtagAndStation(String stationName, List<String> hashtags) {
         return data.stream()
                 .filter(item -> item.getStations().stream()
                         .anyMatch(station -> station.getStation().getStationName().contains(stationName))
                         && item.getHashtags().stream()
-                        .anyMatch(hashtag -> hashtag.getHashtag().getHashtagName().contains(hashtagName)))
+                        .anyMatch(hashtag -> hashtags.contains(hashtag.getHashtag().getHashtagName())))
                 .toList();
     }
 
@@ -44,15 +44,15 @@ public class FakeNailShopRepository implements NailShopRepository {
     }
 
     @Override
-    public List<NailShop> findNailShopByHashtag(String hashtagName) {
+    public List<NailShop> findByHashtag(List<String> hashtags) {
         return data.stream()
                 .filter(item -> item.getHashtags().stream()
-                        .anyMatch(hashtag -> hashtag.getHashtag().getHashtagName().equals(hashtagName)))
+                        .anyMatch(hashtag -> hashtags.contains(hashtag.getHashtag().getHashtagName())))
                 .toList();
     }
 
     @Override
-    public List<NailShop> findNailShopByStation(String stationName) {
+    public List<NailShop> findByStation(String stationName) {
         return data.stream()
                 .filter(item -> item.getStations().stream()
                         .anyMatch(station -> station.getStation().getStationName().equals(stationName)))
