@@ -1,39 +1,31 @@
 package backend.sumnail.domain.nail_shop.repository;
 
+import static backend.sumnail.domain.hashtag.entity.QHashtag.hashtag;
+import static backend.sumnail.domain.nail_shop.entity.QNailShop.nailShop;
+import static backend.sumnail.domain.station.entity.QStation.station;
+
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import backend.sumnail.global.exception.CustomException;
 import backend.sumnail.global.exception.ErrorCode;
-import org.springframework.data.domain.Pageable;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
 public class NailShopRepositoryImpl implements NailShopRepository {
     private final NailShopJpaRepository nailShopJpaRepository;
-
-    @Override
-    public List<NailShop> findAll() {
-        return nailShopJpaRepository.findAll();
-    }
+    private final JPAQueryFactory query;
 
     @Override
     public Page<NailShop> findAll(Pageable pageable) {
         return nailShopJpaRepository.findAll(pageable);
-    }
-
-    @Override
-    public List<NailShop> findNailShopsByHashtagAndStation(String stationName, String hashtagName) {
-        return nailShopJpaRepository.findNailShopsByHashtagAndStation(stationName, hashtagName);
-    }
-
-    @Override
-    public Optional<NailShop> findById(Long id) {
-        return nailShopJpaRepository.findById(id);
     }
 
     @Override
@@ -43,12 +35,29 @@ public class NailShopRepositoryImpl implements NailShopRepository {
     }
 
     @Override
-    public List<NailShop> findNailShopByHashtag(String hashtagName) {
-        return nailShopJpaRepository.findNailShopByHashtag(hashtagName);
+    public List<NailShop> findByHashtagAndStation(String stationName, List<String> hashtags) {
+        return query.selectFrom(nailShop)
+                .leftJoin(nailShop.hashtags)
+                .leftJoin(nailShop.stations)
+                .where(
+                        allEq(stationName, hashtags)
+                )
+                .fetch();
     }
 
-    @Override
-    public List<NailShop> findNailShopByStation(String stationName) {
-        return nailShopJpaRepository.findNailShopByStation(stationName);
+    private BooleanExpression stationEq(String stationNameCond) {
+        return stationNameCond.isEmpty() ? null : station.stationName.eq(stationNameCond);
     }
+
+    private BooleanExpression ageEq(List<String> hashtags) {
+        return hashtags.isEmpty() ? null : hashtag.hashtagName.in(hashtags);
+    }
+
+    private BooleanBuilder allEq(String stationNameCond, List<String> hashtags) {
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(stationEq(stationNameCond));
+        builder.and(ageEq(hashtags));
+        return builder;
+    }
+
 }

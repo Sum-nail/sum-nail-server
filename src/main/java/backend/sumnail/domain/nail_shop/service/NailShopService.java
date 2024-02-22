@@ -38,18 +38,8 @@ public class NailShopService {
         return toNailShopFindAllResponse(nailShops);
     }
 
-
-    public NailShopFindAllResponse searchNailShop(String stationName, String hashtagName) {
-        List<NailShop> nailShops;
-        if (stationName.isEmpty() && hashtagName.isEmpty()) {
-            nailShops = nailShopRepository.findAll();
-        } else if (stationName.isEmpty()) {
-            nailShops = nailShopRepository.findNailShopByHashtag(hashtagName);
-        } else if (hashtagName.isEmpty()) {
-            nailShops = nailShopRepository.findNailShopByStation(stationName);
-        } else {
-            nailShops = nailShopRepository.findNailShopsByHashtagAndStation(stationName, hashtagName);
-        }
+    public NailShopFindAllResponse searchNailShop(String stationName, List<String> hashtags) {
+        List<NailShop> nailShops = nailShopRepository.findByHashtagAndStation(stationName, hashtags);
 
         return toNailShopFindAllResponse(nailShops);
     }

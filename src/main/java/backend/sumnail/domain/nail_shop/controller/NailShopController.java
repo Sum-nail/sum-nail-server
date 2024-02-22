@@ -3,9 +3,9 @@ package backend.sumnail.domain.nail_shop.controller;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllResponse;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.service.NailShopService;
-import backend.sumnail.domain.recentsearch.service.RecentSearchService;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class NailShopController {
     private final NailShopService nailShopService;
 
-    private final RecentSearchService recentSearchService;
-
     @GetMapping("")
     public ResponseEntity<NailShopFindAllResponse> getAllShops(@PageableDefault(size = 6) Pageable pageable) {
         NailShopFindAllResponse response = nailShopService.findAllShop(pageable);
@@ -31,8 +29,8 @@ public class NailShopController {
     }
 
     @GetMapping("search")
-    public ResponseEntity<NailShopFindAllResponse> searchShops(@RequestParam String hashtags,
-                                                               @RequestParam String station) {
+    public ResponseEntity<NailShopFindAllResponse> searchShops(@RequestParam List<String> hashtags,
+                                                                     @RequestParam String station) {
         NailShopFindAllResponse response = nailShopService.searchNailShop(station, hashtags);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
