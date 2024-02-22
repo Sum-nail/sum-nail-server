@@ -14,6 +14,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 class NailShopServiceTest {
 
@@ -26,6 +28,7 @@ class NailShopServiceTest {
         FakeNailShopHashtagRepository fakeNailShopHashtagRepository = new FakeNailShopHashtagRepository();
         this.nailShopService = NailShopService.builder()
                 .nailShopRepository(fakeNailShopRepository)
+                .nailShopHashtagRepository(fakeNailShopHashtagRepository)
                 .build();
 
         Hashtag hashtag = Hashtag.builder()
@@ -58,15 +61,16 @@ class NailShopServiceTest {
         String hashtagName = "귀여운";
         Long nailShopId = 1L;
         String nailShopName = "네일샵1";
+        Pageable pageable = PageRequest.of(0, 6);
 
         //when
-        List<NailShopFindAllResponse> nailShopFindAllResponses = nailShopService.findAllShop();
+        NailShopFindAllResponse nailShopFindResponse = nailShopService.findAllShop(pageable);
 
         //then
-        assertThat(nailShopFindAllResponses.size()).isEqualTo(1);
-        assertThat(nailShopFindAllResponses.get(0).getNailShopId()).isEqualTo(nailShopId);
-        assertThat(nailShopFindAllResponses.get(0).getHashtags().get(0)).isEqualTo(hashtagName);
-        assertThat(nailShopFindAllResponses.get(0).getNailShopName()).isEqualTo(nailShopName);
+        assertThat(nailShopFindResponse.getNailShops().size()).isEqualTo(1);
+        assertThat(nailShopFindResponse.getNailShops().get(0).getNailShopId()).isEqualTo(nailShopId);
+        assertThat(nailShopFindResponse.getNailShops().get(0).getHashtags().get(0)).isEqualTo(hashtagName);
+        assertThat(nailShopFindResponse.getNailShops().get(0).getNailShopName()).isEqualTo(nailShopName);
     }
 
     @Test
@@ -79,12 +83,12 @@ class NailShopServiceTest {
         String nailShopName = "네일샵1";
 
         //when
-        List<NailShopFindAllResponse> nailShopFindAllResponses = nailShopService.searchNailShop("", hashtags);
+        NailShopFindAllResponse nailShopFindAllResponse = nailShopService.searchNailShop("", hashtags);
 
         //then
-        assertThat(nailShopFindAllResponses.get(0).getNailShopId()).isEqualTo(nailShopId);
-        assertThat(nailShopFindAllResponses.get(0).getHashtags().get(0)).isEqualTo(hashtagName);
-        assertThat(nailShopFindAllResponses.get(0).getNailShopName()).isEqualTo(nailShopName);
+        assertThat(nailShopFindAllResponse.getNailShops().get(0).getNailShopId()).isEqualTo(nailShopId);
+        assertThat(nailShopFindAllResponse.getNailShops().get(0).getHashtags().get(0)).isEqualTo(hashtagName);
+        assertThat(nailShopFindAllResponse.getNailShops().get(0).getNailShopName()).isEqualTo(nailShopName);
     }
 
     @Test

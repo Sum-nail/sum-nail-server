@@ -1,5 +1,9 @@
 package backend.sumnail.domain.nail_shop.repository;
 
+import static backend.sumnail.domain.hashtag.entity.QHashtag.hashtag;
+import static backend.sumnail.domain.nail_shop.entity.QNailShop.nailShop;
+import static backend.sumnail.domain.station.entity.QStation.station;
+
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import backend.sumnail.global.exception.CustomException;
@@ -7,15 +11,11 @@ import backend.sumnail.global.exception.ErrorCode;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
-import java.util.Optional;
-
-import static backend.sumnail.domain.hashtag.entity.QHashtag.hashtag;
-import static backend.sumnail.domain.nail_shop.entity.QNailShop.nailShop;
-import static backend.sumnail.domain.station.entity.QStation.station;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,8 +24,14 @@ public class NailShopRepositoryImpl implements NailShopRepository {
     private final JPAQueryFactory query;
 
     @Override
-    public List<NailShop> findAll() {
-        return nailShopJpaRepository.findAll();
+    public Page<NailShop> findAll(Pageable pageable) {
+        return nailShopJpaRepository.findAll(pageable);
+    }
+
+    @Override
+    public NailShop getById(long nailShopId) {
+        return nailShopJpaRepository.findById(nailShopId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_NAIL_SHOP));
     }
 
     @Override
@@ -54,14 +60,4 @@ public class NailShopRepositoryImpl implements NailShopRepository {
         return builder;
     }
 
-    @Override
-    public Optional<NailShop> findById(Long id) {
-        return nailShopJpaRepository.findById(id);
-    }
-
-    @Override
-    public NailShop getById(long nailShopId) {
-        return nailShopJpaRepository.findById(nailShopId)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_NAIL_SHOP));
-    }
 }

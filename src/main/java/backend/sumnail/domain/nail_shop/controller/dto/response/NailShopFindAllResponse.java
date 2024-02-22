@@ -1,27 +1,22 @@
 package backend.sumnail.domain.nail_shop.controller.dto.response;
 
-import backend.sumnail.domain.nail_shop.entity.NailShop;
+import backend.sumnail.domain.nail_shop.controller.dto.NailShopFindDto;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 public class NailShopFindAllResponse {
-    private Long nailShopId;
-    private String nailShopName;
-    private String location;
-    private List<String> hashtags;
-    private String titleImage;
+    List<NailShopFindDto> nailShops;
 
-    public static NailShopFindAllResponse from(NailShop nailShop) {
+    public static NailShopFindAllResponse from(List<NailShopFindDto> nailShopFindDtos){
         return NailShopFindAllResponse.builder()
-                .nailShopId(nailShop.getId())
-                .nailShopName(nailShop.getName())
-                .location(nailShop.getLocation())
-                .titleImage(nailShop.getTitleImage())
-                .hashtags(
-                        nailShop.getHashtags().stream().map(hashtag -> hashtag.getHashtag().getHashtagName()).toList())
+                .nailShops(nailShopFindDtos)
                 .build();
     }
 }

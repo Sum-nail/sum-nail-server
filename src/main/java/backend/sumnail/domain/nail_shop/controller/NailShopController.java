@@ -3,13 +3,17 @@ package backend.sumnail.domain.nail_shop.controller;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindAllResponse;
 import backend.sumnail.domain.nail_shop.controller.dto.response.NailShopFindOneResponse;
 import backend.sumnail.domain.nail_shop.service.NailShopService;
-import backend.sumnail.domain.recentsearch.service.RecentSearchService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("v1/nail-shops")
@@ -17,19 +21,17 @@ import java.util.List;
 public class NailShopController {
     private final NailShopService nailShopService;
 
-    private final RecentSearchService recentSearchService;
-
     @GetMapping("")
-    public ResponseEntity<List<NailShopFindAllResponse>> getAllShops() {
-        List<NailShopFindAllResponse> response = nailShopService.findAllShop();
+    public ResponseEntity<NailShopFindAllResponse> getAllShops(@PageableDefault(size = 6) Pageable pageable) {
+        NailShopFindAllResponse response = nailShopService.findAllShop(pageable);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("search")
-    public ResponseEntity<List<NailShopFindAllResponse>> searchShops(@RequestParam List<String> hashtags,
+    public ResponseEntity<NailShopFindAllResponse> searchShops(@RequestParam List<String> hashtags,
                                                                      @RequestParam String station) {
-        List<NailShopFindAllResponse> response = nailShopService.searchNailShop(station, hashtags);
+        NailShopFindAllResponse response = nailShopService.searchNailShop(station, hashtags);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

@@ -3,10 +3,13 @@ package backend.sumnail.mock;
 import backend.sumnail.domain.nail_shop.entity.NailShop;
 import backend.sumnail.domain.nail_shop.service.port.NailShopRepository;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 public class FakeNailShopRepository implements NailShopRepository {
 
@@ -14,8 +17,20 @@ public class FakeNailShopRepository implements NailShopRepository {
     private final List<NailShop> data = new ArrayList<>();
 
     @Override
-    public List<NailShop> findAll() {
-        return data;
+    public Page<NailShop> findAll(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<NailShop> pageData;
+
+        if (data.size() < startItem) {
+            pageData = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, data.size());
+            pageData = data.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<>(pageData, pageable, data.size());
     }
 
     @Override
@@ -29,13 +44,6 @@ public class FakeNailShopRepository implements NailShopRepository {
     }
 
     @Override
-    public Optional<NailShop> findById(Long id) {
-        return data.stream()
-                .filter(item -> item.getId().equals(id))
-                .findAny();
-    }
-
-    @Override
     public NailShop getById(long id) {
         return data.stream()
                 .filter(item -> item.getId().equals(id))
@@ -43,21 +51,6 @@ public class FakeNailShopRepository implements NailShopRepository {
                 .orElseThrow();
     }
 
-    @Override
-    public List<NailShop> findByHashtag(List<String> hashtags) {
-        return data.stream()
-                .filter(item -> item.getHashtags().stream()
-                        .anyMatch(hashtag -> hashtags.contains(hashtag.getHashtag().getHashtagName())))
-                .toList();
-    }
-
-    @Override
-    public List<NailShop> findByStation(String stationName) {
-        return data.stream()
-                .filter(item -> item.getStations().stream()
-                        .anyMatch(station -> station.getStation().getStationName().equals(stationName)))
-                .toList();
-    }
 
     public void save(NailShop nailShop) {
         if (nailShop.getId() == null || nailShop.getId() == 0) {
